@@ -1,0 +1,156 @@
+[
+  {
+    "firstName": "Alice",
+    "lastName": "Johnson",
+    "username": "alice.johnson",
+    "email": "alice.johnson@example.com",
+    "phone": "+1234567890",
+    "password": "hashedPassword1",
+    "createdAt": "2025-03-24T08:00:00.000Z",
+    "updatedAt": "2025-03-24T08:00:00.000Z",
+    "eventsSignedUp": [
+      "607c5b7d4f1a2f001f8d2908",
+      "607c5b7d4f1a2f001f8d2909"
+    ]
+  },
+  {
+    "firstName": "Bob",
+    "lastName": "Smith",
+    "username": "bob.smith",
+    "email": "bob.smith@example.com",
+    "phone": "+1234567891",
+    "password": "hashedPassword2",
+    "createdAt": "2025-03-24T08:00:00.000Z",
+    "updatedAt": "2025-03-24T08:00:00.000Z",
+    "eventsSignedUp": [
+      "607c5b7d4f1a2f001f8d2909",
+      "607c5b7d4f1a2f001f8d2907"
+    ]
+  },
+  {
+    "firstName": "Charlie",
+    "lastName": "Davis",
+    "username": "charlie.davis",
+    "email": "charlie.davis@example.com",
+    "phone": "+1234567892",
+    "password": "hashedPassword3",
+    "createdAt": "2025-03-24T08:00:00.000Z",
+    "updatedAt": "2025-03-24T08:00:00.000Z",
+    "eventsSignedUp": [
+      "607c5b7d4f1a2f001f8d2907",
+      "607c5b7d4f1a2f001f8d2906"
+    ]
+  },
+  {
+    "firstName": "Diana",
+    "lastName": "Williams",
+    "username": "diana.williams",
+    "email": "diana.williams@example.com",
+    "phone": "+1234567893",
+    "password": "hashedPassword4",
+    "createdAt": "2025-03-24T08:00:00.000Z",
+    "updatedAt": "2025-03-24T08:00:00.000Z",
+    "eventsSignedUp": [
+      "607c5b7d4f1a2f001f8d2905",
+      "607c5b7d4f1a2f001f8d2908"
+    ]
+  },
+  {
+    "firstName": "Eva",
+    "lastName": "Green",
+    "username": "eva.green",
+    "email": "eva.green@example.com",
+    "phone": "+1234567894",
+    "password": "hashedPassword5",
+    "createdAt": "2025-03-24T08:00:00.000Z",
+    "updatedAt": "2025-03-24T08:00:00.000Z",
+    "eventsSignedUp": [
+      "607c5b7d4f1a2f001f8d2907",
+      "607c5b7d4f1a2f001f8d2909"
+    ]
+  },
+  {
+    "firstName": "Frank",
+    "lastName": "Thompson",
+    "username": "frank.thompson",
+    "email": "frank.thompson@example.com",
+    "phone": "+1234567895",
+    "password": "hashedPassword6",
+    "createdAt": "2025-03-24T08:00:00.000Z",
+    "updatedAt": "2025-03-24T08:00:00.000Z",
+    "eventsSignedUp": [
+      "607c5b7d4f1a2f001f8d2906",
+      "607c5b7d4f1a2f001f8d2905"
+    ]
+  },
+  {
+    "firstName": "Grace",
+    "lastName": "Lee",
+    "username": "grace.lee",
+    "email": "grace.lee@example.com",
+    "phone": "+1234567896",
+    "password": "hashedPassword7",
+    "createdAt": "2025-03-24T08:00:00.000Z",
+    "updatedAt": "2025-03-24T08:00:00.000Z",
+    "eventsSignedUp": [
+      "607c5b7d4f1a2f001f8d2904",
+      "607c5b7d4f1a2f001f8d2907"
+    ]
+  },
+  {
+    "firstName": "Hannah",
+    "lastName": "Moore",
+    "username": "hannah.moore",
+    "email": "hannah.moore@example.com",
+    "phone": "+1234567897",
+    "password": "hashedPassword8",
+    "createdAt": "2025-03-24T08:00:00.000Z",
+    "updatedAt": "2025-03-24T08:00:00.000Z",
+    "eventsSignedUp": [
+      "607c5b7d4f1a2f001f8d2903",
+      "607c5b7d4f1a2f001f8d2902"
+    ]
+  },
+  {
+    "firstName": "Isaac",
+    "lastName": "Clark",
+    "username": "isaac.clark",
+    "email": "isaac.clark@example.com",
+    "phone": "+1234567898",
+    "password": "hashedPassword9",
+    "createdAt": "2025-03-24T08:00:00.000Z",
+    "updatedAt": "2025-03-24T08:00:00.000Z",
+    "eventsSignedUp": [
+      "607c5b7d4f1a2f001f8d2903",
+      "607c5b7d4f1a2f001f8d2904"
+    ]
+  },
+  {
+    "firstName": "Jack",
+    "lastName": "Wilson",
+    "username": "jack.wilson",
+    "email": "jack.wilson@example.com",
+    "phone": "+1234567899",
+    "password": "hashedPassword10",
+    "createdAt": "2025-03-24T08:00:00.000Z",
+    "updatedAt": "2025-03-24T08:00:00.000Z",
+    "eventsSignedUp": [
+      "607c5b7d4f1a2f001f8d2901",
+      "607c5b7d4f1a2f001f8d2908"
+    ]
+  },
+  {
+    "firstName": "Katherine",
+    "lastName": "Scott",
+    "username": "katherine.scott",
+    "email": "katherine.scott@example.com",
+    "phone": "+1234567800",
+    "password": "hashedPassword11",
+    "createdAt": "2025-03-24T08:00:00.000Z",
+    "updatedAt": "2025-03-24T08:00:00.000Z",
+    "eventsSignedUp": [
+      "607c5b7d4f1a2f001f8d2905",
+      "607c5b7d4f1a2f001f8d2906"
+    ]
+  }
+]

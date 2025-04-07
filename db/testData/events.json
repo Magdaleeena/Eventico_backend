@@ -1,0 +1,281 @@
+[
+  {
+    "_id": "67e1cebd9c1844e2a36b140b",
+    "title": "Rock Music Concert",
+    "description": "Join us for a thrilling rock concert featuring local bands.",
+    "date": "2025-05-01T19:00:00.000Z",
+    "location": "Downtown Music Hall",
+    "createdBy": "607c5b7d4f1a2f001f8d2907",
+    "maxParticipants": 200,
+    "participants": [],
+    "keywords": [
+      "rock",
+      "concert",
+      "music",
+      "live performance"
+    ],
+    "category": "Music",
+    "tags": [
+      "live",
+      "bands",
+      "rock music"
+    ],
+    "image": "https://link-to-image1.jpg",
+    "eventURL": "https://example.com/rock-concert",
+    "createdAt": "2025-03-24T08:00:00.000Z",
+    "updatedAt": "2025-03-24T08:00:00.000Z",
+    "status": "active",
+    "organizerContact": {
+      "email": "contact@musicvenue.com",
+      "phone": "+1234567890"
+    }
+  },
+  {
+    "_id": "67e1cebd9c1844e2a36b140c",
+    "title": "Art Exhibition: Contemporary Art",
+    "description": "Explore modern art from a variety of artists in our latest exhibition.",
+    "date": "2025-05-10T10:00:00.000Z",
+    "location": "City Art Gallery",
+    "createdBy": "607c5b7d4f1a2f001f8d2907",
+    "maxParticipants": 100,
+    "participants": [],
+    "keywords": [
+      "art",
+      "contemporary",
+      "exhibition",
+      "gallery"
+    ],
+    "category": "Arts",
+    "tags": [
+      "modern art",
+      "art lovers",
+      "exhibit"
+    ],
+    "image": "https://link-to-image2.jpg",
+    "eventURL": "https://example.com/art-exhibition",
+    "createdAt": "2025-03-24T08:00:00.000Z",
+    "updatedAt": "2025-03-24T08:00:00.000Z",
+    "status": "active",
+    "organizerContact": {
+      "email": "gallery@cityart.com",
+      "phone": "+1234567890"
+    }
+  },
+  {
+    "_id": "67e1cebd9c1844e2a36b140d",
+    "title": "Community Potluck Dinner",
+    "description": "Bring your favorite dish and share with the community.",
+    "date": "2025-05-12T18:00:00.000Z",
+    "location": "Community Center",
+    "createdBy": "607c5b7d4f1a2f001f8d2907",
+    "maxParticipants": 50,
+    "participants": [],
+    "keywords": [
+      "potluck",
+      "community",
+      "dinner",
+      "food"
+    ],
+    "category": "Social",
+    "tags": [
+      "family-friendly",
+      "outdoor",
+      "potluck"
+    ],
+    "image": "https://link-to-image3.jpg",
+    "eventURL": "https://example.com/community-potluck",
+    "createdAt": "2025-03-24T08:00:00.000Z",
+    "updatedAt": "2025-03-24T08:00:00.000Z",
+    "status": "active",
+    "organizerContact": {
+      "email": "contact@communitycenter.com",
+      "phone": "+1234567890"
+    }
+  },
+  {
+    "_id": "67e1cebd9c1844e2a36b140e",
+    "title": "Yoga Retreat in the Mountains",
+    "description": "Relax, meditate, and practice yoga with experts in a beautiful mountain setting.",
+    "date": "2025-06-01T09:00:00.000Z",
+    "location": "Mountain Resort",
+    "createdBy": "607c5b7d4f1a2f001f8d2907",
+    "maxParticipants": 30,
+    "participants": [],
+    "keywords": [
+      "yoga",
+      "retreat",
+      "mountains",
+      "wellness"
+    ],
+    "category": "Health & Wellness",
+    "tags": [
+      "relaxation",
+      "meditation",
+      "nature"
+    ],
+    "image": "https://link-to-image4.jpg",
+    "eventURL": "https://example.com/yoga-retreat",
+    "createdAt": "2025-03-24T08:00:00.000Z",
+    "updatedAt": "2025-03-24T08:00:00.000Z",
+    "status": "active",
+    "organizerContact": {
+      "email": "info@yogaretreat.com",
+      "phone": "+1234567890"
+    }
+  },
+  {
+    "_id": "67e1cebd9c1844e2a36b140f",
+    "title": "Photography Workshop",
+    "description": "Learn the art of photography from experienced professionals.",
+    "date": "2025-05-20T10:00:00.000Z",
+    "location": "Photography Studio",
+    "createdBy": "607c5b7d4f1a2f001f8d2907",
+    "maxParticipants": 20,
+    "participants": [],
+    "keywords": [
+      "photography",
+      "workshop",
+      "learning",
+      "art"
+    ],
+    "category": "Education",
+    "tags": [
+      "beginner",
+      "camera",
+      "photo tips"
+    ],
+    "image": "https://link-to-image5.jpg",
+    "eventURL": "https://example.com/photography-workshop",
+    "createdAt": "2025-03-24T08:00:00.000Z",
+    "updatedAt": "2025-03-24T08:00:00.000Z",
+    "status": "active",
+    "organizerContact": {
+      "email": "info@photoworkshop.com",
+      "phone": "+1234567890"
+    }
+  },
+  {
+    "_id": "67e1cebd9c1844e2a36b1410",
+    "title": "Outdoor Movie Night",
+    "description": "Enjoy a classic movie under the stars with friends and family.",
+    "date": "2025-07-05T20:00:00.000Z",
+    "location": "Central Park",
+    "createdBy": "607c5b7d4f1a2f001f8d2907",
+    "maxParticipants": 100,
+    "participants": [],
+    "keywords": [
+      "movie",
+      "outdoor",
+      "family",
+      "classic"
+    ],
+    "category": "Entertainment",
+    "tags": [
+      "family-friendly",
+      "outdoor cinema",
+      "fun"
+    ],
+    "image": "https://link-to-image6.jpg",
+    "eventURL": "https://example.com/outdoor-movie-night",
+    "createdAt": "2025-03-24T08:00:00.000Z",
+    "updatedAt": "2025-03-24T08:00:00.000Z",
+    "status": "active",
+    "organizerContact": {
+      "email": "contact@outdoorcinema.com",
+      "phone": "+1234567890"
+    }
+  },
+  {
+    "_id": "67e1cebd9c1844e2a36b1411",
+    "title": "Tech Conference 2025",
+    "description": "An exciting conference on the latest trends in technology and innovation.",
+    "date": "2025-08-15T09:00:00.000Z",
+    "location": "Tech Expo Center",
+    "createdBy": "607c5b7d4f1a2f001f8d2907",
+    "maxParticipants": 500,
+    "participants": [],
+    "keywords": [
+      "technology",
+      "conference",
+      "innovation",
+      "tech trends"
+    ],
+    "category": "Conference",
+    "tags": [
+      "networking",
+      "tech industry",
+      "future"
+    ],
+    "image": "https://link-to-image7.jpg",
+    "eventURL": "https://example.com/tech-conference",
+    "createdAt": "2025-03-24T08:00:00.000Z",
+    "updatedAt": "2025-03-24T08:00:00.000Z",
+    "status": "active",
+    "organizerContact": {
+      "email": "info@techconference.com",
+      "phone": "+1234567890"
+    }
+  },
+  {
+    "_id": "67e1cebd9c1844e2a36b1412",
+    "title": "Creative Writing Workshop",
+    "description": "Unlock your inner writer and develop your creative skills.",
+    "date": "2025-05-25T11:00:00.000Z",
+    "location": "Local Library",
+    "createdBy": "607c5b7d4f1a2f001f8d2907",
+    "maxParticipants": 15,
+    "participants": [],
+    "keywords": [
+      "writing",
+      "workshop",
+      "creative",
+      "literature"
+    ],
+    "category": "Education",
+    "tags": [
+      "beginner",
+      "literature",
+      "creative writing"
+    ],
+    "image": "https://link-to-image8.jpg",
+    "eventURL": "https://example.com/writing-workshop",
+    "createdAt": "2025-03-24T08:00:00.000Z",
+    "updatedAt": "2025-03-24T08:00:00.000Z",
+    "status": "active",
+    "organizerContact": {
+      "email": "info@writingworkshop.com",
+      "phone": "+1234567890"
+    }
+  },
+  {
+    "_id": "67e1cebd9c1844e2a36b1413",
+    "title": "Cooking Class: Italian Cuisine",
+    "description": "Learn how to cook traditional Italian dishes in this hands-on cooking class.",
+    "date": "2025-06-15T10:00:00.000Z",
+    "location": "Culinary School",
+    "createdBy": "607c5b7d4f1a2f001f8d2907",
+    "maxParticipants": 25,
+    "participants": [],
+    "keywords": [
+      "cooking",
+      "class",
+      "Italian",
+      "food"
+    ],
+    "category": "Food & Drink",
+    "tags": [
+      "italian",
+      "cooking",
+      "hands-on"
+    ],
+    "image": "https://link-to-image9.jpg",
+    "eventURL": "https://example.com/cooking-class-italian",
+    "createdAt": "2025-03-24T08:00:00.000Z",
+    "updatedAt": "2025-03-24T08:00:00.000Z",
+    "status": "active",
+    "organizerContact": {
+      "email": "info@culinaryschool.com",
+      "phone": "+1234567890"
+    }
+  }
+]
