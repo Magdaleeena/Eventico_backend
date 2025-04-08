@@ -5,16 +5,10 @@ const connectDB = require('./db');
 const userRoutes = require('./routes/userRoutes'); 
 const eventRoutes = require('./routes/eventRoutes');
 const { psqlErrorHandlerOne, psqlErrorHandlerTwo, psqlErrorHandlerThree, customErrorHandler, serverErrorHandler } = require('./error-handlers');
-const { clerkMiddleware } = require('@clerk/express');
 
 const app = express();
 
-// Connect to MongoDB based on the environment (production or development)
 connectDB();
-
-// Apply Clerk middleware for authentication (no instantiation needed)
-app.use(clerkMiddleware({ apiKey: process.env.CLERK_SECRET_KEY }))
-// Middleware to parse JSON requests
 
 app.use(express.json());
 

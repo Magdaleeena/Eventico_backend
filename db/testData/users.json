@@ -1,17 +1,15 @@
 [
   {
-    "firstName": "Alice",
-    "lastName": "Johnson",
-    "username": "alice.johnson",
-    "email": "alice.johnson@example.com",
+    "firstName": "Jennifer",
+    "lastName": "Kirk",
+    "username": "JenK",
+    "email": "jen.kirk@happy.face.com",
     "phone": "+1234567890",
     "password": "hashedPassword1",
+    "role": "user",
     "createdAt": "2025-03-24T08:00:00.000Z",
     "updatedAt": "2025-03-24T08:00:00.000Z",
-    "eventsSignedUp": [
-      "607c5b7d4f1a2f001f8d2908",
-      "607c5b7d4f1a2f001f8d2909"
-    ]
+    "eventsSignedUp": []
   },
   {
     "firstName": "Bob",
@@ -20,12 +18,10 @@
     "email": "bob.smith@example.com",
     "phone": "+1234567891",
     "password": "hashedPassword2",
+    "role": "user",
     "createdAt": "2025-03-24T08:00:00.000Z",
     "updatedAt": "2025-03-24T08:00:00.000Z",
-    "eventsSignedUp": [
-      "607c5b7d4f1a2f001f8d2909",
-      "607c5b7d4f1a2f001f8d2907"
-    ]
+    "eventsSignedUp": []
   },
   {
     "firstName": "Charlie",
@@ -34,12 +30,10 @@
     "email": "charlie.davis@example.com",
     "phone": "+1234567892",
     "password": "hashedPassword3",
+    "role": "user",
     "createdAt": "2025-03-24T08:00:00.000Z",
     "updatedAt": "2025-03-24T08:00:00.000Z",
-    "eventsSignedUp": [
-      "607c5b7d4f1a2f001f8d2907",
-      "607c5b7d4f1a2f001f8d2906"
-    ]
+    "eventsSignedUp": []
   },
   {
     "firstName": "Diana",
@@ -48,12 +42,10 @@
     "email": "diana.williams@example.com",
     "phone": "+1234567893",
     "password": "hashedPassword4",
+    "role": "user",
     "createdAt": "2025-03-24T08:00:00.000Z",
     "updatedAt": "2025-03-24T08:00:00.000Z",
-    "eventsSignedUp": [
-      "607c5b7d4f1a2f001f8d2905",
-      "607c5b7d4f1a2f001f8d2908"
-    ]
+    "eventsSignedUp": []
   },
   {
     "firstName": "Eva",
@@ -62,12 +54,10 @@
     "email": "eva.green@example.com",
     "phone": "+1234567894",
     "password": "hashedPassword5",
+    "role": "user",
     "createdAt": "2025-03-24T08:00:00.000Z",
     "updatedAt": "2025-03-24T08:00:00.000Z",
-    "eventsSignedUp": [
-      "607c5b7d4f1a2f001f8d2907",
-      "607c5b7d4f1a2f001f8d2909"
-    ]
+    "eventsSignedUp": []
   },
   {
     "firstName": "Frank",
@@ -76,12 +66,10 @@
     "email": "frank.thompson@example.com",
     "phone": "+1234567895",
     "password": "hashedPassword6",
+    "role": "user",
     "createdAt": "2025-03-24T08:00:00.000Z",
     "updatedAt": "2025-03-24T08:00:00.000Z",
-    "eventsSignedUp": [
-      "607c5b7d4f1a2f001f8d2906",
-      "607c5b7d4f1a2f001f8d2905"
-    ]
+    "eventsSignedUp": []
   },
   {
     "firstName": "Grace",
@@ -90,12 +78,10 @@
     "email": "grace.lee@example.com",
     "phone": "+1234567896",
     "password": "hashedPassword7",
+    "role": "user",
     "createdAt": "2025-03-24T08:00:00.000Z",
     "updatedAt": "2025-03-24T08:00:00.000Z",
-    "eventsSignedUp": [
-      "607c5b7d4f1a2f001f8d2904",
-      "607c5b7d4f1a2f001f8d2907"
-    ]
+    "eventsSignedUp": []
   },
   {
     "firstName": "Hannah",
@@ -104,12 +90,10 @@
     "email": "hannah.moore@example.com",
     "phone": "+1234567897",
     "password": "hashedPassword8",
+    "role": "user",
     "createdAt": "2025-03-24T08:00:00.000Z",
     "updatedAt": "2025-03-24T08:00:00.000Z",
-    "eventsSignedUp": [
-      "607c5b7d4f1a2f001f8d2903",
-      "607c5b7d4f1a2f001f8d2902"
-    ]
+    "eventsSignedUp": []
   },
   {
     "firstName": "Isaac",
@@ -118,12 +102,10 @@
     "email": "isaac.clark@example.com",
     "phone": "+1234567898",
     "password": "hashedPassword9",
+    "role": "user",
     "createdAt": "2025-03-24T08:00:00.000Z",
     "updatedAt": "2025-03-24T08:00:00.000Z",
-    "eventsSignedUp": [
-      "607c5b7d4f1a2f001f8d2903",
-      "607c5b7d4f1a2f001f8d2904"
-    ]
+    "eventsSignedUp": []
   },
   {
     "firstName": "Jack",
@@ -132,12 +114,10 @@
     "email": "jack.wilson@example.com",
     "phone": "+1234567899",
     "password": "hashedPassword10",
+    "role": "user",
     "createdAt": "2025-03-24T08:00:00.000Z",
     "updatedAt": "2025-03-24T08:00:00.000Z",
-    "eventsSignedUp": [
-      "607c5b7d4f1a2f001f8d2901",
-      "607c5b7d4f1a2f001f8d2908"
-    ]
+    "eventsSignedUp": []
   },
   {
     "firstName": "Katherine",
@@ -146,11 +126,61 @@
     "email": "katherine.scott@example.com",
     "phone": "+1234567800",
     "password": "hashedPassword11",
+    "role": "user",
     "createdAt": "2025-03-24T08:00:00.000Z",
     "updatedAt": "2025-03-24T08:00:00.000Z",
-    "eventsSignedUp": [
-      "607c5b7d4f1a2f001f8d2905",
-      "607c5b7d4f1a2f001f8d2906"
-    ]
+    "eventsSignedUp": []
+  },
+  {
+    "firstName": "John",
+    "lastName": "Doe",
+    "username": "john.doe",
+    "email": "john.doe@community.com",
+    "phone": "+1234567890",
+    "password": "hashedPasswordAdmin1",
+    "role": "admin",
+    "createdAt": "2025-03-24T08:00:00.000Z",
+    "updatedAt": "2025-03-24T08:00:00.000Z",
+    "eventsManaged": [],
+    "status": "active"
+  },
+  {
+    "firstName": "Mary",
+    "lastName": "Stone",
+    "username": "mary.stone",
+    "email": "mary.stone@community.com",
+    "phone": "+1234567891",
+    "password": "hashedPasswordAdmin2",
+    "role": "admin",
+    "createdAt": "2025-03-24T08:00:00.000Z",
+    "updatedAt": "2025-03-24T08:00:00.000Z",
+    "eventsManaged": [],
+    "status": "active"
+  },
+  {
+    "firstName": "Lisa",
+    "lastName": "Turner",
+    "username": "lisa.turner",
+    "email": "lisa.turner@community.com",
+    "phone": "+1234567892",
+    "password": "hashedPasswordAdmin3",
+    "role": "admin",
+    "createdAt": "2025-03-24T08:00:00.000Z",
+    "updatedAt": "2025-03-24T08:00:00.000Z",
+    "eventsManaged": [],
+    "status": "active"
+  },
+  {
+    "firstName": "James",
+    "lastName": "Brown",
+    "username": "james.brown",
+    "email": "james.brown@community.com",
+    "phone": "+1234567893",
+    "password": "hashedPasswordAdmin4",
+    "role": "admin",
+    "createdAt": "2025-03-24T08:00:00.000Z",
+    "updatedAt": "2025-03-24T08:00:00.000Z",
+    "eventsManaged": [],
+    "status": "active"
   }
 ]

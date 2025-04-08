@@ -15,9 +15,25 @@ exports.createUser = async (req, res) => {
 // Get all users
 exports.getAllUsers = async (req, res) => {
     try {
-      const users = await User.find(); // Mongoose will use the 'users' collection automatically
-      res.status(200).json(users); // Respond with the list of users
+      const { role } = req.query;
+      const filter = role ? { role } : {};
+      const users = await User.find(filter); 
+      res.status(200).json(users); 
     } catch (err) {
       res.status(500).json({ message: 'Error fetching users', error: err });
     }
   };
+
+
+// Get a user by clerkUserId
+exports.getUserById = async (req, res) => {
+  try {
+    const user = await User.findOne({ clerkUserId: req.auth.user.id });
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    res.status(200).json(user);
+  } catch (err) {
+    res.status(500).json({ message: 'Error fetching user', error: err });
+  }
+};

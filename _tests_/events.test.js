@@ -24,7 +24,7 @@ describe('Event Controller Tests', () => {
     expect(response.body).toHaveProperty('events');
     expect(response.body.events).toBeInstanceOf(Array);  // Ensure 'events' is an array
     expect(response.body.events.length).toBeGreaterThan(0); // At least one event should be present
-    
+        
     // Ensure pagination data is present
     expect(response.body).toHaveProperty('totalEvents');
     expect(response.body).toHaveProperty('totalPages');
@@ -37,6 +37,7 @@ describe('Event Controller Tests', () => {
     
     expect(response.status).toBe(200);
     expect(response.body.events).toBeInstanceOf(Array);
+       
     response.body.events.forEach(event => {
       expect(event.category).toBe(category);  // All events should have 'Music' as their category
     });
@@ -91,7 +92,7 @@ describe('Event Controller Tests', () => {
   });
 
   it('should update an event with status 200', async () => {
-    const eventId = '67e1cebd9c1844e2a36b140b'; 
+    const eventId = '67e1cebd9c1844e2a36b1410'; 
     const updatedEvent = {
       title: 'Updated Music Concert',
       description: 'An updated description',

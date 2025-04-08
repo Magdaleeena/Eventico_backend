@@ -5,12 +5,16 @@ const userSchema = new mongoose.Schema({
     clerkId: { type: String, required: false},  
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
-    username: { type: String, required: true },
+    username: { type: String, required: false },
     email: { type: String, required: true, unique: true },
-    password: { type: String },
-    role: { type: String, default: 'user' },
-    createdAt: { type: Date, default: Date.now },
-});
+    role: { type: String, enum: ['user', 'admin'], default: 'user' },
+    eventsSignedUp: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Event' }],
+    eventsManaged: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Event' }],
+  },
+  {
+    timestamps: true,  // Automatically adds createdAt and updatedAt
+  }
+);
 
 // Create the User model from the schema
 const User = mongoose.model('User', userSchema);

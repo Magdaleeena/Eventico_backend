@@ -4,7 +4,7 @@ require('dotenv-flow').config(); // Import dotenv-flow to load environment varia
 
 const connectDB = async () => {
   try {
-    await mongoose.connect('mongodb://localhost:27017/eventTestDB');
+    await mongoose.connect('mongodb://localhost:27017/eventicoTestDB');
     console.log('MongoDB Connected Successfully');
   } catch (err) {
     console.error('Error connecting to MongoDB:', err);
