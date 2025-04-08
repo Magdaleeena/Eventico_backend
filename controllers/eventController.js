@@ -83,29 +83,45 @@ const getEventById = async (req, res) => {
 const updateEvent = async (req, res) => {
   const { id } = req.params;
   const updates = req.body;
+
   try {
-    const event = await Event.findByIdAndUpdate(id, updates, { new: true });
+    const event = await Event.findById(id);
     if (!event) {
       return res.status(404).json({ msg: 'Event not found' });
     }
-    return res.status(200).json(event);
+
+    if (event.createdBy.toString() !== req.user._id) {
+      return res.status(403).json({ msg: 'You are not authorized to update this event.' });
+    }
+
+    const updatedEvent = await Event.findByIdAndUpdate(id, updates, { new: true });
+    return res.status(200).json(updatedEvent);
   } catch (err) {
     return res.status(400).json({ msg: 'Error updating event', error: err.message });
   }
 };
 
+
 // Delete an event
 const deleteEvent = async (req, res) => {
   const { id } = req.params;
+
   try {
-    const event = await Event.findByIdAndDelete(id);
+    const event = await Event.findById(id);
     if (!event) {
       return res.status(404).json({ msg: 'Event not found' });
     }
+
+    if (event.createdBy.toString() !== req.user._id) {
+      return res.status(403).json({ msg: 'You are not authorized to delete this event.' });
+    }
+
+    await Event.findByIdAndDelete(id);
     return res.status(200).json({ msg: 'Event deleted' });
   } catch (err) {
     return res.status(500).json({ msg: 'Error deleting event', error: err.message });
   }
 };
+
 
 module.exports = { getAllEvents, createEvent, getEventById, updateEvent, deleteEvent };

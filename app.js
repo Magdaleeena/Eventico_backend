@@ -1,5 +1,4 @@
-require('dotenv-flow').config();  // Automatically loads the correct .env file based on NODE_ENV
-
+require('dotenv-flow').config();  
 const express = require('express');
 const connectDB = require('./db');  
 const userRoutes = require('./routes/userRoutes'); 

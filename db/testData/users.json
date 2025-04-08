@@ -154,7 +154,7 @@
     "role": "admin",
     "createdAt": "2025-03-24T08:00:00.000Z",
     "updatedAt": "2025-03-24T08:00:00.000Z",
-    "eventsManaged": [],
+    "eventsManaged": ["67e1cebd9c1844e2a36b1400", "67e1cebd9c1844e2a36b140c"],
     "status": "active"
   },
   {

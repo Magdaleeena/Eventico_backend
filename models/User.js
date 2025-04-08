@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
 
 // Define the User schema
 const userSchema = new mongoose.Schema({
@@ -15,6 +16,10 @@ const userSchema = new mongoose.Schema({
     timestamps: true,  // Automatically adds createdAt and updatedAt
   }
 );
+
+userSchema.statics.hashPassword = async function(password) {
+  return await bcrypt.hash(password, 10);
+};
 
 // Create the User model from the schema
 const User = mongoose.model('User', userSchema);
