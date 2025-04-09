@@ -6,14 +6,19 @@ const seedDatabase = require('../db/seedDatabase');
 const jwt = require('jsonwebtoken');
 
 const user = {
-  _id: '67f54d1287f898787e07a2b2',
+  id: '67f54d1287f898787e07a2b2',
   username: 'mary.stone',
   role: 'admin'
 };
 
 const token = jwt.sign(user, process.env.JWT_SECRET, { expiresIn: '2h' });
 
+
+
 describe('Event Controller Tests', () => {
+
+  let createdEventId;
+
   beforeAll(async () => {
     await seedDatabase(); 
   });
@@ -64,7 +69,6 @@ describe('Event Controller Tests', () => {
         description: 'An amazing live music concert with famous artists.',
         date: '2025-06-15T19:00:00Z', 
         location: 'Madison Square Garden',
-        createdBy: '60e8f755d9e8a86ed4935e5f', // Existing User _id
         maxParticipants: 500,
         participants: [],
         keywords: ['music', 'concert', 'live'],
@@ -82,7 +86,10 @@ describe('Event Controller Tests', () => {
       const response = await request(app)
       .post('/api/events')
       .set('Authorization', `Bearer ${token}`)
-      .send(newEvent);  
+      .send(newEvent); 
+
+      createdEventId = response.body._id;
+      console.log('Created event:', response.body);
     
     expect(response.status).toBe(201);
     expect(response.body).toHaveProperty('_id');
@@ -97,29 +104,17 @@ describe('Event Controller Tests', () => {
     expect(response.body.msg).toBe('Event not found');
   });
 
-  // it('should update an event with status 200', async () => {
-  //   const eventId = '67e1cebd9c1844e2a36b1400'; 
-  //   const updatedEvent = {
-  //     title: 'Updated Music Concert',
-  //     description: 'An updated description',
-  //   };
+  it('should update an event with status 200', async () => {
+    console.log(`Attempting to update event with ID: ${createdEventId}`);
 
-  //   const response = await request(app)
-  //     .put(`/api/events/${eventId}`)
-  //     .set('Authorization', `Bearer ${token}`)
-  //     .send(updatedEvent);
-    
-  //   expect(response.status).toBe(200);
-  //   expect(response.body.title).toBe('Updated Music Concert');
-  // });
+    const response = await request(app)
+      .put(`/api/events/${createdEventId}`)
+      .set('Authorization', `Bearer ${token}`)
+      .send({ title: 'Updated Title' });
 
-  // it('should delete an event with status 200', async () => {
-  //   const eventId = '67e1cebd9c1844e2a36b1411'; 
-  //   const response = await request(app)    
-  //     .delete(`/api/events/${eventId}`)
-  //     .set('Authorization', `Bearer ${token}`);
-
-  //   expect(response.status).toBe(200);
-  //   expect(response.body.msg).toBe('Event deleted');
-  // });
+    console.log('Response from update event:', response.body);
+  
+    expect(response.status).toBe(200);
+    expect(response.body.title).toBe('Updated Title');
+  });
 });

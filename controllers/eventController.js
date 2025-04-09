@@ -4,13 +4,12 @@ const Event = require('../models/Event');
 const getAllEvents = async (req, res) => {
   const { page = 1, limit = 10, category, sortBy = 'date', sortOrder = 'asc' } = req.query;
   
-  const order = sortOrder === 'desc' ? -1 : 1;  // If descending, use -1
+  const order = sortOrder === 'desc' ? -1 : 1;  
   
   try {
     // Build filter object for category (optional)
     const filter = category ? { category } : {};
 
-    // Get events with pagination, category filter, and sorting
     const events = await Event.find(filter)
       .sort({ [sortBy]: order })  // Sort by 'date' or other fields
       .skip((page - 1) * limit)   // Skip the correct number of items for pagination
@@ -51,7 +50,7 @@ const getEventById = async (req, res) => {
 // Create a new event
 const createEvent = async (req, res) => {
   try {
-    const { title, description, date, location, createdBy, maxParticipants, keywords, category, tags, image, eventURL, status, organizerContact } = req.body;
+    const { title, description, date, location, maxParticipants, keywords, category, tags, image, eventURL, status, organizerContact } = req.body;
 
     // Create a new event document
     const newEvent = new Event({
@@ -59,7 +58,7 @@ const createEvent = async (req, res) => {
       description,
       date,
       location,
-      createdBy,
+      createdBy: req.user.id,
       maxParticipants,
       participants: [], // Initially no participants
       keywords,
@@ -89,15 +88,6 @@ const updateEvent = async (req, res) => {
   const updates = req.body;
 
   try {
-    const event = await Event.findById(id);
-    if (!event) {
-      return res.status(404).json({ msg: 'Event not found' });
-    }
-
-    if (event.createdBy.toString() !== req.user._id) {
-      return res.status(403).json({ msg: 'You are not authorized to update this event.' });
-    }
-
     const updatedEvent = await Event.findByIdAndUpdate(id, updates, { new: true });
     return res.status(200).json(updatedEvent);
   } catch (err) {
@@ -111,15 +101,6 @@ const deleteEvent = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const event = await Event.findById(id);
-    if (!event) {
-      return res.status(404).json({ msg: 'Event not found' });
-    }
-
-    if (event.createdBy.toString() !== req.user._id) {
-      return res.status(403).json({ msg: 'You are not authorized to delete this event.' });
-    }
-
     await Event.findByIdAndDelete(id);
     return res.status(200).json({ msg: 'Event deleted' });
   } catch (err) {
