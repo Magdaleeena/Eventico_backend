@@ -3,9 +3,9 @@ exports.psqlErrorHandlerOne = async (error, request, response, next) => {
       if (error.code === '23502') {
         return response.status(400).send({ msg: 'Bad request' });
       }
-      next(error);  // Continue to the next middleware if error code doesn't match
+      next(error);  
     } catch (err) {
-      next(err);  // Pass any unexpected error to the error handler
+      next(err);  
     }
   };
   
@@ -16,7 +16,7 @@ exports.psqlErrorHandlerOne = async (error, request, response, next) => {
       }
       next(error);
     } catch (err) {
-      next(err);  // Pass any unexpected error to the error handler
+      next(err);  
     }
   };
   
@@ -27,7 +27,7 @@ exports.psqlErrorHandlerOne = async (error, request, response, next) => {
       }
       next(error);
     } catch (err) {
-      next(err);  // Pass any unexpected error to the error handler
+      next(err);  
     }
   };
   
@@ -36,9 +36,9 @@ exports.psqlErrorHandlerOne = async (error, request, response, next) => {
       if (error.status && error.msg) {
         return response.status(error.status).send({ msg: error.msg });
       }
-      next(error);  // Pass the error if it doesn't match the expected structure
+      next(error);  
     } catch (err) {
-      next(err);  // Pass any unexpected error to the error handler
+      next(err);  
     }
   };
   
@@ -46,7 +46,7 @@ exports.psqlErrorHandlerOne = async (error, request, response, next) => {
     try {
       return response.status(500).send({ msg: 'Internal server error' });
     } catch (err) {
-      next(err);  // Pass any unexpected error to the error handler
+      next(err);  
     }
   };
   

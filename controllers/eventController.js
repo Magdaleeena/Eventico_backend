@@ -73,11 +73,9 @@ const createEvent = async (req, res) => {
     // Save event to the database
     const event = await newEvent.save();
 
-    // Respond with the created event
     res.status(201).json(event);
-  } catch (err) {
-    console.error(err);
-    res.status(400).json({ msg: 'Bad request, invalid data.' }); // Ensure proper error handling
+  } catch (err) {    
+    res.status(400).json({ msg: 'Bad request, invalid data.' }); 
   }
 };
 
@@ -88,6 +86,7 @@ const updateEvent = async (req, res) => {
   const updates = req.body;
 
   try {
+    // This returns the event after it's been updated { new: true}
     const updatedEvent = await Event.findByIdAndUpdate(id, updates, { new: true });
     return res.status(200).json(updatedEvent);
   } catch (err) {

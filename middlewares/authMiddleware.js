@@ -30,7 +30,7 @@ const isEventCreatorAdmin = async (req, res, next) => {
     try {
       const event = await Event.findById(req.params.id);
       if (!event) {
-        return res.status(404).json({ message: 'Event not found' });
+        return res.status(404).json({ msg: 'Event not found' });
       }
   
       const userId = req.user._id || req.user.id;
@@ -39,13 +39,13 @@ const isEventCreatorAdmin = async (req, res, next) => {
       const isCreator = event.createdBy.toString() === userId;
   
       if (!isAdmin || !isCreator) {
-        return res.status(403).json({ message: 'Only the admin who created this event can modify it' });
+        return res.status(403).json({ msg: 'Only the admin who created this event can modify it' });
       }
   
       next();
     } catch (err) {
       console.error('Authorization error:', err);
-      res.status(500).json({ message: 'Server error' });
+      res.status(500).json({ msg: 'Server error' });
     }
 };
   
