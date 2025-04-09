@@ -1,6 +1,6 @@
 // Database connection set up
 const mongoose = require('mongoose');
-require('dotenv-flow').config(); // Import dotenv-flow to load environment variables
+require('dotenv-flow').config(); 
 
 const connectDB = async () => {
   try {
@@ -8,7 +8,7 @@ const connectDB = async () => {
     console.log('MongoDB Connected Successfully');
   } catch (err) {
     console.error('Error connecting to MongoDB:', err);
-    process.exit(1); // Exit the process with failure
+    process.exit(1); 
   }
 };
 

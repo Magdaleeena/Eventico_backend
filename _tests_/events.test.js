@@ -1,7 +1,7 @@
 const request = require('supertest');
 const app = require('../app');
 const mongoose = require('mongoose');
-const seedDatabase = require('../db/seedDatabase'); // If you have any seed data for events
+const seedDatabase = require('../db/seedDatabase'); 
 
 const jwt = require('jsonwebtoken');
 
@@ -13,30 +13,25 @@ const user = {
 
 const token = jwt.sign(user, process.env.JWT_SECRET, { expiresIn: '2h' });
 
-
 describe('Event Controller Tests', () => {
   beforeAll(async () => {
-    // Seed the database before running tests
-    await seedDatabase(); // Ensure that this seeds some events in your DB
+    await seedDatabase(); 
   });
 
   afterAll(async () => {
-    await mongoose.connection.dropDatabase(); // Clean up after tests
+    await mongoose.connection.dropDatabase(); 
     await mongoose.connection.close();
   });
 
   it('should return a list of events with status 200 and default pagination', async () => {
-    const response = await request(app).get('/api/events');
+    const response = await request(app).get('/api/events');    
     
-    // Check for successful status
     expect(response.status).toBe(200);
-    
-    // Ensure response is an object containing events array and pagination details
     expect(response.body).toHaveProperty('events');
-    expect(response.body.events).toBeInstanceOf(Array);  // Ensure 'events' is an array
-    expect(response.body.events.length).toBeGreaterThan(0); // At least one event should be present
+    expect(response.body.events).toBeInstanceOf(Array);  
+    expect(response.body.events.length).toBeGreaterThan(0); 
         
-    // Ensure pagination data is present
+    // Pagination data is present
     expect(response.body).toHaveProperty('totalEvents');
     expect(response.body).toHaveProperty('totalPages');
     expect(response.body).toHaveProperty('currentPage');
@@ -50,7 +45,7 @@ describe('Event Controller Tests', () => {
     expect(response.body.events).toBeInstanceOf(Array);
        
     response.body.events.forEach(event => {
-      expect(event.category).toBe(category);  // All events should have 'Music' as their category
+      expect(event.category).toBe(category); 
     });
   });
 
@@ -58,7 +53,6 @@ describe('Event Controller Tests', () => {
     const response = await request(app).get('/api/events');
     
     expect(response.status).toBe(200);
-    // Check that the first event is older than the second one (ascending order by default)
     const events = response.body.events;
     expect(new Date(events[0].date) <= new Date(events[1].date)).toBe(true);
   });
@@ -70,7 +64,7 @@ describe('Event Controller Tests', () => {
         description: 'An amazing live music concert with famous artists.',
         date: '2025-06-15T19:00:00Z', 
         location: 'Madison Square Garden',
-        createdBy: '60e8f755d9e8a86ed4935e5f', // This should be an existing User _id
+        createdBy: '60e8f755d9e8a86ed4935e5f', // Existing User _id
         maxParticipants: 500,
         participants: [],
         keywords: ['music', 'concert', 'live'],

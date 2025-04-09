@@ -14,7 +14,8 @@ const getAllEvents = async (req, res) => {
     const events = await Event.find(filter)
       .sort({ [sortBy]: order })  // Sort by 'date' or other fields
       .skip((page - 1) * limit)   // Skip the correct number of items for pagination
-      .limit(Number(limit));      // Limit the number of events to 'limit'
+      .limit(Number(limit))       // Limit the number of events to 'limit'
+      .populate('createdBy', 'firstName lastName');         
 
     // Get the total count of events for pagination
     const totalEvents = await Event.countDocuments(filter);
@@ -30,6 +31,22 @@ const getAllEvents = async (req, res) => {
     res.status(500).json({ msg: 'Error fetching events', error: err.message });
   }
 };
+
+// Get a single event by ID
+const getEventById = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const event = await Event.findById(id)
+    .populate('createdBy', 'firstName lastName username');
+    if (!event) {
+      return res.status(404).json({ msg: 'Event not found' });
+    }
+    return res.status(200).json(event);
+  } catch (err) {
+    return res.status(500).json({ msg: 'Error fetching event', error: err.message });
+  }
+};
+
 
 // Create a new event
 const createEvent = async (req, res) => {
@@ -65,19 +82,6 @@ const createEvent = async (req, res) => {
   }
 };
 
-// Get a single event by ID
-const getEventById = async (req, res) => {
-  const { id } = req.params;
-  try {
-    const event = await Event.findById(id);
-    if (!event) {
-      return res.status(404).json({ msg: 'Event not found' });
-    }
-    return res.status(200).json(event);
-  } catch (err) {
-    return res.status(500).json({ msg: 'Error fetching event', error: err.message });
-  }
-};
 
 // Update an event
 const updateEvent = async (req, res) => {

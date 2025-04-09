@@ -4,10 +4,12 @@ const bcrypt = require('bcryptjs');
 // Define the User schema
 const userSchema = new mongoose.Schema({
     clerkId: { type: String, required: false},  
-    firstName: { type: String, required: true },
-    lastName: { type: String, required: true },
-    username: { type: String, required: false },
-    email: { type: String, required: true, unique: true },
+    firstName: { type: String, required: true, trim: true },
+    lastName: { type: String, required: true, trim: true},
+    username: { type: String, required: true, unique: true, trim: true },
+    // clerkId or auth0Id or firebaseUid: { type: String, required: false } OR  password, if managed by myself: { type: String, required: true, select: false },
+    email: { type: String, required: true, unique: true, trim: true, lowercase: true},
+    phone: { type: String, required: false, trim: true },
     role: { type: String, enum: ['user', 'admin'], default: 'user' },
     eventsSignedUp: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Event' }],
     eventsManaged: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Event' }],

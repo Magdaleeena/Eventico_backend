@@ -1,21 +1,21 @@
 const express = require('express');
 const router = express.Router();
 const eventController = require('../controllers/eventController');
-const { authenticateToken, isAdmin } = require('../middlewares/authMiddleware');
+const { authenticateToken, isAdmin, isEventOwner } = require('../middlewares/authMiddleware');
 
-// Get all events
+// Get all events PUBLIC
 router.get('/', eventController.getAllEvents);
 
-// Create a new event
-router.post('/', authenticateToken, isAdmin, eventController.createEvent);
-
-// Get an event by ID
+// Get an event by ID PUBLIC
 router.get('/:id', eventController.getEventById);
 
+// Create a new event ADMIN ONLY
+router.post('/', authenticateToken, isAdmin, eventController.createEvent);
+
 // Update an event by ID
-router.put('/:id', authenticateToken, eventController.updateEvent);
+router.put('/:id', authenticateToken, isEventOwner, eventController.updateEvent);
 
 // Delete an event by ID
-router.delete('/:id', authenticateToken, eventController.deleteEvent);
+router.delete('/:id', authenticateToken, isEventOwner, eventController.deleteEvent);
 
 module.exports = router;

@@ -1,61 +1,32 @@
 const mongoose = require('mongoose');
 
-// Define the Event Schema
 const eventSchema = new mongoose.Schema(
   {
-    title: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-    description: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-    date: {
-      type: Date,
-      required: true,
-    },
-    location: {
-      type: String,
-      required: true,
-      trim: true,
-    },
+    title: { type: String, required: true, trim: true },
+    description: { type: String, required: true, trim: true },
+    date: { type: Date, required: true },
+    location: { type: String, required: true, trim: true },
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'User', // Reference to the User model
+      ref: 'User',
       required: true,
     },
-    maxParticipants: {
-      type: Number,
-      required: true,
-      min: 1,
-    },
+    maxParticipants: { type: Number, required: true, min: 1 },
     participants: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User', // References users who are participants
+        ref: 'User',
       },
     ],
-    keywords: {
-      type: [String],
-      required: true,
-    },
+    keywords: { type: [String], required: true },
     category: {
       type: String,
       required: true,
-      enum: ['Music', 'Arts', 'Social', 'Health & Wellness', 'Education', 'Entertainment', 'Food & Drink', 'Conference'], // Example categories
+      enum: ['Music', 'Arts', 'Social', 'Health & Wellness', 'Education', 'Entertainment', 'Food & Drink', 'Conference', 'Sports', 'Technology', 'Networking'], 
     },
     tags: [String],
-    image: {
-      type: String,
-      default: '', // URL to an image for the event
-    },
-    eventURL: {
-      type: String,
-      default: '', // URL to the event's webpage
-    },
+    image: { type: String, default: '' },
+    eventURL: { type: String, default: '' },
     status: {
       type: String,
       required: true,
@@ -63,20 +34,13 @@ const eventSchema = new mongoose.Schema(
       default: 'active',
     },
     organizerContact: {
-      email: {
-        type: String,
-        required: true,
-      },
-      phone: {
-        type: String,
-        required: true,
-      },
+      email: { type: String, required: true },
+      phone: { type: String, required: true },
     },
   },
-  { timestamps: true } // Automatically adds createdAt and updatedAt fields
+  { timestamps: true }
 );
 
-// Create the Event model based on the schema
 const Event = mongoose.model('Event', eventSchema);
 
 module.exports = Event;
