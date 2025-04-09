@@ -1,6 +1,5 @@
 [
-  {
-    "_id": "67e1cebd9c1844e2a36b1400",
+  {    
     "title": "Rock Music Concert",
     "description": "Join us for a thrilling rock concert featuring local bands.",
     "date": "2025-05-01T19:00:00.000Z",
@@ -30,8 +29,7 @@
       "phone": "+1234567890"
     }
   },
-  {
-    "_id": "67e1cebd9c1844e2a36b140c",
+  {    
     "title": "Art Exhibition: Contemporary Art",
     "description": "Explore modern art from a variety of artists in our latest exhibition.",
     "date": "2025-05-10T10:00:00.000Z",
@@ -61,8 +59,7 @@
       "phone": "+1234567890"
     }
   },
-  {
-    "_id": "67e1cebd9c1844e2a36b140d",
+  {    
     "title": "Community Potluck Dinner",
     "description": "Bring your favorite dish and share with the community.",
     "date": "2025-05-12T18:00:00.000Z",
@@ -92,8 +89,7 @@
       "phone": "+1234567890"
     }
   },
-  {
-    "_id": "67e1cebd9c1844e2a36b140e",
+  {    
     "title": "Yoga Retreat in the Mountains",
     "description": "Relax, meditate, and practice yoga with experts in a beautiful mountain setting.",
     "date": "2025-06-01T09:00:00.000Z",
@@ -123,8 +119,7 @@
       "phone": "+1234567890"
     }
   },
-  {
-    "_id": "67e1cebd9c1844e2a36b140f",
+  {    
     "title": "Photography Workshop",
     "description": "Learn the art of photography from experienced professionals.",
     "date": "2025-05-20T10:00:00.000Z",
@@ -154,8 +149,7 @@
       "phone": "+1234567890"
     }
   },
-  {
-    "_id": "67e1cebd9c1844e2a36b1410",
+  {    
     "title": "Outdoor Movie Night",
     "description": "Enjoy a classic movie under the stars with friends and family.",
     "date": "2025-07-05T20:00:00.000Z",
@@ -185,8 +179,7 @@
       "phone": "+1234567890"
     }
   },
-  {
-    "_id": "67e1cebd9c1844e2a36b1411",
+  {    
     "title": "Tech Conference 2025",
     "description": "An exciting conference on the latest trends in technology and innovation.",
     "date": "2025-08-15T09:00:00.000Z",
@@ -216,8 +209,7 @@
       "phone": "+1234567890"
     }
   },
-  {
-    "_id": "67e1cebd9c1844e2a36b1412",
+  {    
     "title": "Creative Writing Workshop",
     "description": "Unlock your inner writer and develop your creative skills.",
     "date": "2025-05-25T11:00:00.000Z",
@@ -247,8 +239,7 @@
       "phone": "+1234567890"
     }
   },
-  {
-    "_id": "67e1cebd9c1844e2a36b1413",
+  {    
     "title": "Cooking Class: Italian Cuisine",
     "description": "Learn how to cook traditional Italian dishes in this hands-on cooking class.",
     "date": "2025-06-15T10:00:00.000Z",

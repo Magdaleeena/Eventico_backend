@@ -1,4 +1,5 @@
 const Event = require('../models/Event');
+const User = require('../models/User');
 
 // Get all events with pagination, sorting, and optional category filter
 const getAllEvents = async (req, res) => {
@@ -107,5 +108,67 @@ const deleteEvent = async (req, res) => {
   }
 };
 
+// Authenticated user can sign up for an event
+const signUpForEvent = async (req, res) => {
+  const userId = req.user.id;
+  const eventId = req.params.id;
 
-module.exports = { getAllEvents, createEvent, getEventById, updateEvent, deleteEvent };
+  try {
+    const event = await Event.findById(eventId);
+    const user = await User.findById(userId);
+
+    if (!event || !user) {
+      return res.status(404).json({ message: 'Event or user not found' });
+    }
+
+    if (event.participants.includes(userId)) {
+      return res.status(400).json({ message: 'You already signed up for this event' });
+    }
+
+    if (event.participants.length >= event.maxParticipants) {
+      return res.status(400).json({ message: 'Event is full' });
+    }
+
+    event.participants.push(userId);
+    user.eventsSignedUp.push(eventId);
+
+    await event.save();
+    await user.save();
+
+    return res.status(200).json({ message: 'Successfully signed up for the event' });
+  } catch (err) {
+    return res.status(500).json({ message: 'Error signing up for event', error: err.message });
+  }
+};
+
+// Authenticated user can cancel their sign up for an event
+const unSignUpFromEvent = async (req, res) => {
+  const userId = req.user.id;
+  const eventId = req.params.id;
+
+  try {
+    const event = await Event.findById(eventId);
+    const user = await User.findById(userId);
+
+    if (!event || !user) {
+      return res.status(404).json({ message: 'Event or user not found' });
+    }
+
+    if (!event.participants.includes(userId)) {
+      return res.status(400).json({ message: 'You are not signed up for this event' });
+    }
+
+    event.participants = event.participants.filter(p => p.toString() !== userId);
+    user.eventsSignedUp = user.eventsSignedUp.filter(e => e.toString() !== eventId);
+
+    await event.save();
+    await user.save();
+
+    return res.status(200).json({ message: 'Successfully removed from event' });
+  } catch (err) {
+    return res.status(500).json({ message: 'Error unsigning from event', error: err.message });
+  }
+};
+
+
+module.exports = { getAllEvents, createEvent, getEventById, updateEvent, deleteEvent, signUpForEvent, unSignUpFromEvent };

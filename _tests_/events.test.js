@@ -16,6 +16,7 @@ describe('Event Controller API', () => {
   let createdEventId;
 
   beforeAll(async () => {
+    await mongoose.connection.dropDatabase();
     await seedDatabase();
   });
 
@@ -199,7 +200,7 @@ describe('Event Controller API', () => {
     let eventToDeleteId;
 
   beforeAll(async () => {
-    // Create an event that this user will later delete
+    // An event that this user will later delete
     const event = {
       title: 'Event to Delete',
       description: 'This event will be deleted in tests.',
@@ -226,24 +227,24 @@ describe('Event Controller API', () => {
     eventToDeleteId = response.body._id;
   });
 
-  it('should delete the event if the user is the creator', async () => {
-    const response = await request(app)
-      .delete(`/api/events/${eventToDeleteId}`)
-      .set('Authorization', `Bearer ${token}`);
+    it('should delete the event if the user is the creator', async () => {
+      const response = await request(app)
+        .delete(`/api/events/${eventToDeleteId}`)
+        .set('Authorization', `Bearer ${token}`);
 
-    expect(response.status).toBe(200);
-    expect(response.body.msg).toBe('Event deleted');
+      expect(response.status).toBe(200);
+      expect(response.body.msg).toBe('Event deleted');
   });
 
-  it('should return 404 when trying to delete an event that does not exist', async () => {
-    const fakeId = new mongoose.Types.ObjectId();
+    it('should return 404 when trying to delete an event that does not exist', async () => {
+      const fakeId = new mongoose.Types.ObjectId();
 
-    const response = await request(app)
-      .delete(`/api/events/${fakeId}`)
-      .set('Authorization', `Bearer ${token}`);
+      const response = await request(app)
+        .delete(`/api/events/${fakeId}`)
+        .set('Authorization', `Bearer ${token}`);
 
-    expect(response.status).toBe(404);
-    expect(response.body.msg).toMatch(/not found/i);
-  });
-});
+      expect(response.status).toBe(404);
+      expect(response.body.msg).toMatch(/not found/i);
+    });
+  });  
 });

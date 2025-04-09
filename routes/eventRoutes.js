@@ -18,4 +18,10 @@ router.put('/:id', authenticateToken, isEventCreatorAdmin, eventController.updat
 // Delete an event by ID
 router.delete('/:id', authenticateToken, isEventCreatorAdmin, eventController.deleteEvent);
 
+// User can signup for an event
+router.post('/:id/signup', authenticateToken, eventController.signUpForEvent);
+
+// User can cancel their signup for an event
+router.post('/:id/unsignup', authenticateToken, eventController.unSignUpFromEvent);
+
 module.exports = router;

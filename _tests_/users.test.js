@@ -21,6 +21,7 @@ describe('UserController Tests', () => {
 
   beforeAll(async () => {
     // Seed the database before running tests
+    await mongoose.connection.dropDatabase();
     await seedDatabase();
 
     // Get the admin and user from the seeded database
@@ -48,6 +49,7 @@ describe('UserController Tests', () => {
     expect(response.status).toBe(200);    
     expect(response.body).toBeInstanceOf(Array);
     expect(response.body.length).toBeGreaterThan(0);
+    // console.log(response.body);
   });
 
   it('should return only admins when filtered by role', async () => {
