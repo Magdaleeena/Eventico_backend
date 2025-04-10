@@ -3,7 +3,7 @@ const express = require('express');
 const connectDB = require('./db');  
 const userRoutes = require('./routes/userRoutes'); 
 const eventRoutes = require('./routes/eventRoutes');
-const { psqlErrorHandlerOne, psqlErrorHandlerTwo, psqlErrorHandlerThree, customErrorHandler, serverErrorHandler } = require('./error-handlers');
+const { mongooseValidationHandler, mongooseCastErrorHandler, customErrorHandler, serverErrorHandler } = require('./error-handlers');
 
 const app = express();
 
@@ -12,7 +12,7 @@ connectDB();
 app.use(express.json());
 
 // Use the user routes
-app.use('/api', userRoutes);
+app.use('/api/users', userRoutes);
 
 app.use('/api/events', eventRoutes);
 
@@ -26,11 +26,9 @@ app.all("*", (request, response) => {
   response.status(404).send({ msg: 'Path not found' });
 });
 
-app.use(psqlErrorHandlerOne);
+app.use(mongooseValidationHandler);
 
-app.use(psqlErrorHandlerTwo);
-
-app.use(psqlErrorHandlerThree);
+app.use(mongooseCastErrorHandler);
 
 app.use(customErrorHandler);
 

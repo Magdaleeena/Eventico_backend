@@ -1,52 +1,36 @@
-exports.psqlErrorHandlerOne = async (error, request, response, next) => {
-    try {
-      if (error.code === '23502') {
-        return response.status(400).send({ msg: 'Bad request' });
-      }
-      next(error);  
-    } catch (err) {
-      next(err);  
-    }
-  };
-  
-  exports.psqlErrorHandlerTwo = async (error, request, response, next) => {
-    try {
-      if (error.code === '22P02') {
-        return response.status(400).send({ msg: 'Invalid type' });
-      }
-      next(error);
-    } catch (err) {
-      next(err);  
-    }
-  };
-  
-  exports.psqlErrorHandlerThree = async (error, request, response, next) => {
-    try {
-      if (error.code === '23503') {
-        return response.status(404).send({ msg: 'Not found' });
-      }
-      next(error);
-    } catch (err) {
-      next(err);  
-    }
-  };
-  
-  exports.customErrorHandler = async (error, request, response, next) => {
-    try {
-      if (error.status && error.msg) {
-        return response.status(error.status).send({ msg: error.msg });
-      }
-      next(error);  
-    } catch (err) {
-      next(err);  
-    }
-  };
-  
-  exports.serverErrorHandler = async (error, request, response, next) => {
-    try {
-      return response.status(500).send({ msg: 'Internal server error' });
-    } catch (err) {
-      next(err);  
-    }
-  };
+// Mongoose validation errors (e.g., required fields missing)
+exports.mongooseValidationHandler = (err, req, res, next) => {
+  if (err.name === 'ValidationError') {
+    const errors = Object.values(err.errors).map((e) => ({
+      field: e.path,
+      message: e.message,
+    }));
+    return res.status(400).json({ msg: 'Validation error', errors });
+  }
+  next(err);
+};
+
+// Mongoose cast errors (e.g., invalid ObjectId)
+exports.mongooseCastErrorHandler = (err, req, res, next) => {
+  if (err.name === 'CastError') {
+    return res.status(400).json({
+      msg: `Invalid ${err.path}: ${err.value}`,
+    });
+  }
+  next(err);
+};
+
+// Custom error (when using next({ status, msg }))
+exports.customErrorHandler = (err, req, res, next) => {
+  if (err.status && err.msg) {
+    return res.status(err.status).json({ msg: err.msg });
+  }
+  next(err);
+};
+
+// Final catch-all error handler
+exports.serverErrorHandler = (err, req, res, next) => {
+  console.error('Unexpected error:', err);
+  return res.status(500).json({ msg: 'Internal server error' });
+};
   

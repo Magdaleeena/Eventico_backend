@@ -110,6 +110,7 @@ const deleteEvent = async (req, res) => {
 
 // Authenticated user can sign up for an event
 const signUpForEvent = async (req, res) => {
+  
   const userId = req.user.id;
   const eventId = req.params.id;
 
@@ -118,15 +119,17 @@ const signUpForEvent = async (req, res) => {
     const user = await User.findById(userId);
 
     if (!event || !user) {
+      console.log('Event or user not found');
       return res.status(404).json({ message: 'Event or user not found' });
     }
 
-    if (event.participants.includes(userId)) {
-      return res.status(400).json({ message: 'You already signed up for this event' });
+    if (user.role === 'admin') {
+      return res.status(403).json({ message: 'Admins cannot sign up for events' });
     }
 
-    if (event.participants.length >= event.maxParticipants) {
-      return res.status(400).json({ message: 'Event is full' });
+    const alreadySignedUp = event.participants.includes(userId);
+    if (alreadySignedUp) {
+      return res.status(400).json({ message: 'User already signed up for this event' });
     }
 
     event.participants.push(userId);
@@ -137,9 +140,11 @@ const signUpForEvent = async (req, res) => {
 
     return res.status(200).json({ message: 'Successfully signed up for the event' });
   } catch (err) {
-    return res.status(500).json({ message: 'Error signing up for event', error: err.message });
+    console.error(err);
+    return res.status(500).json({ message: 'Server error', error: err.message });
   }
 };
+
 
 // Authenticated user can cancel their sign up for an event
 const unSignUpFromEvent = async (req, res) => {
@@ -147,11 +152,18 @@ const unSignUpFromEvent = async (req, res) => {
   const eventId = req.params.id;
 
   try {
-    const event = await Event.findById(eventId);
     const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
 
-    if (!event || !user) {
-      return res.status(404).json({ message: 'Event or user not found' });
+    if (user.role === 'admin') {
+      return res.status(403).json({ message: 'Admins cannot unsign from events' });
+    }
+
+    const event = await Event.findById(eventId);
+    if (!event) {
+      return res.status(404).json({ message: 'Event not found' });
     }
 
     if (!event.participants.includes(userId)) {
@@ -169,6 +181,7 @@ const unSignUpFromEvent = async (req, res) => {
     return res.status(500).json({ message: 'Error unsigning from event', error: err.message });
   }
 };
+
 
 
 module.exports = { getAllEvents, createEvent, getEventById, updateEvent, deleteEvent, signUpForEvent, unSignUpFromEvent };
