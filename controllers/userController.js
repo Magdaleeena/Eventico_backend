@@ -97,6 +97,55 @@ exports.loginUser = async (req, res) => {
   }
 };
 
+// Get your own profile
+exports.getOwnProfile = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.user.userId).select('-password');
+    if (!user) {
+      return res.status(404).json({ msg: 'User not found' });
+    }
+    res.status(200).json(user);
+  } catch (err) {
+    next(err);
+  }
+};
+
+// Update your own profile
+exports.updateOwnProfile = async (req, res, next) => {
+  try {
+    const updates = req.body;
+    delete updates.role; // prevent role change
+    delete updates.password; // prevent password change here
+
+    const user = await User.findByIdAndUpdate(req.user.userId, updates, {
+      new: true,
+      runValidators: true,
+    }).select('-password');
+
+    if (!user) {
+      return res.status(404).json({ msg: 'User not found' });
+    }
+
+    res.status(200).json({ msg: 'Profile updated', user });
+  } catch (err) {
+    next(err); 
+  }
+};
+
+// Delete your own profile
+exports.deleteOwnProfile = async (req, res, next) => {
+  try {
+    const user = await User.findByIdAndDelete(req.user.userId);
+    if (!user) {
+      return res.status(404).json({ msg: 'User not found' });
+    }
+    res.status(200).json({ msg: 'Your account has been deleted' });
+  } catch (err) {
+    next(err); 
+  }
+};
+
+
 
 
 

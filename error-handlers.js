@@ -30,7 +30,6 @@ exports.customErrorHandler = (err, req, res, next) => {
 
 // Final catch-all error handler
 exports.serverErrorHandler = (err, req, res, next) => {
-  console.error('Unexpected error:', err);
   return res.status(500).json({ msg: 'Internal server error' });
 };
   

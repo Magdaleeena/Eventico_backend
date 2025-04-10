@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema({
     username: { type: String, required: true, unique: true, trim: true },
     password: { type: String, required: true, select: false },
     // clerkId or auth0Id or firebaseUid: { type: String, required: false } OR  password, if managed by myself: { type: String, required: true, select: false },
-    email: { type: String, required: true, unique: true, trim: true, lowercase: true},
+    email: { type: String, required: true, unique: true, trim: true, lowercase: true, match: [/^\S+@\S+\.\S+$/, 'Please provide a valid email address']},
     phone: { type: String, required: false, trim: true },
     role: { type: String, enum: ['user', 'admin'], default: 'user' },
     eventsSignedUp: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Event' }],

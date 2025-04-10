@@ -14,6 +14,15 @@ router.post('/login', userController.loginUser);
 // Route to get all users - protected route
 router.get('/', authenticateToken, isAdmin, userController.getAllUsers);
 
+// Route to get your profile - protected route
+router.get('/me', authenticateToken, userController.getOwnProfile);
+
+// Route to update your profile - protected route
+router.put('/me', authenticateToken, userController.updateOwnProfile);
+
+//Route to delete your profile - protected route
+router.delete('/me', authenticateToken, userController.deleteOwnProfile);
+
 
 
 module.exports = router;
