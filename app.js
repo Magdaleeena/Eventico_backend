@@ -11,17 +11,10 @@ connectDB();
 
 app.use(express.json());
 
-// Use the user routes
 app.use('/api/users', userRoutes);
 
 app.use('/api/events', eventRoutes);
 
-// Basic route to check if the server is running
-app.get('/', (req, res) => {
-  res.send('Welcome to the Event API!');
-});
-
-// 404 error handler for undefined routes
 app.all("*", (request, response) => {
   response.status(404).send({ msg: 'Path not found' });
 });

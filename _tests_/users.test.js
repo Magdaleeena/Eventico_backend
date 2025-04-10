@@ -5,7 +5,6 @@ const seedDatabase = require('../db/seedDatabase');
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 
-// Helper function to generate a token
 const generateToken = (user) => {
   return jwt.sign(
     { userId: user._id, username: user.username, role: user.role },
@@ -17,8 +16,7 @@ const generateToken = (user) => {
 describe('UserController Tests', () => {
   let adminToken;
   let userToken;
-  let userId;
-
+  
   beforeAll(async () => {
     // Seed the database before running tests
     await mongoose.connection.dropDatabase();
@@ -31,13 +29,11 @@ describe('UserController Tests', () => {
     // Generate tokens for both the admin and regular user
     adminToken = generateToken(adminUser);
     userToken = generateToken(regularUser);
-
-    // Save userId for testing purposes
-    userId = regularUser._id;
+    
   });
 
   afterAll(async () => {
-    // Cleanup: Drop the database after tests
+    
     await mongoose.connection.dropDatabase();
     await mongoose.connection.close();
   });
@@ -107,8 +103,8 @@ describe('UserController Tests', () => {
   it('should return 403 for accessing admin route with non-admin token', async () => {
     const response = await request(app)
       .get('/api/users')
-      .set('Authorization', `Bearer ${userToken}`);  // Non-admin token
-    expect(response.status).toBe(403);  // Forbidden if the user is not an admin
+      .set('Authorization', `Bearer ${userToken}`);  
+    expect(response.status).toBe(403);  
     expect(response.body.msg).toBe('Access denied');
   });
    
