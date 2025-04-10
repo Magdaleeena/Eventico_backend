@@ -28,7 +28,7 @@ const getAllEvents = async (req, res) => {
       currentPage: Number(page),
     });
   } catch (err) {
-    res.status(500).json({ msg: 'Error fetching events', error: err.message });
+    res.status(500).json({ msg: 'Error fetching events', error: err.msg });
   }
 };
 
@@ -43,7 +43,7 @@ const getEventById = async (req, res) => {
     }
     return res.status(200).json(event);
   } catch (err) {
-    return res.status(500).json({ msg: 'Error fetching event', error: err.message });
+    return res.status(500).json({ msg: 'Error fetching event', error: err.msg });
   }
 };
 
@@ -91,7 +91,7 @@ const updateEvent = async (req, res) => {
     const updatedEvent = await Event.findByIdAndUpdate(id, updates, { new: true });
     return res.status(200).json(updatedEvent);
   } catch (err) {
-    return res.status(400).json({ msg: 'Error updating event', error: err.message });
+    return res.status(400).json({ msg: 'Error updating event', error: err.msg });
   }
 };
 
@@ -104,7 +104,7 @@ const deleteEvent = async (req, res) => {
     await Event.findByIdAndDelete(id);
     return res.status(200).json({ msg: 'Event deleted' });
   } catch (err) {
-    return res.status(500).json({ msg: 'Error deleting event', error: err.message });
+    return res.status(500).json({ msg: 'Error deleting event', error: err.msg });
   }
 };
 
@@ -120,16 +120,16 @@ const signUpForEvent = async (req, res) => {
 
     if (!event || !user) {
       console.log('Event or user not found');
-      return res.status(404).json({ message: 'Event or user not found' });
+      return res.status(404).json({ msg: 'Event or user not found' });
     }
 
     if (user.role === 'admin') {
-      return res.status(403).json({ message: 'Admins cannot sign up for events' });
+      return res.status(403).json({ msg: 'Admins cannot sign up for events' });
     }
 
     const alreadySignedUp = event.participants.includes(userId);
     if (alreadySignedUp) {
-      return res.status(400).json({ message: 'User already signed up for this event' });
+      return res.status(400).json({ msg: 'User already signed up for this event' });
     }
 
     event.participants.push(userId);
@@ -138,10 +138,10 @@ const signUpForEvent = async (req, res) => {
     await event.save();
     await user.save();
 
-    return res.status(200).json({ message: 'Successfully signed up for the event' });
+    return res.status(200).json({ msg: 'Successfully signed up for the event' });
   } catch (err) {
     console.error(err);
-    return res.status(500).json({ message: 'Server error', error: err.message });
+    return res.status(500).json({ msg: 'Server error', error: err.msg });
   }
 };
 
@@ -154,20 +154,20 @@ const unSignUpFromEvent = async (req, res) => {
   try {
     const user = await User.findById(userId);
     if (!user) {
-      return res.status(404).json({ message: 'User not found' });
+      return res.status(404).json({ msg: 'User not found' });
     }
 
     if (user.role === 'admin') {
-      return res.status(403).json({ message: 'Admins cannot unsign from events' });
+      return res.status(403).json({ msg: 'Admins cannot unsign from events' });
     }
 
     const event = await Event.findById(eventId);
     if (!event) {
-      return res.status(404).json({ message: 'Event not found' });
+      return res.status(404).json({ msg: 'Event not found' });
     }
 
     if (!event.participants.includes(userId)) {
-      return res.status(400).json({ message: 'You are not signed up for this event' });
+      return res.status(400).json({ msg: 'You are not signed up for this event' });
     }
 
     event.participants = event.participants.filter(p => p.toString() !== userId);
@@ -176,9 +176,9 @@ const unSignUpFromEvent = async (req, res) => {
     await event.save();
     await user.save();
 
-    return res.status(200).json({ message: 'Successfully removed from event' });
+    return res.status(200).json({ msg: 'Successfully removed from event' });
   } catch (err) {
-    return res.status(500).json({ message: 'Error unsigning from event', error: err.message });
+    return res.status(500).json({ msg: 'Error unsigning from event', error: err.msg });
   }
 };
 

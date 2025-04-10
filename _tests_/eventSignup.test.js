@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 const Event = require('../models/Event');
 const User = require('../models/User');
 
-describe('Event Signup API - Regular User', () => {
+describe('Event Signup API - Regular User vs Admin User', () => {
   let eventId;
 
   let adminUser;
@@ -73,7 +73,7 @@ describe('Event Signup API - Regular User', () => {
         .set('Authorization', `Bearer ${userToken}`);
 
       expect(res.status).toBe(200);
-      expect(res.body.message).toMatch(/successfully signed up/i);
+      expect(res.body.msg).toMatch(/successfully signed up/i);
     });
 
     it('should not allow signing up twice for the same event', async () => {
@@ -82,7 +82,7 @@ describe('Event Signup API - Regular User', () => {
         .set('Authorization', `Bearer ${userToken}`);
 
       expect(res.status).toBe(400);
-      expect(res.body.message).toMatch(/already signed up/i);
+      expect(res.body.msg).toMatch(/already signed up/i);
     });
 
     it('should not allow an admin to sign up for an event', async () => {
@@ -91,7 +91,7 @@ describe('Event Signup API - Regular User', () => {
         .set('Authorization', `Bearer ${adminToken}`);
     
       expect(res.status).toBe(403);
-      expect(res.body.message).toMatch(/admins cannot sign up/i);
+      expect(res.body.msg).toMatch(/admins cannot sign up/i);
     });
 
     it('should allow a user to unsign from the event', async () => {
@@ -100,7 +100,7 @@ describe('Event Signup API - Regular User', () => {
         .set('Authorization', `Bearer ${userToken}`);
 
       expect(res.status).toBe(200);
-      expect(res.body.message).toMatch(/removed from event/i);
+      expect(res.body.msg).toMatch(/removed from event/i);
     });
 
     it('should not allow unsigning if not signed up', async () => {
@@ -109,7 +109,7 @@ describe('Event Signup API - Regular User', () => {
         .set('Authorization', `Bearer ${userToken}`);
 
       expect(res.status).toBe(400);
-      expect(res.body.message).toMatch(/not signed up/i);
+      expect(res.body.msg).toMatch(/not signed up/i);
     });
   });
 });

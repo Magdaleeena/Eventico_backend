@@ -6,7 +6,7 @@ const { authenticateToken, isAdmin } = require('../middlewares/authMiddleware');
 
 
 // Route to create a user - public route
-router.post('/', userController.createUser);
+router.post('/register', userController.createUser);
 
 // Route to get all users - protected route
 router.get('/', authenticateToken, isAdmin, userController.getAllUsers);

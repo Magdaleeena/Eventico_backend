@@ -10,6 +10,17 @@ const generateToken = (user) => {
   );
 };
 
+// Get all users
+exports.getAllUsers = async (req, res) => {
+    try {
+      const { role } = req.query;
+      const filter = role ? { role } : {};
+      const users = await User.find(filter); 
+      res.status(200).json(users); 
+    } catch (err) {
+      res.status(500).json({ msg: 'Error fetching users', error: err });
+    }
+};
 // Create a new user
 exports.createUser = async (req, res) => {
   try {
@@ -18,7 +29,7 @@ exports.createUser = async (req, res) => {
     // Check if user already exists
     const userExists = await User.findOne({ email });
     if (userExists) {
-      return res.status(400).json({ message: 'User already exists' });
+      return res.status(400).json({ msg: 'User already exists' });
     }     
 
     const hashedPassword = await User.hashPassword(password); 
@@ -46,7 +57,7 @@ exports.createUser = async (req, res) => {
     });
 
   } catch (err) {    
-    res.status(500).json({ message: 'Error creating user', error: err.message });
+    res.status(500).json({ msg: 'Error creating user', error: err.msg });
   }
 };
 
@@ -80,22 +91,11 @@ exports.loginUser = async (req, res) => {
       token,
     });
   } catch (err) {
-    res.status(500).json({ message: 'Error logging in', error: err.message });
+    res.status(500).json({ msg: 'Error logging in', error: err.msg });
   }
 };
 
 
-// Get all users
-exports.getAllUsers = async (req, res) => {
-    try {
-      const { role } = req.query;
-      const filter = role ? { role } : {};
-      const users = await User.find(filter); 
-      res.status(200).json(users); 
-    } catch (err) {
-      res.status(500).json({ message: 'Error fetching users', error: err });
-    }
-  };
 
 
 
