@@ -58,7 +58,7 @@ describe('Event Signup API - Regular User vs Admin User', () => {
     });
 
     eventId = createdEvent._id.toString();
-    console.log('Created test event with ID:', eventId);
+    // console.log('Created test event with ID:', eventId);
   });
 
   afterAll(async () => {

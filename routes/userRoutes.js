@@ -8,6 +8,9 @@ const { authenticateToken, isAdmin } = require('../middlewares/authMiddleware');
 // Route to create a user - public route
 router.post('/register', userController.createUser);
 
+// Route to login a user - public route
+router.post('/login', userController.loginUser);
+
 // Route to get all users - protected route
 router.get('/', authenticateToken, isAdmin, userController.getAllUsers);
 

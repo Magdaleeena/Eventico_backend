@@ -148,10 +148,46 @@ describe('UserController Tests', () => {
       expect(res.status).toBe(500);
       expect(res.body.msg).toMatch(/error creating user/i);
     });
-
   });
 
+  describe('POST /api/users/login', () => {
+    const testUser = {
+      firstName: 'Login',
+      lastName: 'Tester',
+      username: 'logintester',
+      email: 'logintester@example.com',
+      password: 'testpass123'
+    };
   
+    it('should create and then log in a user successfully', async () => {      
+      const registerRes = await request(app)
+        .post('/api/users/register')
+        .send(testUser)
+        .set('Authorization', `Bearer ${adminToken}`);
+  
+      expect(registerRes.status).toBe(201);
+  
+      const userInDb = await User.findOne({ email: testUser.email }); 
+
+      expect(userInDb).toBeDefined();
+      expect(userInDb.email).toBe(testUser.email);
+      expect(userInDb.password).not.toBe(testUser.password); 
+
+    // Log in the user
+      const loginRes = await request(app)
+        .post('/api/users/login')
+        .send({
+          email: testUser.email,
+          password: testUser.password
+        });
+
+      expect(loginRes.status).toBe(200);
+      expect(loginRes.body.msg).toBe('Login successful');
+      expect(loginRes.body).toHaveProperty('token');
+    });
+  });
+  
+ 
   describe('General Error Handling', () => {
     it('should return 404 for a non-existent endpoint', async () => {
       const res = await request(app).get('/api/nonexistent');

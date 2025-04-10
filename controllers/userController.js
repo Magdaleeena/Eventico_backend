@@ -1,5 +1,6 @@
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
 
 // Generate token
 const generateToken = (user) => {
@@ -68,7 +69,7 @@ exports.loginUser = async (req, res) => {
     const { email, password } = req.body;
 
     // Find the user by email
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email }).select('+password'); // This tells Mongoose to include the password field just for this query, which is exactly what you want during login
     if (!user) {
       return res.status(400).json({ msg: 'Invalid credentials' });
     }
