@@ -27,14 +27,15 @@ exports.createUser = async (req, res) => {
     const { firstName, lastName, username, email, password, phone, role } = req.body;
 
     // Check if user already exists
-    const userExists = await User.findOne({ email });
+    const normalizedEmail = email.toLowerCase();
+    const userExists = await User.findOne({ email: normalizedEmail });
     if (userExists) {
       return res.status(400).json({ msg: 'User already exists' });
     }     
 
     const hashedPassword = await User.hashPassword(password); 
       
-    const newUser = new User({ firstName, lastName, username, email, password: hashedPassword, phone, role });
+    const newUser = new User({ firstName, lastName, username, email: normalizedEmail, password: hashedPassword, phone, role });
     await newUser.save();
    
     const token = generateToken(newUser);

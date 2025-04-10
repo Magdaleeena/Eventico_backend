@@ -1,9 +1,9 @@
 [
   {
-    "firstName": "Jennifer",
+    "firstName": "Julie",
     "lastName": "Kirk",
-    "username": "JenK",
-    "email": "jen.kirk@happy.face.com",
+    "username": "JulieK",
+    "email": "julie.kirk@happy.face.com",
     "phone": "+1234567890",
     "password": "hashedPassword1",
     "role": "user",

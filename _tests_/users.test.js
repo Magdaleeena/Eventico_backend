@@ -106,21 +106,30 @@ describe('UserController Tests', () => {
     });
     
     it('should return 400 if the user already exists by email', async () => {
-      const existingUser = {
+      const duplicateUser = {
         firstName: 'Duplicate',
         lastName: 'User',
-        username: 'newuser1',
-        email: 'bob.smith@example.com', 
+        username: 'dupeuser1',
+        email: 'dupe@example.com',
         password: 'password123',
       };
-  
-      const res = await request(app)
+    
+      // First request: should succeed
+      const firstRes = await request(app)
         .post('/api/users/register')
-        .send(existingUser)
+        .send(duplicateUser)
         .set('Authorization', `Bearer ${adminToken}`);
-  
-      expect(res.status).toBe(400);
-      expect(res.body.msg).toMatch(/already exists/i);
+    
+      expect(firstRes.status).toBe(201);
+    
+      // Second request: should fail with 400
+      const secondRes = await request(app)
+        .post('/api/users/register')
+        .send(duplicateUser)
+        .set('Authorization', `Bearer ${adminToken}`);
+    
+      expect(secondRes.status).toBe(400);
+      expect(secondRes.body.msg).toMatch(/already exists/i);
     });
 
     it('should return 500 if required fields like password are missing', async () => {
