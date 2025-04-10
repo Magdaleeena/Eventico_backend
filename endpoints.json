@@ -1,303 +1,330 @@
 {
   "users": {
-    "getAllUsers": {
-      "method": "GET",
-      "path": "/api/users",
-      "description": "Fetch a list of all users.",
-      "request": {
-        "headers": {
-          "Authorization": "Bearer <token>"
-        }
-      },
-      "response": {
-        "status": 200,
-        "body": [
-          {
-            "_id": "string",
-            "firstName": "string",
-            "lastName": "string",
-            "username": "string",
-            "email": "string",
-            "role": "string",
-            "createdAt": "string",
-            "updatedAt": "string",
-            "eventsSignedUp": ["string"]
-          }
-        ]
-      }
-    },
-    "getUserById": {
-      "method": "GET",
-      "path": "/api/users/:id",
-      "description": "Fetch a single user by their ID.",
-      "request": {
-        "headers": {
-          "Authorization": "Bearer <token>"
-        },
-        "params": {
-          "id": "string"
-        }
-      },
-      "response": {
-        "status": 200,
-        "body": {
-          "_id": "string",
-          "firstName": "string",
-          "lastName": "string",
-          "username": "string",
-          "email": "string",
-          "role": "string",
-          "createdAt": "string",
-          "updatedAt": "string",
-          "eventsSignedUp": ["string"]
-        }
-      }
-    },
-    "createUser": {
-      "method": "POST",
-      "path": "/api/users",
-      "description": "Create a new user.",
-      "request": {
-        "headers": {
-          "Authorization": "Bearer <token>"
-        },
-        "body": {
-          "firstName": "string",
-          "lastName": "string",
-          "username": "string",
-          "email": "string",
-          "password": "string"
-        }
-      },
-      "response": {
-        "status": 201,
-        "body": {
-          "_id": "string",
-          "firstName": "string",
-          "lastName": "string",
-          "username": "string",
-          "email": "string",
-          "role": "string",
-          "createdAt": "string",
-          "updatedAt": "string"
-        }
-      }
-    }
+  "getAllUsers": {
+  "method": "GET",
+  "path": "/api/users",
+  "description": "Fetch a list of all users.",
+  "request": {
+  "headers": {
+  "Authorization": "Bearer "
+  }
+  },
+  "response": {
+  "status": 200,
+  "body": [
+  {
+  "_id": "string",
+  "firstName": "string",
+  "lastName": "string",
+  "username": "string",
+  "email": "string",
+  "role": "string",
+  "createdAt": "string",
+  "updatedAt": "string",
+  "eventsSignedUp": ["string"]
+  }
+  ]
+  }
+  },
+  "createUser": {
+  "method": "POST",
+  "path": "/api/users/register",
+  "description": "Register a new user.",
+  "request": {
+  "body": {
+  "firstName": "string",
+  "lastName": "string",
+  "username": "string",
+  "email": "string",
+  "password": "string"
+  }
+  },
+  "response": {
+  "status": 201,
+  "body": {
+  "_id": "string",
+  "firstName": "string",
+  "lastName": "string",
+  "username": "string",
+  "email": "string",
+  "role": "string",
+  "createdAt": "string",
+  "updatedAt": "string"
+  }
+  }
+  },
+  "loginUser": {
+  "method": "POST",
+  "path": "/api/users/login",
+  "description": "Authenticate and log in a user.",
+  "request": {
+  "body": {
+  "email": "string",
+  "password": "string"
+  }
+  },
+  "response": {
+  "status": 200,
+  "body": {
+  "msg": "Login successful",
+  "token": "string",
+  "user": {
+  "id": "string",
+  "username": "string",
+  "email": "string"
+  }
+  }
+  }
+  }
   },
   "events": {
-    "getAllEvents": {
-      "method": "GET",
-      "path": "/api/events",
-      "description": "Fetch a list of all events with pagination, sorting, and optional category filter.",
-      "request": {
-        "headers": {
-          "Authorization": "Bearer <token>"
-        },
-        "query": {
-          "page": "number",
-          "limit": "number",
-          "category": "string",
-          "sortBy": "string",
-          "sortOrder": "string"
-        }
-      },
-      "response": {
-        "status": 200,
-        "body": {
-          "events": [
-            {
-              "_id": "string",
-              "title": "string",
-              "description": "string",
-              "date": "string",
-              "location": "string",
-              "createdBy": "string",
-              "maxParticipants": "number",
-              "participants": ["string"],
-              "keywords": ["string"],
-              "category": "string",
-              "tags": ["string"],
-              "image": "string",
-              "eventURL": "string",
-              "status": "string",
-              "organizerContact": {
-                "email": "string",
-                "phone": "string"
-              },
-              "createdAt": "string",
-              "updatedAt": "string"
-            }
-          ],
-          "totalEvents": "number",
-          "totalPages": "number",
-          "currentPage": "number"
-        }
-      }
-    },
-    "getEventById": {
-      "method": "GET",
-      "path": "/api/events/:id",
-      "description": "Fetch a single event by its ID.",
-      "request": {
-        "headers": {
-          "Authorization": "Bearer <token>"
-        },
-        "params": {
-          "id": "string"
-        }
-      },
-      "response": {
-        "status": 200,
-        "body": {
-          "_id": "string",
-          "title": "string",
-          "description": "string",
-          "date": "string",
-          "location": "string",
-          "createdBy": "string",
-          "maxParticipants": "number",
-          "participants": ["string"],
-          "keywords": ["string"],
-          "category": "string",
-          "tags": ["string"],
-          "image": "string",
-          "eventURL": "string",
-          "status": "string",
-          "organizerContact": {
-            "email": "string",
-            "phone": "string"
-          },
-          "createdAt": "string",
-          "updatedAt": "string"
-        }
-      }
-    },
-    "createEvent": {
-      "method": "POST",
-      "path": "/api/events",
-      "description": "Create a new event.",
-      "request": {
-        "headers": {
-          "Authorization": "Bearer <token>"
-        },
-        "body": {
-          "title": "string",
-          "description": "string",
-          "date": "string",
-          "location": "string",
-          "createdBy": "string",
-          "maxParticipants": "number",
-          "keywords": ["string"],
-          "category": "string",
-          "tags": ["string"],
-          "image": "string",
-          "eventURL": "string",
-          "status": "string",
-          "organizerContact": {
-            "email": "string",
-            "phone": "string"
-          }
-        }
-      },
-      "response": {
-        "status": 201,
-        "body": {
-          "_id": "string",
-          "title": "string",
-          "description": "string",
-          "date": "string",
-          "location": "string",
-          "createdBy": "string",
-          "maxParticipants": "number",
-          "participants": ["string"],
-          "keywords": ["string"],
-          "category": "string",
-          "tags": ["string"],
-          "image": "string",
-          "eventURL": "string",
-          "status": "string",
-          "organizerContact": {
-            "email": "string",
-            "phone": "string"
-          },
-          "createdAt": "string",
-          "updatedAt": "string"
-        }
-      }
-    },
-    "updateEvent": {
-      "method": "PUT",
-      "path": "/api/events/:id",
-      "description": "Update an existing event by its ID.",
-      "request": {
-        "headers": {
-          "Authorization": "Bearer <token>"
-        },
-        "params": {
-          "id": "string"
-        },
-        "body": {
-          "title": "string",
-          "description": "string",
-          "date": "string",
-          "location": "string",
-          "maxParticipants": "number",
-          "keywords": ["string"],
-          "category": "string",
-          "tags": ["string"],
-          "image": "string",
-          "eventURL": "string",
-          "status": "string",
-          "organizerContact": {
-            "email": "string",
-            "phone": "string"
-          }
-        }
-      },
-      "response": {
-        "status": 200,
-        "body": {
-          "_id": "string",
-          "title": "string",
-          "description": "string",
-          "date": "string",
-          "location": "string",
-          "createdBy": "string",
-          "maxParticipants": "number",
-          "participants": ["string"],
-          "keywords": ["string"],
-          "category": "string",
-          "tags": ["string"],
-          "image": "string",
-          "eventURL": "string",
-          "status": "string",
-          "organizerContact": {
-            "email": "string",
-            "phone": "string"
-          },
-          "createdAt": "string",
-          "updatedAt": "string"
-        }
-      }
-    },
-    "deleteEvent": {
-      "method": "DELETE",
-      "path": "/api/events/:id",
-      "description": "Delete an event by its ID.",
-      "request": {
-        "headers": {
-          "Authorization": "Bearer <token>"
-        },
-        "params": {
-          "id": "string"
-        }
-      },
-      "response": {
-        "status": 200,
-        "body": {
-          "msg": "Event deleted"
-        }
-      }
-    }
+  "getAllEvents": {
+  "method": "GET",
+  "path": "/api/events",
+  "description": "Fetch a list of all events with pagination, sorting, and optional category filter.",
+  "request": {
+  "query": {
+  "page": "number",
+  "limit": "number",
+  "category": "string",
+  "sortBy": "string",
+  "sortOrder": "string"
   }
-}
+  },
+  "response": {
+  "status": 200,
+  "body": {
+  "events": [
+  {
+  "_id": "string",
+  "title": "string",
+  "description": "string",
+  "date": "string",
+  "location": "string",
+  "createdBy": "string",
+  "maxParticipants": "number",
+  "participants": ["string"],
+  "keywords": ["string"],
+  "category": "string",
+  "tags": ["string"],
+  "image": "string",
+  "eventURL": "string",
+  "status": "string",
+  "organizerContact": {
+  "email": "string",
+  "phone": "string"
+  },
+  "createdAt": "string",
+  "updatedAt": "string"
+  }
+  ],
+  "totalEvents": "number",
+  "totalPages": "number",
+  "currentPage": "number"
+  }
+  }
+  },
+  "getEventById": {
+  "method": "GET",
+  "path": "/api/events/:id",
+  "description": "Fetch a single event by its ID.",
+  "request": {
+  "params": {
+  "id": "string"
+  }
+  },
+  "response": {
+  "status": 200,
+  "body": {
+  "_id": "string",
+  "title": "string",
+  "description": "string",
+  "date": "string",
+  "location": "string",
+  "createdBy": "string",
+  "maxParticipants": "number",
+  "participants": ["string"],
+  "keywords": ["string"],
+  "category": "string",
+  "tags": ["string"],
+  "image": "string",
+  "eventURL": "string",
+  "status": "string",
+  "organizerContact": {
+  "email": "string",
+  "phone": "string"
+  },
+  "createdAt": "string",
+  "updatedAt": "string"
+  }
+  }
+  },
+  "createEvent": {
+  "method": "POST",
+  "path": "/api/events",
+  "description": "Create a new event.",
+  "request": {
+  "headers": {
+  "Authorization": "Bearer "
+  },
+  "body": {
+  "title": "string",
+  "description": "string",
+  "date": "string",
+  "location": "string",
+  "createdBy": "string",
+  "maxParticipants": "number",
+  "keywords": ["string"],
+  "category": "string",
+  "tags": ["string"],
+  "image": "string",
+  "eventURL": "string",
+  "status": "string",
+  "organizerContact": {
+  "email": "string",
+  "phone": "string"
+  }
+  }
+  },
+  "response": {
+  "status": 201,
+  "body": {
+  "_id": "string",
+  "title": "string",
+  "description": "string",
+  "date": "string",
+  "location": "string",
+  "createdBy": "string",
+  "maxParticipants": "number",
+  "participants": ["string"],
+  "keywords": ["string"],
+  "category": "string",
+  "tags": ["string"],
+  "image": "string",
+  "eventURL": "string",
+  "status": "string",
+  "organizerContact": {
+  "email": "string",
+  "phone": "string"
+  },
+  "createdAt": "string",
+  "updatedAt": "string"
+  }
+  }
+  },
+  "updateEvent": {
+  "method": "PUT",
+  "path": "/api/events/:id",
+  "description": "Update an existing event by its ID.",
+  "request": {
+  "headers": {
+  "Authorization": "Bearer "
+  },
+  "params": {
+  "id": "string"
+  },
+  "body": {
+  "title": "string",
+  "description": "string",
+  "date": "string",
+  "location": "string",
+  "maxParticipants": "number",
+  "keywords": ["string"],
+  "category": "string",
+  "tags": ["string"],
+  "image": "string",
+  "eventURL": "string",
+  "status": "string",
+  "organizerContact": {
+  "email": "string",
+  "phone": "string"
+  }
+  }
+  },
+  "response": {
+  "status": 200,
+  "body": {
+  "_id": "string",
+  "title": "string",
+  "description": "string",
+  "date": "string",
+  "location": "string",
+  "createdBy": "string",
+  "maxParticipants": "number",
+  "participants": ["string"],
+  "keywords": ["string"],
+  "category": "string",
+  "tags": ["string"],
+  "image": "string",
+  "eventURL": "string",
+  "status": "string",
+  "organizerContact": {
+  "email": "string",
+  "phone": "string"
+  },
+  "createdAt": "string",
+  "updatedAt": "string"
+  }
+  }
+  },
+  "deleteEvent": {
+  "method": "DELETE",
+  "path": "/api/events/:id",
+  "description": "Delete an event by its ID.",
+  "request": {
+  "headers": {
+  "Authorization": "Bearer "
+  },
+  "params": {
+  "id": "string"
+  }
+  },
+  "response": {
+  "status": 200,
+  "body": {
+  "msg": "Event deleted"
+  }
+  }
+  },
+  "signUpForEvent": {
+  "method": "POST",
+  "path": "/api/events/:id/signup",
+  "description": "Allow a regular user to sign up for an event.",
+  "request": {
+  "headers": {
+  "Authorization": "Bearer "
+  },
+  "params": {
+  "id": "string"
+  }
+  },
+  "response": {
+  "status": 200,
+  "body": {
+  "msg": "Successfully signed up for the event"
+  }
+  }
+  },
+  "unSignFromEvent": {
+  "method": "POST",
+  "path": "/api/events/:id/unsignup",
+  "description": "Allow a regular user to unsign from an event.",
+  "request": {
+  "headers": {
+  "Authorization": "Bearer "
+  },
+  "params": {
+  "id": "string"
+  }
+  },
+  "response": {
+  "status": 200,
+  "body": {
+  "msg": "Successfully removed from event"
+  }
+  }
+  }
+  }
+  }
+  
+  
