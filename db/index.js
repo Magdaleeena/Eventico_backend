@@ -4,7 +4,10 @@ require('dotenv-flow').config();
 
 const connectDB = async () => {
   try {
-    await mongoose.connect('mongodb://localhost:27017/eventicoTestDB');
+    await mongoose.connect(process.env.MONGODB_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
     console.log('MongoDB Connected Successfully');
   } catch (err) {
     console.error('Error connecting to MongoDB:', err);
