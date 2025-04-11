@@ -22,10 +22,11 @@ exports.getAllUsers = async (req, res) => {
       res.status(500).json({ msg: 'Error fetching users', error: err });
     }
 };
+
 // Create a new user
-exports.createUser = async (req, res) => {
+exports.createUser = async (req, res, next) => {
   try {
-    const { firstName, lastName, username, email, password, phone, role } = req.body;
+    const { firstName, lastName, username, email, password, phone, role, profileImage, bio, location, social, dateOfBirth } = req.body;
 
     // Check if user already exists
     const normalizedEmail = email.toLowerCase();
@@ -36,7 +37,7 @@ exports.createUser = async (req, res) => {
 
     const hashedPassword = await User.hashPassword(password); 
       
-    const newUser = new User({ firstName, lastName, username, email: normalizedEmail, password: hashedPassword, phone, role });
+    const newUser = new User({ firstName, lastName, username, email: normalizedEmail, password: hashedPassword, phone, role, profileImage, bio, location, social, dateOfBirth });
     await newUser.save();
    
     const token = generateToken(newUser);
@@ -50,6 +51,15 @@ exports.createUser = async (req, res) => {
       email: newUser.email,
       phone: newUser.phone,
       role: newUser.role,
+      profileImage: newUser.profileImage,
+      bio: newUser.bio,
+      location: newUser.location,
+      social: newUser.social,
+      dateOfBirth: newUser.dateOfBirth,
+      isVerified: newUser.isVerified,
+      isActive: newUser.isActive,
+      createdAt: newUser.createdAt,
+      updatedAt: newUser.updatedAt,    
       token, 
     };
 
@@ -58,8 +68,8 @@ exports.createUser = async (req, res) => {
       user: userResponse,
     });
 
-  } catch (err) {    
-    res.status(500).json({ msg: 'Error creating user', error: err.msg });
+  } catch (err) {
+    next(err); 
   }
 };
 

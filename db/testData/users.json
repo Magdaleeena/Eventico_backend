@@ -7,6 +7,18 @@
     "phone": "+1234567890",
     "password": "hashedPassword1",
     "role": "user",
+    "profileImage": "/public/images/default_profile_img.png",
+    "bio": "Nature enthusiast and event organizer",
+    "location": "Edinburgh, UK",
+    "social": {
+      "linkedin": "https://linkedin.com/in/exampleuser",
+      "twitter": "https://twitter.com/exampleuser",
+      "website": "https://exampleuser.dev"
+    },
+    "dateOfBirth": "1990-07-15T00:00:00.000Z",
+    "isVerified": true,
+    "isActive": true,
+    "lastLogin": "2025-03-25T10:00:00.000Z",
     "createdAt": "2025-03-24T08:00:00.000Z",
     "updatedAt": "2025-03-24T08:00:00.000Z",
     "eventsSignedUp": []
@@ -19,6 +31,18 @@
     "phone": "+1234567891",
     "password": "hashedPassword2",
     "role": "user",
+    "profileImage": "/public/images/default_profile_img.png",
+    "bio": "Nature enthusiast and event organizer",
+    "location": "Edinburgh, UK",
+    "social": {
+      "linkedin": "https://linkedin.com/in/exampleuser",
+      "twitter": "https://twitter.com/exampleuser",
+      "website": "https://exampleuser.dev"
+    },
+    "dateOfBirth": "1990-07-15T00:00:00.000Z",
+    "isVerified": true,
+    "isActive": true,
+    "lastLogin": "2025-03-25T10:00:00.000Z",
     "createdAt": "2025-03-24T08:00:00.000Z",
     "updatedAt": "2025-03-24T08:00:00.000Z",
     "eventsSignedUp": []
@@ -31,6 +55,18 @@
     "phone": "+1234567892",
     "password": "hashedPassword3",
     "role": "user",
+    "profileImage": "/public/images/default_profile_img.png",
+    "bio": "Nature enthusiast and event organizer",
+    "location": "Edinburgh, UK",
+    "social": {
+      "linkedin": "https://linkedin.com/in/exampleuser",
+      "twitter": "https://twitter.com/exampleuser",
+      "website": "https://exampleuser.dev"
+    },
+    "dateOfBirth": "1990-07-15T00:00:00.000Z",
+    "isVerified": true,
+    "isActive": true,
+    "lastLogin": "2025-03-25T10:00:00.000Z",
     "createdAt": "2025-03-24T08:00:00.000Z",
     "updatedAt": "2025-03-24T08:00:00.000Z",
     "eventsSignedUp": []
@@ -43,6 +79,18 @@
     "phone": "+1234567893",
     "password": "hashedPassword4",
     "role": "user",
+    "profileImage": "/public/images/default_profile_img.png",
+    "bio": "Nature enthusiast and event organizer",
+    "location": "Edinburgh, UK",
+    "social": {
+      "linkedin": "https://linkedin.com/in/exampleuser",
+      "twitter": "https://twitter.com/exampleuser",
+      "website": "https://exampleuser.dev"
+    },
+    "dateOfBirth": "1990-07-15T00:00:00.000Z",
+    "isVerified": true,
+    "isActive": true,
+    "lastLogin": "2025-03-25T10:00:00.000Z",
     "createdAt": "2025-03-24T08:00:00.000Z",
     "updatedAt": "2025-03-24T08:00:00.000Z",
     "eventsSignedUp": []
@@ -55,6 +103,18 @@
     "phone": "+1234567894",
     "password": "hashedPassword5",
     "role": "user",
+    "profileImage": "/public/images/default_profile_img.png",
+    "bio": "Nature enthusiast and event organizer",
+    "location": "Edinburgh, UK",
+    "social": {
+      "linkedin": "https://linkedin.com/in/exampleuser",
+      "twitter": "https://twitter.com/exampleuser",
+      "website": "https://exampleuser.dev"
+    },
+    "dateOfBirth": "1990-07-15T00:00:00.000Z",
+    "isVerified": true,
+    "isActive": true,
+    "lastLogin": "2025-03-25T10:00:00.000Z",
     "createdAt": "2025-03-24T08:00:00.000Z",
     "updatedAt": "2025-03-24T08:00:00.000Z",
     "eventsSignedUp": []
@@ -67,6 +127,18 @@
     "phone": "+1234567895",
     "password": "hashedPassword6",
     "role": "user",
+    "profileImage": "/public/images/default_profile_img.png",
+    "bio": "Nature enthusiast and event organizer",
+    "location": "Edinburgh, UK",
+    "social": {
+      "linkedin": "https://linkedin.com/in/exampleuser",
+      "twitter": "https://twitter.com/exampleuser",
+      "website": "https://exampleuser.dev"
+    },
+    "dateOfBirth": "1990-07-15T00:00:00.000Z",
+    "isVerified": true,
+    "isActive": true,
+    "lastLogin": "2025-03-25T10:00:00.000Z",
     "createdAt": "2025-03-24T08:00:00.000Z",
     "updatedAt": "2025-03-24T08:00:00.000Z",
     "eventsSignedUp": []
@@ -79,6 +151,18 @@
     "phone": "+1234567896",
     "password": "hashedPassword7",
     "role": "user",
+    "profileImage": "/public/images/default_profile_img.png",
+    "bio": "Nature enthusiast and event organizer",
+    "location": "Edinburgh, UK",
+    "social": {
+      "linkedin": "https://linkedin.com/in/exampleuser",
+      "twitter": "https://twitter.com/exampleuser",
+      "website": "https://exampleuser.dev"
+    },
+    "dateOfBirth": "1990-07-15T00:00:00.000Z",
+    "isVerified": true,
+    "isActive": true,
+    "lastLogin": "2025-03-25T10:00:00.000Z",
     "createdAt": "2025-03-24T08:00:00.000Z",
     "updatedAt": "2025-03-24T08:00:00.000Z",
     "eventsSignedUp": []
@@ -91,6 +175,18 @@
     "phone": "+1234567897",
     "password": "hashedPassword8",
     "role": "user",
+    "profileImage": "/public/images/default_profile_img.png",
+    "bio": "Nature enthusiast and event organizer",
+    "location": "Edinburgh, UK",
+    "social": {
+      "linkedin": "https://linkedin.com/in/exampleuser",
+      "twitter": "https://twitter.com/exampleuser",
+      "website": "https://exampleuser.dev"
+    },
+    "dateOfBirth": "1990-07-15T00:00:00.000Z",
+    "isVerified": true,
+    "isActive": true,
+    "lastLogin": "2025-03-25T10:00:00.000Z",
     "createdAt": "2025-03-24T08:00:00.000Z",
     "updatedAt": "2025-03-24T08:00:00.000Z",
     "eventsSignedUp": []
@@ -103,6 +199,18 @@
     "phone": "+1234567898",
     "password": "hashedPassword9",
     "role": "user",
+    "profileImage": "/public/images/default_profile_img.png",
+    "bio": "Nature enthusiast and event organizer",
+    "location": "Edinburgh, UK",
+    "social": {
+      "linkedin": "https://linkedin.com/in/exampleuser",
+      "twitter": "https://twitter.com/exampleuser",
+      "website": "https://exampleuser.dev"
+    },
+    "dateOfBirth": "1990-07-15T00:00:00.000Z",
+    "isVerified": true,
+    "isActive": true,
+    "lastLogin": "2025-03-25T10:00:00.000Z",
     "createdAt": "2025-03-24T08:00:00.000Z",
     "updatedAt": "2025-03-24T08:00:00.000Z",
     "eventsSignedUp": []
@@ -115,6 +223,18 @@
     "phone": "+1234567899",
     "password": "hashedPassword10",
     "role": "user",
+    "profileImage": "/public/images/default_profile_img.png",
+    "bio": "Nature enthusiast and event organizer",
+    "location": "Edinburgh, UK",
+    "social": {
+      "linkedin": "https://linkedin.com/in/exampleuser",
+      "twitter": "https://twitter.com/exampleuser",
+      "website": "https://exampleuser.dev"
+    },
+    "dateOfBirth": "1990-07-15T00:00:00.000Z",
+    "isVerified": true,
+    "isActive": true,
+    "lastLogin": "2025-03-25T10:00:00.000Z",
     "createdAt": "2025-03-24T08:00:00.000Z",
     "updatedAt": "2025-03-24T08:00:00.000Z",
     "eventsSignedUp": []
@@ -127,6 +247,18 @@
     "phone": "+1234567800",
     "password": "hashedPassword11",
     "role": "user",
+    "profileImage": "/public/images/default_profile_img.png",
+    "bio": "Nature enthusiast and event organizer",
+    "location": "Edinburgh, UK",
+    "social": {
+      "linkedin": "https://linkedin.com/in/exampleuser",
+      "twitter": "https://twitter.com/exampleuser",
+      "website": "https://exampleuser.dev"
+    },
+    "dateOfBirth": "1990-07-15T00:00:00.000Z",
+    "isVerified": true,
+    "isActive": true,
+    "lastLogin": "2025-03-25T10:00:00.000Z",
     "createdAt": "2025-03-24T08:00:00.000Z",
     "updatedAt": "2025-03-24T08:00:00.000Z",
     "eventsSignedUp": []
@@ -139,10 +271,21 @@
     "phone": "+1234567890",
     "password": "hashedPasswordAdmin1",
     "role": "admin",
-    "createdAt": "2025-03-24T08:00:00.000Z",
-    "updatedAt": "2025-03-24T08:00:00.000Z",
     "eventsManaged": [],
-    "status": "active"
+    "profileImage": "/public/images/default_profile_img.png",
+    "bio": "Nature enthusiast and event organizer",
+    "location": "Edinburgh, UK",
+    "social": {
+      "linkedin": "https://linkedin.com/in/exampleuser",
+      "twitter": "https://twitter.com/exampleuser",
+      "website": "https://exampleuser.dev"
+    },
+    "dateOfBirth": "1990-07-15T00:00:00.000Z",
+    "isVerified": true,
+    "isActive": true,
+    "lastLogin": "2025-03-25T10:00:00.000Z",
+    "createdAt": "2025-03-24T08:00:00.000Z",
+    "updatedAt": "2025-03-24T08:00:00.000Z"
   },
   {
     "firstName": "Mary",
@@ -152,10 +295,24 @@
     "phone": "+1234567891",
     "password": "hashedPasswordAdmin2",
     "role": "admin",
+    "eventsManaged": [
+      "67e1cebd9c1844e2a36b1400",
+      "67e1cebd9c1844e2a36b140c"
+    ],
+    "profileImage": "/public/images/default_profile_img.png",
+    "bio": "Nature enthusiast and event organizer",
+    "location": "Edinburgh, UK",
+    "social": {
+      "linkedin": "https://linkedin.com/in/exampleuser",
+      "twitter": "https://twitter.com/exampleuser",
+      "website": "https://exampleuser.dev"
+    },
+    "dateOfBirth": "1990-07-15T00:00:00.000Z",
+    "isVerified": true,
+    "isActive": true,
+    "lastLogin": "2025-03-25T10:00:00.000Z",
     "createdAt": "2025-03-24T08:00:00.000Z",
-    "updatedAt": "2025-03-24T08:00:00.000Z",
-    "eventsManaged": ["67e1cebd9c1844e2a36b1400", "67e1cebd9c1844e2a36b140c"],
-    "status": "active"
+    "updatedAt": "2025-03-24T08:00:00.000Z"
   },
   {
     "firstName": "Lisa",
@@ -165,10 +322,21 @@
     "phone": "+1234567892",
     "password": "hashedPasswordAdmin3",
     "role": "admin",
-    "createdAt": "2025-03-24T08:00:00.000Z",
-    "updatedAt": "2025-03-24T08:00:00.000Z",
     "eventsManaged": [],
-    "status": "active"
+    "profileImage": "/public/images/default_profile_img.png",
+    "bio": "Nature enthusiast and event organizer",
+    "location": "Edinburgh, UK",
+    "social": {
+      "linkedin": "https://linkedin.com/in/exampleuser",
+      "twitter": "https://twitter.com/exampleuser",
+      "website": "https://exampleuser.dev"
+    },
+    "dateOfBirth": "1990-07-15T00:00:00.000Z",
+    "isVerified": true,
+    "isActive": true,
+    "lastLogin": "2025-03-25T10:00:00.000Z",
+    "createdAt": "2025-03-24T08:00:00.000Z",
+    "updatedAt": "2025-03-24T08:00:00.000Z"
   },
   {
     "firstName": "James",
@@ -178,9 +346,20 @@
     "phone": "+1234567893",
     "password": "hashedPasswordAdmin4",
     "role": "admin",
-    "createdAt": "2025-03-24T08:00:00.000Z",
-    "updatedAt": "2025-03-24T08:00:00.000Z",
     "eventsManaged": [],
-    "status": "active"
+    "profileImage": "/public/images/default_profile_img.png",
+    "bio": "Nature enthusiast and event organizer",
+    "location": "Edinburgh, UK",
+    "social": {
+      "linkedin": "https://linkedin.com/in/exampleuser",
+      "twitter": "https://twitter.com/exampleuser",
+      "website": "https://exampleuser.dev"
+    },
+    "dateOfBirth": "1990-07-15T00:00:00.000Z",
+    "isVerified": true,
+    "isActive": true,
+    "lastLogin": "2025-03-25T10:00:00.000Z",
+    "createdAt": "2025-03-24T08:00:00.000Z",
+    "updatedAt": "2025-03-24T08:00:00.000Z"
   }
 ]

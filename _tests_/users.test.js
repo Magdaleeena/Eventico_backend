@@ -103,6 +103,7 @@ describe('UserController Tests', () => {
       expect(res.body.user.email).toBe(newUser.email);
       expect(res.body.user.firstName).toBe(newUser.firstName);
       expect(res.body.user.role).toBe('user');
+      expect(res.body.user.profileImage).toBe('/public/images/default_profile_img.png');
     });
     
     it('should return 400 if the user already exists by email', async () => {
@@ -146,7 +147,7 @@ describe('UserController Tests', () => {
         .set('Authorization', `Bearer ${adminToken}`);
   
       expect(res.status).toBe(500);
-      expect(res.body.msg).toMatch(/error creating user/i);
+      expect(res.body.msg).toMatch(/Internal server error/i);
     });
   });
 
