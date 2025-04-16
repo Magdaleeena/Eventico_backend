@@ -127,6 +127,14 @@ exports.updateOwnProfile = async (req, res, next) => {
     delete updates.role; // prevent role change
     delete updates.password; // prevent password change here
 
+    // Check if username is being updated and is already taken
+    if (updates.username) {
+      const existing = await User.findOne({ username: updates.username });
+      if (existing && existing._id.toString() !== req.user.userId) {
+        return res.status(400).json({ msg: "Username already taken" });
+      }
+    }
+
     const user = await User.findByIdAndUpdate(req.user.userId, updates, {
       new: true,
       runValidators: true,
@@ -172,7 +180,7 @@ exports.syncUserFromClerk = async (req, res) => {
       user = new User({
         clerkId,
         email: email.toLowerCase(),
-        username: email.split("@")[0],
+        username: `${email.split("@")[0]}-${clerkId.slice(-4)}`,
         firstName,
         lastName,
         isVerified: true,
