@@ -20,8 +20,11 @@ router.get('/me', authenticateToken, userController.getOwnProfile);
 // Route to update your profile - protected route
 router.put('/me', authenticateToken, userController.updateOwnProfile);
 
-//Route to delete your profile - protected route
+// Route to delete your profile - protected route
 router.delete('/me', authenticateToken, userController.deleteOwnProfile);
+
+router.post("/sync", userController.syncUserFromClerk);
+
 
 
 

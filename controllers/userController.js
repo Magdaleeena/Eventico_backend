@@ -155,6 +155,40 @@ exports.deleteOwnProfile = async (req, res, next) => {
   }
 };
 
+// Sync Clerk user into your database
+exports.syncUserFromClerk = async (req, res) => {
+  try {
+    const { clerkId, email, firstName, lastName } = req.body;
+
+    if (!clerkId || !email) {
+      return res.status(400).json({ msg: "Missing required Clerk info" });
+    }
+
+    // Check if user already exists
+    let user = await User.findOne({ clerkId });
+
+    if (!user) {
+      // Create the user
+      user = new User({
+        clerkId,
+        email: email.toLowerCase(),
+        username: email.split("@")[0],
+        firstName,
+        lastName,
+        isVerified: true,
+        role: "user", // default role
+      });
+
+      await user.save();
+    }
+
+    res.status(200).json({ msg: "User synced successfully", user });
+  } catch (err) {
+    console.error("Error syncing user:", err);
+    res.status(500).json({ msg: "Error syncing user", error: err.message });
+  }
+};
+
 
 
 
