@@ -3,11 +3,13 @@ const bcrypt = require('bcryptjs');
 
 // Define the User schema
 const userSchema = new mongoose.Schema({
-    clerkId: { type: String, required: false},  
+    clerkId: { type: String, required: false, unique: true},  
     firstName: { type: String, required: true, trim: true },
     lastName: { type: String, required: true, trim: true},
     username: { type: String, required: true, unique: true, trim: true },
-    password: { type: String, required: true, select: false },
+    password: { type: String, select: false, required: function () {
+      return !this.clerkId;
+    } },
     // clerkId or auth0Id or firebaseUid: { type: String, required: false } OR  password, if managed by myself: { type: String, required: true, select: false },
     email: { type: String, required: true, unique: true, trim: true, lowercase: true, match: [/^\S+@\S+\.\S+$/, 'Please provide a valid email address']},
     phone: { type: String, required: false, trim: true },
