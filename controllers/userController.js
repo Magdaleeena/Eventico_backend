@@ -166,7 +166,6 @@ exports.deleteOwnProfile = async (req, res, next) => {
 
 
 // Sync Clerk user into your database
-// Sync Clerk user into your database
 exports.syncUserFromClerk = async (req, res) => {
   try {
     const { clerkId, email, firstName, lastName } = req.body;
@@ -182,15 +181,21 @@ exports.syncUserFromClerk = async (req, res) => {
 
     if (!user) {
       const baseUsername = normalizedEmail.split("@")[0] || `user${Date.now()}`;
-      const uniqueSuffix = clerkId.slice(-4);
-      const username = `${baseUsername}-${uniqueSuffix}`;
+      let uniqueUsername = `${baseUsername}-${clerkId.slice(-4)}`;
+
+      // Make sure it's unique in the DB
+      let count = 0;
+      while (await User.findOne({ username: uniqueUsername })) {
+        count++;
+        uniqueUsername = `${baseUsername}-${clerkId.slice(-4)}-${count}`;
+      }
 
       user = new User({
         clerkId,
         firstName: firstName || 'First',
         lastName: lastName || 'Last',
         email: normalizedEmail,
-        username,
+        username: uniqueUsername,
         isVerified: true,
         role: "user",
       });
