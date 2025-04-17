@@ -140,12 +140,8 @@ exports.getOwnProfile = async (req, res, next) => {
 
     res.status(200).json(user);
   } catch (err) {
-    console.error("Error in getOwnProfile:", {
-      message: err.message,
-      stack: err.stack,
-      clerkId: req.auth?.clerkId,
-    });
-    res.status(500).json({ msg: "Server error fetching profile" });
+    console.error("Error in getOwnProfile:", err);
+    next(err); 
   }
 };
 
