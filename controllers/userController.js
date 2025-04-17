@@ -107,7 +107,7 @@ exports.loginUser = async (req, res) => {
   }
 };
 
-// Get your own profile
+
 // Get your own profile
 exports.getOwnProfile = async (req, res, next) => {
   try {
@@ -143,9 +143,6 @@ exports.getOwnProfile = async (req, res, next) => {
     res.status(500).json({ msg: "Server error fetching profile" });
   }
 };
-
-
-
 
 // Update your own profile
 exports.updateOwnProfile = async (req, res, next) => {
@@ -203,18 +200,19 @@ exports.syncUserFromClerk = async (req, res) => {
 
     const normalizedEmail = email.toLowerCase();
 
-    // Check by clerkId OR email
+    // ✅ This is where you check if a user exists by either Clerk ID or email
     let user = await User.findOne({ $or: [{ clerkId }, { email: normalizedEmail }] });
 
     if (!user) {
       const baseUsername = normalizedEmail.split("@")[0] || `user${Date.now()}`;
-      let uniqueUsername = `${baseUsername}-${clerkId.slice(-4)}`;
+      let suffix = clerkId.slice(-4);
+      let username = `${baseUsername}-${suffix}`;
+      let counter = 0;
 
-      // Make sure it's unique in the DB
-      let count = 0;
-      while (await User.findOne({ username: uniqueUsername })) {
-        count++;
-        uniqueUsername = `${baseUsername}-${clerkId.slice(-4)}-${count}`;
+      // 👇 Ensure the username is unique in the DB
+      while (await User.findOne({ username })) {
+        counter++;
+        username = `${baseUsername}-${suffix}-${counter}`;
       }
 
       user = new User({
@@ -222,16 +220,18 @@ exports.syncUserFromClerk = async (req, res) => {
         firstName: firstName || 'First',
         lastName: lastName || 'Last',
         email: normalizedEmail,
-        username: uniqueUsername,
+        username,
         isVerified: true,
         role: "user",
       });
 
       await user.save();
+      console.log("MONGODB USER CREATED:", user._id);
     } else if (!user.clerkId) {
-      // Link existing user to new Clerk ID
+      // 👇 If the user exists by email but doesn't have a Clerk ID yet, link it
       user.clerkId = clerkId;
       await user.save();
+      console.log("🔗 Clerk ID linked to existing user:", user._id);
     }
 
     res.status(200).json({ msg: "User synced successfully", user });
