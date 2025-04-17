@@ -112,13 +112,15 @@ exports.loginUser = async (req, res) => {
 exports.getOwnProfile = async (req, res, next) => {
   try {
     const clerkId = req.auth?.clerkId;
+    console.log("📌 Clerk ID received in getOwnProfile:", clerkId);
+    console.log("📌 Full req.auth object:", req.auth);
 
     if (!clerkId) {
       return res.status(401).json({ msg: "Missing Clerk ID in request" });
     }
 
     // Log incoming Clerk ID for debugging
-    console.log("🔍 Looking for user with Clerk ID:", clerkId);
+    console.log("Looking for user with Clerk ID:", clerkId);
 
     // Attempt to find user
     const user = await User.findOne({ clerkId }).select('-password');
@@ -208,7 +210,7 @@ exports.syncUserFromClerk = async (req, res) => {
     let user = await User.findOne({ $or: [{ clerkId }, { email: normalizedEmail }] });
 
     if (!user) {
-      // 🔄 Generate truly unique username
+      // Generate truly unique username
       const baseUsername = normalizedEmail.split("@")[0];
       const suffix = clerkId.slice(-4);
       let candidateUsername = `${baseUsername}-${suffix}`;
@@ -230,21 +232,21 @@ exports.syncUserFromClerk = async (req, res) => {
       });
 
       await user.save();
-      console.log("✅ New user created:", candidateUsername);
+      console.log("New user created:", candidateUsername);
     } else {
-      // ✅ Update Clerk ID if not set yet
+      // Update Clerk ID if not set yet
       if (!user.clerkId) {
         user.clerkId = clerkId;
         await user.save();
-        console.log("🔗 Linked Clerk ID to existing user:", user.email);
+        console.log("Linked Clerk ID to existing user:", user.email);
       } else {
-        console.log("👀 Clerk user already exists:", user.email);
+        console.log("Clerk user already exists:", user.email);
       }
     }
 
     res.status(200).json({ msg: "User synced successfully", user });
   } catch (err) {
-    console.error("❌ Error syncing user:", {
+    console.error("Error syncing user:", {
       message: err.message,
       stack: err.stack,
       body: req.body,
