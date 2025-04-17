@@ -178,15 +178,18 @@ exports.syncUserFromClerk = async (req, res) => {
     let user = await User.findOne({ clerkId });
 
     if (!user) {
-      // Create the user
+      const baseUsername = email?.split("@")[0] || `user${Date.now()}`;
+      const uniqueSuffix = clerkId.slice(-4);
+      const username = `${baseUsername}-${uniqueSuffix}`;
+
       user = new User({
         clerkId,
         firstName: firstName || 'First',
         lastName: lastName || 'Last',
         email: email.toLowerCase(),
-        username: `${email.split("@")[0]}-${clerkId.slice(-4)}`,
+        username,
         isVerified: true,
-        role: "user", // default role
+        role: "user",
       });
 
       await user.save();
@@ -194,10 +197,15 @@ exports.syncUserFromClerk = async (req, res) => {
 
     res.status(200).json({ msg: "User synced successfully", user });
   } catch (err) {
-    console.error("Error syncing user:", err);
+    console.error("Error syncing user:", {
+      message: err.message,
+      stack: err.stack,
+      body: req.body,
+    });
     res.status(500).json({ msg: "Error syncing user", error: err.message });
   }
 };
+
 
 
 
