@@ -200,25 +200,25 @@ exports.syncUserFromClerk = async (req, res) => {
 
     const normalizedEmail = email.toLowerCase();
 
-    // ✅ This is where you check if a user exists by either Clerk ID or email
+    // Look for an existing user by Clerk ID or email
     let user = await User.findOne({ $or: [{ clerkId }, { email: normalizedEmail }] });
 
     if (!user) {
-      const baseUsername = normalizedEmail.split("@")[0] || `user${Date.now()}`;
-      let suffix = clerkId.slice(-4);
+      const baseUsername = normalizedEmail.split("@")[0];
+      const suffix = clerkId.slice(-4);
       let username = `${baseUsername}-${suffix}`;
-      let counter = 0;
+      let attempt = 1;
 
-      // 👇 Ensure the username is unique in the DB
+      // Loop until we find a truly unique username
       while (await User.findOne({ username })) {
-        counter++;
-        username = `${baseUsername}-${suffix}-${counter}`;
+        username = `${baseUsername}-${suffix}-${attempt}`;
+        attempt++;
       }
 
       user = new User({
         clerkId,
-        firstName: firstName || 'First',
-        lastName: lastName || 'Last',
+        firstName: firstName || "First",
+        lastName: lastName || "Last",
         email: normalizedEmail,
         username,
         isVerified: true,
@@ -226,12 +226,12 @@ exports.syncUserFromClerk = async (req, res) => {
       });
 
       await user.save();
-      console.log("MONGODB USER CREATED:", user._id);
+      console.log("New user created:", user.username);
     } else if (!user.clerkId) {
-      // 👇 If the user exists by email but doesn't have a Clerk ID yet, link it
+      // If existing user found by email, attach Clerk ID
       user.clerkId = clerkId;
       await user.save();
-      console.log("🔗 Clerk ID linked to existing user:", user._id);
+      console.log("🔗 Clerk ID linked to existing user:", user.email);
     }
 
     res.status(200).json({ msg: "User synced successfully", user });
@@ -244,10 +244,6 @@ exports.syncUserFromClerk = async (req, res) => {
     res.status(500).json({ msg: "Error syncing user", error: err.message });
   }
 };
-
-
-
-
 
 
 
