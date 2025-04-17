@@ -117,16 +117,19 @@ exports.getOwnProfile = async (req, res, next) => {
       return res.status(401).json({ msg: "Missing Clerk ID in request" });
     }
 
-    // Log the incoming Clerk ID
+    // Log incoming Clerk ID for debugging
     console.log("🔍 Looking for user with Clerk ID:", clerkId);
 
+    // Attempt to find user
     const user = await User.findOne({ clerkId }).select('-password');
 
+    // Additional debug log if user not found
     if (!user) {
-      console.log("No user found with this Clerk ID in the database.");
+      console.log("User NOT found. Full DB check failed.");
       return res.status(404).json({ msg: 'User not found in DB' });
     }
 
+    // Log if user was found
     console.log("User found:", {
       id: user._id,
       email: user.email,
@@ -143,6 +146,7 @@ exports.getOwnProfile = async (req, res, next) => {
     res.status(500).json({ msg: "Server error fetching profile" });
   }
 };
+
 
 // Update your own profile
 exports.updateOwnProfile = async (req, res, next) => {
