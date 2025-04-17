@@ -6,7 +6,6 @@ const { authenticateToken, isAdmin } = require('../middlewares/authMiddleware');
 const { authenticateClerkToken } = require('../middlewares/clerkAuthMiddleware');
 
 
-
 // Route to create a user - public route
 router.post('/register', userController.createUser);
 
