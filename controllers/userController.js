@@ -179,10 +179,10 @@ exports.syncUserFromClerk = async (req, res) => {
       // Create the user
       user = new User({
         clerkId,
+        firstName: firstName || 'First',
+        lastName: lastName || 'Last',
         email: email.toLowerCase(),
         username: `${email.split("@")[0]}-${clerkId.slice(-4)}`,
-        firstName,
-        lastName,
         isVerified: true,
         role: "user", // default role
       });
