@@ -110,7 +110,7 @@ exports.loginUser = async (req, res) => {
 // Get your own profile
 exports.getOwnProfile = async (req, res, next) => {
   try {
-    const user = await User.findById(req.user.userId).select('-password');
+    const user = await User.findOne({ clerkId: req.auth.clerkId }).select('-password');
     if (!user) {
       return res.status(404).json({ msg: 'User not found' });
     }
@@ -124,21 +124,21 @@ exports.getOwnProfile = async (req, res, next) => {
 exports.updateOwnProfile = async (req, res, next) => {
   try {
     const updates = req.body;
-    delete updates.role; // prevent role change
-    delete updates.password; // prevent password change here
+    delete updates.role;
+    delete updates.password;
 
-    // Check if username is being updated and is already taken
     if (updates.username) {
       const existing = await User.findOne({ username: updates.username });
-      if (existing && existing._id.toString() !== req.user.userId) {
+      if (existing && existing.clerkId !== req.auth.clerkId) {
         return res.status(400).json({ msg: "Username already taken" });
       }
     }
 
-    const user = await User.findByIdAndUpdate(req.user.userId, updates, {
-      new: true,
-      runValidators: true,
-    }).select('-password');
+    const user = await User.findOneAndUpdate(
+      { clerkId: req.auth.clerkId },
+      updates,
+      { new: true, runValidators: true }
+    ).select('-password');
 
     if (!user) {
       return res.status(404).json({ msg: 'User not found' });
@@ -146,22 +146,24 @@ exports.updateOwnProfile = async (req, res, next) => {
 
     res.status(200).json({ msg: 'Profile updated', user });
   } catch (err) {
-    next(err); 
+    next(err);
   }
 };
+
 
 // Delete your own profile
 exports.deleteOwnProfile = async (req, res, next) => {
   try {
-    const user = await User.findByIdAndDelete(req.user.userId);
+    const user = await User.findOneAndDelete({ clerkId: req.auth.clerkId });
     if (!user) {
       return res.status(404).json({ msg: 'User not found' });
     }
     res.status(200).json({ msg: 'Your account has been deleted' });
   } catch (err) {
-    next(err); 
+    next(err);
   }
 };
+
 
 // Sync Clerk user into your database
 exports.syncUserFromClerk = async (req, res) => {
