@@ -208,13 +208,15 @@ exports.syncUserFromClerk = async (req, res) => {
     let user = await User.findOne({ $or: [{ clerkId }, { email: normalizedEmail }] });
 
     if (!user) {
-      // 🔄 Generate unique username
+      // 🔄 Generate truly unique username
       const baseUsername = normalizedEmail.split("@")[0];
-      let uniqueUsername = `${baseUsername}-${clerkId.slice(-4)}`;
+      const suffix = clerkId.slice(-4);
+      let candidateUsername = `${baseUsername}-${suffix}`;
       let count = 0;
-      while (await User.findOne({ username: uniqueUsername })) {
+
+      while (await User.findOne({ username: candidateUsername })) {
         count++;
-        uniqueUsername = `${baseUsername}-${clerkId.slice(-4)}-${count}`;
+        candidateUsername = `${baseUsername}-${suffix}-${count}`;
       }
 
       user = new User({
@@ -222,13 +224,13 @@ exports.syncUserFromClerk = async (req, res) => {
         firstName: firstName || 'First',
         lastName: lastName || 'Last',
         email: normalizedEmail,
-        username: uniqueUsername,
+        username: candidateUsername,
         isVerified: true,
         role: "user",
       });
 
       await user.save();
-      console.log("✅ New user created:", uniqueUsername);
+      console.log("✅ New user created:", candidateUsername);
     } else {
       // ✅ Update Clerk ID if not set yet
       if (!user.clerkId) {
@@ -250,4 +252,3 @@ exports.syncUserFromClerk = async (req, res) => {
     res.status(500).json({ msg: "Error syncing user", error: err.message });
   }
 };
-
