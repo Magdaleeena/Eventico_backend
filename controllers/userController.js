@@ -108,19 +108,30 @@ exports.loginUser = async (req, res) => {
 };
 
 // Get your own profile
+// Get your own profile
 exports.getOwnProfile = async (req, res, next) => {
   try {
-    if (!req.auth?.clerkId) {
+    const clerkId = req.auth?.clerkId;
+
+    if (!clerkId) {
       return res.status(401).json({ msg: "Missing Clerk ID in request" });
     }
 
-    console.log("🔍 Clerk ID received:", req.auth.clerkId); // <-- Add this
+    // Log the incoming Clerk ID
+    console.log("🔍 Looking for user with Clerk ID:", clerkId);
 
-    const user = await User.findOne({ clerkId: req.auth.clerkId }).select('-password');
+    const user = await User.findOne({ clerkId }).select('-password');
 
     if (!user) {
+      console.log("No user found with this Clerk ID in the database.");
       return res.status(404).json({ msg: 'User not found in DB' });
     }
+
+    console.log("User found:", {
+      id: user._id,
+      email: user.email,
+      username: user.username,
+    });
 
     res.status(200).json(user);
   } catch (err) {
@@ -132,6 +143,7 @@ exports.getOwnProfile = async (req, res, next) => {
     res.status(500).json({ msg: "Server error fetching profile" });
   }
 };
+
 
 
 
