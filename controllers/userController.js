@@ -110,15 +110,27 @@ exports.loginUser = async (req, res) => {
 // Get your own profile
 exports.getOwnProfile = async (req, res, next) => {
   try {
-    const user = await User.findOne({ clerkId: req.auth.clerkId }).select('-password');
-    if (!user) {
-      return res.status(404).json({ msg: 'User not found' });
+    if (!req.auth?.clerkId) {
+      return res.status(401).json({ msg: "Missing Clerk ID in request" });
     }
+
+    const user = await User.findOne({ clerkId: req.auth.clerkId }).select('-password');
+
+    if (!user) {
+      return res.status(404).json({ msg: 'User not found in DB' });
+    }
+
     res.status(200).json(user);
   } catch (err) {
-    next(err);
+    console.error("Error in getOwnProfile:", {
+      message: err.message,
+      stack: err.stack,
+      clerkId: req.auth?.clerkId,
+    });
+    res.status(500).json({ msg: "Server error fetching profile" });
   }
 };
+
 
 // Update your own profile
 exports.updateOwnProfile = async (req, res, next) => {
