@@ -194,6 +194,7 @@ exports.deleteOwnProfile = async (req, res, next) => {
 
 
 // Sync Clerk user into your database
+// Sync Clerk user into your database
 exports.syncUserFromClerk = async (req, res) => {
   try {
     const { clerkId, email, firstName, lastName } = req.body;
@@ -204,38 +205,36 @@ exports.syncUserFromClerk = async (req, res) => {
 
     const normalizedEmail = email.toLowerCase();
 
-    // Look for an existing user by Clerk ID or email
+    // Check if the user already exists by clerkId or email
     let user = await User.findOne({ $or: [{ clerkId }, { email: normalizedEmail }] });
 
     if (!user) {
-      const baseUsername = normalizedEmail.split("@")[0];
-      const suffix = clerkId.slice(-4);
-      let username = `${baseUsername}-${suffix}`;
-      let attempt = 1;
+      const baseUsername = normalizedEmail.split("@")[0] || `user${Date.now()}`;
+      let uniqueUsername = `${baseUsername}-${clerkId.slice(-4)}`;
 
-      // Loop until we find a truly unique username
-      while (await User.findOne({ username })) {
-        username = `${baseUsername}-${suffix}-${attempt}`;
+      // Keep checking until you find a truly unique username
+      let attempt = 0;
+      while (await User.findOne({ username: uniqueUsername })) {
         attempt++;
+        uniqueUsername = `${baseUsername}-${clerkId.slice(-4)}-${attempt}`;
       }
 
       user = new User({
         clerkId,
-        firstName: firstName || "First",
-        lastName: lastName || "Last",
+        firstName: firstName || 'First',
+        lastName: lastName || 'Last',
         email: normalizedEmail,
-        username,
+        username: uniqueUsername,
         isVerified: true,
         role: "user",
       });
 
       await user.save();
-      console.log("New user created:", user.username);
+      console.log("New user created:", uniqueUsername);
     } else if (!user.clerkId) {
-      // If existing user found by email, attach Clerk ID
       user.clerkId = clerkId;
       await user.save();
-      console.log("🔗 Clerk ID linked to existing user:", user.email);
+      console.log("🔗 Linked existing user to Clerk:", user.email);
     }
 
     res.status(200).json({ msg: "User synced successfully", user });
@@ -248,7 +247,4 @@ exports.syncUserFromClerk = async (req, res) => {
     res.status(500).json({ msg: "Error syncing user", error: err.message });
   }
 };
-
-
-
 
