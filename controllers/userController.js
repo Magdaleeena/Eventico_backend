@@ -114,6 +114,8 @@ exports.getOwnProfile = async (req, res, next) => {
       return res.status(401).json({ msg: "Missing Clerk ID in request" });
     }
 
+    console.log("🔍 Clerk ID received:", req.auth.clerkId); // <-- Add this
+
     const user = await User.findOne({ clerkId: req.auth.clerkId }).select('-password');
 
     if (!user) {
@@ -130,6 +132,7 @@ exports.getOwnProfile = async (req, res, next) => {
     res.status(500).json({ msg: "Server error fetching profile" });
   }
 };
+
 
 
 // Update your own profile

@@ -8,9 +8,11 @@ const authenticateClerkToken = (req, res, next) => {
     return res.status(401).json({ msg: "Unauthorized: Clerk token missing or invalid" });
   }
 
+  // Set for use in controllers
   req.auth = { clerkId: userId, sessionId };
   next();
 };
+
 
 
 module.exports = { authenticateClerkToken };
