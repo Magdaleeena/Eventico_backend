@@ -194,7 +194,6 @@ exports.deleteOwnProfile = async (req, res, next) => {
 
 
 // Sync Clerk user into your database
-// Sync Clerk user into your database
 exports.syncUserFromClerk = async (req, res) => {
   try {
     const { clerkId, email, firstName, lastName } = req.body;
@@ -205,18 +204,17 @@ exports.syncUserFromClerk = async (req, res) => {
 
     const normalizedEmail = email.toLowerCase();
 
-    // Check if the user already exists by clerkId or email
+    // 👉 Look for an existing user by Clerk ID or email
     let user = await User.findOne({ $or: [{ clerkId }, { email: normalizedEmail }] });
 
     if (!user) {
-      const baseUsername = normalizedEmail.split("@")[0] || `user${Date.now()}`;
+      // 🔄 Generate unique username
+      const baseUsername = normalizedEmail.split("@")[0];
       let uniqueUsername = `${baseUsername}-${clerkId.slice(-4)}`;
-
-      // Keep checking until you find a truly unique username
-      let attempt = 0;
+      let count = 0;
       while (await User.findOne({ username: uniqueUsername })) {
-        attempt++;
-        uniqueUsername = `${baseUsername}-${clerkId.slice(-4)}-${attempt}`;
+        count++;
+        uniqueUsername = `${baseUsername}-${clerkId.slice(-4)}-${count}`;
       }
 
       user = new User({
@@ -230,16 +228,21 @@ exports.syncUserFromClerk = async (req, res) => {
       });
 
       await user.save();
-      console.log("New user created:", uniqueUsername);
-    } else if (!user.clerkId) {
-      user.clerkId = clerkId;
-      await user.save();
-      console.log("🔗 Linked existing user to Clerk:", user.email);
+      console.log("✅ New user created:", uniqueUsername);
+    } else {
+      // ✅ Update Clerk ID if not set yet
+      if (!user.clerkId) {
+        user.clerkId = clerkId;
+        await user.save();
+        console.log("🔗 Linked Clerk ID to existing user:", user.email);
+      } else {
+        console.log("👀 Clerk user already exists:", user.email);
+      }
     }
 
     res.status(200).json({ msg: "User synced successfully", user });
   } catch (err) {
-    console.error("Error syncing user:", {
+    console.error("❌ Error syncing user:", {
       message: err.message,
       stack: err.stack,
       body: req.body,
