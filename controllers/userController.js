@@ -166,6 +166,7 @@ exports.deleteOwnProfile = async (req, res, next) => {
 
 
 // Sync Clerk user into your database
+// Sync Clerk user into your database
 exports.syncUserFromClerk = async (req, res) => {
   try {
     const { clerkId, email, firstName, lastName } = req.body;
@@ -174,11 +175,13 @@ exports.syncUserFromClerk = async (req, res) => {
       return res.status(400).json({ msg: "Missing required Clerk info" });
     }
 
-    // Check if user already exists
-    let user = await User.findOne({ clerkId });
+    const normalizedEmail = email.toLowerCase();
+
+    // Check by clerkId OR email
+    let user = await User.findOne({ $or: [{ clerkId }, { email: normalizedEmail }] });
 
     if (!user) {
-      const baseUsername = email?.split("@")[0] || `user${Date.now()}`;
+      const baseUsername = normalizedEmail.split("@")[0] || `user${Date.now()}`;
       const uniqueSuffix = clerkId.slice(-4);
       const username = `${baseUsername}-${uniqueSuffix}`;
 
@@ -186,12 +189,16 @@ exports.syncUserFromClerk = async (req, res) => {
         clerkId,
         firstName: firstName || 'First',
         lastName: lastName || 'Last',
-        email: email.toLowerCase(),
+        email: normalizedEmail,
         username,
         isVerified: true,
         role: "user",
       });
 
+      await user.save();
+    } else if (!user.clerkId) {
+      // Link existing user to new Clerk ID
+      user.clerkId = clerkId;
       await user.save();
     }
 
@@ -205,6 +212,7 @@ exports.syncUserFromClerk = async (req, res) => {
     res.status(500).json({ msg: "Error syncing user", error: err.message });
   }
 };
+
 
 
 
