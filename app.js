@@ -12,7 +12,15 @@ const app = express();
 
 connectDB();
 
-app.use(cors());
+app.use(cors({
+  origin: ['http://localhost:5173', 'https://eventico-frontend.onrender.com'], 
+  credentials: true,
+}));
+
+app.use((req, res, next) => {
+  console.log("🌐 Incoming request from:", req.headers.origin);
+  next();
+});
 
 app.use(express.json());
 
