@@ -14,38 +14,42 @@ exports.getAllUsers = async (req, res) => {
 
 // Get your own profile
 exports.getOwnProfile = async (req, res, next) => {
+  console.log("🔥 [getOwnProfile] Route hit");
+
   try {
-    const clerkId = req.auth?.clerkId;
-    console.log("Clerk ID received in getOwnProfile:", clerkId);
-    console.log("Full req.auth object:", req.auth);
+    const authObj = req.auth;
+    console.log("📦 req.auth:", authObj);
+
+    const clerkId = authObj?.userId || authObj?.clerkId;
+    console.log("🆔 Clerk ID resolved:", clerkId);
 
     if (!clerkId) {
+      console.warn("❌ Clerk ID missing from auth object");
       return res.status(401).json({ msg: "Missing Clerk ID in request" });
     }
 
-    // Log incoming Clerk ID for debugging
-    console.log("Looking for user with Clerk ID:", clerkId);
+    console.log("🔍 Searching for user in DB with Clerk ID:", clerkId);
 
-    // Attempt to find user
     const user = await User.findOne({ clerkId }).select('-password');
 
-    // Additional debug log if user not found
     if (!user) {
-      console.log("User NOT found. Full DB check failed.");
+      console.warn("🚫 No user found for Clerk ID:", clerkId);
       return res.status(404).json({ msg: 'User not found in DB' });
     }
 
-    // Log if user was found
-    console.log("User found:", {
+    console.log("✅ User found:", {
       id: user._id,
-      email: user.email,
       username: user.username,
+      email: user.email
     });
 
-    res.status(200).json(user);
+    return res.status(200).json(user);
   } catch (err) {
-    console.error("Error in getOwnProfile:", err);
-    next(err); 
+    console.error("🔥 Uncaught error in getOwnProfile:", {
+      message: err.message,
+      stack: err.stack
+    });
+    return res.status(500).json({ msg: "Internal server error", error: err.message });
   }
 };
 
