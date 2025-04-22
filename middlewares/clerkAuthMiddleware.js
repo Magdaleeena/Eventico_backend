@@ -1,28 +1,21 @@
 const User = require('../models/User');
 const Event = require('../models/Event');
-const { getAuth } = require('@clerk/clerk-sdk-node');
+const { auth } = require('@clerk/express');
 
-// Auth middleware using Clerk
-const authenticateClerkToken = async (req, res, next) => {
+// This sets req.auth = { userId, sessionId }
+const authenticateClerkToken = (req, res, next) => {
   try {
-    const authHeader = req.headers.authorization;
-    const token = authHeader && authHeader.split(' ')[1]; // Remove 'Bearer '
-
-    if (!token) {
-      return res.status(401).json({ msg: 'No token provided in Authorization header' });
-    }
-
-    const { userId, sessionId } = getAuth(req); // or getAuth(req, { token }) if needed
+    const { userId, sessionId } = auth(req);
 
     if (!userId) {
-      return res.status(401).json({ msg: 'Unauthorized: Invalid token' });
+      return res.status(401).json({ msg: 'Unauthorized: Clerk token missing or invalid' });
     }
 
     req.auth = { clerkId: userId, sessionId };
     next();
   } catch (err) {
-    console.error('Clerk auth error:', err);
-    return res.status(500).json({ msg: 'Server error in Clerk authentication' });
+    console.error("Clerk auth error:", err);
+    res.status(500).json({ msg: "Clerk auth error", error: err.message });
   }
 };
 
