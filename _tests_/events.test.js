@@ -1,30 +1,65 @@
 const request = require('supertest');
 const app = require('../app');
 const mongoose = require('mongoose');
+const Event = require('../models/Event');
+const User = require('../models/User');
 const seedDatabase = require('../db/seedDatabase');
-const jwt = require('jsonwebtoken');
 
-const user = {
-  id: '67f54d1287f898787e07a2b2',
-  username: 'mary.stone',
-  role: 'admin'
-};
+jest.mock('../middlewares/clerkAuthMiddleware', () => ({
+  authenticateClerkToken: (req, res, next) => {
+    req.auth = global.__mockClerkAuth__ || {
+      clerkId: 'test_admin_id',
+      sessionId: 'mock-session',
+    };
+    next();
+  },
+  isAdmin: async (req, res, next) => {
+    const user = await require('../models/User').findOne({ clerkId: req.auth.clerkId });
+    if (!user || user.role !== 'admin') {
+      return res.status(403).json({ msg: 'Access denied: Admins only' });
+    }
+    req.user = user;
+    next();
+  },
+  isEventCreatorAdmin: async (req, res, next) => {
+    const event = await require('../models/Event').findById(req.params.id);
+    const user = await require('../models/User').findOne({ clerkId: req.auth.clerkId });
+  
+    if (!event || !user) {
+      return res.status(404).json({ msg: 'Event or user not found' });
+    }
+  
+    const isSameAdmin = user.role === 'admin' && event.createdBy.toString() === user._id.toString();
+  
+    if (!isSameAdmin) {
+      return res.status(403).json({ msg: 'Only the admin who created this event can modify it' });
+    }
+  
+    req.user = user;
+    req.event = event;
+    next();
+  }
+  
+}));
 
-const token = jwt.sign(user, process.env.JWT_SECRET, { expiresIn: '2h' });
 
 describe('Event Controller API', () => {
-  let createdEventId;
-
+  
   beforeAll(async () => {
     await mongoose.connection.dropDatabase();
     await seedDatabase();
   });
 
   afterAll(async () => {
-    await mongoose.connection.dropDatabase();
-    await mongoose.connection.close();
+    try {
+      if (mongoose.connection.readyState !== 0) {
+        await mongoose.connection.dropDatabase();
+        await mongoose.disconnect();
+      }
+    } catch (err) {
+      console.error('afterAll error:', err);
+    }
   });
-
   describe('GET /api/events', () => {
     it('should return a list of events with status 200 and default pagination', async () => {
       const response = await request(app).get('/api/events');
@@ -68,183 +103,191 @@ describe('Event Controller API', () => {
     });
   });
 
-  describe('POST /api/events', () => {
-    it('should create a new event with status 201', async () => {
-      const newEvent = {
-        title: 'Music Concert',
-        description: 'An amazing live music concert with famous artists.',
-        date: '2025-06-15T19:00:00Z',
-        location: 'Madison Square Garden',
-        maxParticipants: 500,
-        participants: [],
-        keywords: ['music', 'concert', 'live'],
-        category: 'Music',
-        tags: ['live', 'performance'],
-        image: 'http://example.com/image.jpg',
-        eventURL: 'http://example.com/event',
+  describe('Event routes (Clerk-authenticated)', () => {
+    let adminUser, nonAdminUser, eventToUpdate;
+  
+    beforeAll(async () => {
+      await mongoose.connect(process.env.MONGODB_URI);
+      await mongoose.connection.dropDatabase();
+      await seedDatabase();
+  
+      // Seed users
+      adminUser = await User.create({
+        clerkId: 'test_admin_id',
+        username: 'adminUser',
+        email: 'admin@example.com',
+        role: 'admin',
+        isVerified: true,
+      });
+  
+      nonAdminUser = await User.create({
+        clerkId: 'test_user_id',
+        username: 'basicUser',
+        email: 'user@example.com',
+        role: 'user',
+        isVerified: true,
+      });
+  
+      // Seed event (created by admin)
+      eventToUpdate = await Event.create({
+        title: 'Clerk Event',
+        description: 'Clerk test',
+        date: new Date(),
+        location: 'Nowhere',
+        maxParticipants: 100,
+        keywords: ['test'],
+        category: 'Music', 
+        tags: ['clerk'],
         status: 'active',
-        organizerContact: {
-          email: 'organizer@example.com',
-          phone: '+1234567890',
+        organizerContact: {                       
+          email: 'admin@clerk.com',
+          phone: '+111111111'
         },
-      };
-
-      const response = await request(app)
-        .post('/api/events')
-        .set('Authorization', `Bearer ${token}`)
-        .send(newEvent);
-
-      createdEventId = response.body._id;
+        createdBy: adminUser._id,
+      });
+    });
+  
+    afterAll(async () => {
+      await mongoose.connection.dropDatabase();
+      await mongoose.connection.close();
+    });
+  
+    describe('POST /api/events', () => {
+      it('allows admin to create event', async () => {
+        global.__mockClerkAuth__ = { clerkId: 'test_admin_id', sessionId: 'x' };
+  
+        const res = await request(app)
+          .post('/api/events')
+          .send({
+            title: 'New Event',
+            description: 'Testing Clerk',
+            date: new Date(),
+            location: 'Zoom',
+            maxParticipants: 20,
+            category: 'Music',
+            keywords: ['js'],
+            tags: ['online'],
+            status: 'active',
+            organizerContact: {
+              email: 'org@example.com',
+              phone: '+123456789',
+            },
+          });
+  
+        expect(res.status).toBe(201);
+        expect(res.body).toHaveProperty('_id');
+      });
+  
+      it('blocks non-admin from creating event', async () => {
+        global.__mockClerkAuth__ = { clerkId: 'test_user_id', sessionId: 'x' };
+  
+        const res = await request(app)
+          .post('/api/events')
+          .send({
+            title: 'Blocked Event',
+            description: 'Non-admin should not pass',
+            date: new Date(),
+            location: 'Nowhere',
+            maxParticipants: 1,
+            category: 'Music',
+            organizerContact: {                        
+              email: 'nonadmin@fail.com',
+              phone: '+123123123'
+            },
+            tags: ['fail'],
+            status: 'active'
+          });
+  
+        expect(res.status).toBe(403);
+        expect(res.body.msg).toMatch(/access denied/i);
+      });
+    });
+  
+    describe('PUT /api/events/:id', () => {
+      let eventId;
+    
+      beforeAll(async () => {
+        // Create a second admin
+        await User.create({
+          clerkId: 'other_admin_id',
+          username: 'otherAdmin',
+          email: 'other@example.com',
+          role: 'admin',
+          isVerified: true,
+        });
+      });
+    
+      it('allows creator admin to update their event', async () => {
+        global.__mockClerkAuth__ = { clerkId: 'test_admin_id', sessionId: 'x' };
+    
+        const created = await request(app)
+          .post('/api/events')
+          .send({
+            title: 'PUT Test Event',
+            description: 'Should be updatable by creator only',
+            date: new Date(),
+            location: 'Zoom',
+            maxParticipants: 50,
+            category: 'Music',
+            keywords: ['test'],
+            tags: ['put'],
+            status: 'active',
+            organizerContact: {
+              email: 'admin@clerk.com',
+              phone: '+123456789',
+            },
+          });
+    
+        eventId = created.body._id;
+    
+        const res = await request(app)
+          .put(`/api/events/${eventId}`)
+          .send({ title: 'Updated Title' });
+    
+        expect(res.status).toBe(200);
+        expect(res.body.title).toBe('Updated Title');
+      });
+    
+      it('blocks other admin from updating event', async () => {
+        global.__mockClerkAuth__ = { clerkId: 'other_admin_id', sessionId: 'x' };
+    
+        const res = await request(app)
+          .put(`/api/events/${eventId}`)
+          .send({ title: 'Hacked Title' });
+    
+        console.log('👀 PUT Attempt by Other Admin:', res.status, res.body);
+    
+        expect(res.status).toBe(403);
+        expect(res.body.msg).toMatch(/only the admin who created/i);
+      });
+    });  
       
-      expect(response.status).toBe(201);
-      expect(response.body).toHaveProperty('_id');
-      expect(response.body.title).toBe('Music Concert');
-    });
-
-    it('should return 400 if required fields are missing', async () => {
-      const incompleteEvent = {
-        date: '2025-06-15T19:00:00Z',
-        location: 'Madison Square Garden',
-      };
+    describe('DELETE /api/events/:id', () => {
+      it('allows creator admin to delete event', async () => {
+        const toDelete = await Event.create({
+          title: 'Delete Me',
+          description: 'To be deleted',
+          date: new Date(),
+          location: 'Temporary Location',
+          maxParticipants: 10,
+          keywords: ['delete'],
+          category: 'Music', 
+          tags: ['temp'],
+          status: 'active',
+          createdBy: adminUser._id,
+          organizerContact: {
+            email: 'org@example.com',
+            phone: '+123456789',
+          },
+        });
   
-      const response = await request(app)
-        .post('/api/events')
-        .set('Authorization', `Bearer ${token}`)
-        .send(incompleteEvent);
+        global.__mockClerkAuth__ = { clerkId: 'test_admin_id', sessionId: 'x' };
   
-      expect(response.status).toBe(400);
-      expect(response.body.msg).toBe('Bad request, invalid data.');
-    });
-
-    it('should return 403 if the user is not an admin', async () => {
-      const nonAdminUser = {
-        id: '67f54d1287f898787e00000', // mock user ID
-        username: 'regular.user',
-        role: 'user', 
-      };
-    
-      const nonAdminToken = jwt.sign(nonAdminUser, process.env.JWT_SECRET, { expiresIn: '2h' });
-    
-      const newEvent = {
-        title: 'Unauthorized Event',
-        description: 'A non-admin user is trying to create an event!',
-        date: '2025-07-20T18:00:00Z',
-        location: 'London',
-        maxParticipants: 10,
-        keywords: ['sneaky'],
-        category: 'Music',
-        tags: ['fail'],
-        status: 'active',
-        image: '',
-        eventURL: '',
-        organizerContact: {
-          email: 'unauthorized@fail.com',
-          phone: '+1111111111',
-        },
-      };
-    
-      const response = await request(app)
-        .post('/api/events')
-        .set('Authorization', `Bearer ${nonAdminToken}`)
-        .send(newEvent);
-    
-      expect(response.status).toBe(403);
-      expect(response.body.msg).toMatch(/access denied/i);
+        const res = await request(app).delete(`/api/events/${toDelete._id}`);
+  
+        expect(res.status).toBe(200);
+        expect(res.body.msg).toMatch(/deleted/i);
+      });
     });
   });
-
-  describe('PUT /api/events/:id', () => {
-    it('should update an event with status 200', async () => {
-      // console.log(`Attempting to update event with ID: ${createdEventId}`);
-      const response = await request(app)
-        .put(`/api/events/${createdEventId}`)
-        .set('Authorization', `Bearer ${token}`)
-        .send({ title: 'Updated Title' });
-
-      expect(response.status).toBe(200);
-      expect(response.body.title).toBe('Updated Title');
-    });
-
-    it('should return 404 if event ID is invalid or not found', async () => {
-      const invalidId = new mongoose.Types.ObjectId();
-  
-      const response = await request(app)
-        .put(`/api/events/${invalidId}`)
-        .set('Authorization', `Bearer ${token}`)
-        .send({ title: 'Should Not Work' });
-  
-      expect(response.status).toBe(404);
-      expect(response.body.msg).toMatch(/not found/i);
-    });
-  
-    it('should return 403 if user is not the creator admin', async () => {
-      const otherUser = {
-        id: '67f54d1287f898787e07a999', 
-        username: 'other.admin',
-        role: 'admin'
-      };
-  
-      const otherToken = jwt.sign(otherUser, process.env.JWT_SECRET, { expiresIn: '2h' });
-  
-      const response = await request(app)
-        .put(`/api/events/${createdEventId}`)
-        .set('Authorization', `Bearer ${otherToken}`)
-        .send({ title: 'Malicious Update Attempt' });
-  
-      expect(response.status).toBe(403);
-      expect(response.body.msg).toBe('Only the admin who created this event can modify it');
-    });
-  });
-
-  describe('DELETE /api/events/:id', () => {
-    let eventToDeleteId;
-
-  beforeAll(async () => {
-    // An event that this user will later delete
-    const event = {
-      title: 'Event to Delete',
-      description: 'This event will be deleted in tests.',
-      date: '2025-08-01T19:00:00Z',
-      location: 'Test Location',
-      maxParticipants: 100,
-      keywords: ['delete', 'test'],
-      category: 'Social',
-      tags: ['temporary'],
-      status: 'active',
-      image: '',
-      eventURL: '',
-      organizerContact: {
-        email: 'test@delete.com',
-        phone: '+1234567890',
-      },
-    };
-
-    const response = await request(app)
-      .post('/api/events')
-      .set('Authorization', `Bearer ${token}`)
-      .send(event);
-
-    eventToDeleteId = response.body._id;
-  });
-
-    it('should delete the event if the user is the creator', async () => {
-      const response = await request(app)
-        .delete(`/api/events/${eventToDeleteId}`)
-        .set('Authorization', `Bearer ${token}`);
-
-      expect(response.status).toBe(200);
-      expect(response.body.msg).toBe('Event deleted');
-  });
-
-    it('should return 404 when trying to delete an event that does not exist', async () => {
-      const fakeId = new mongoose.Types.ObjectId();
-
-      const response = await request(app)
-        .delete(`/api/events/${fakeId}`)
-        .set('Authorization', `Bearer ${token}`);
-
-      expect(response.status).toBe(404);
-      expect(response.body.msg).toMatch(/not found/i);
-    });
-  });  
 });

@@ -110,16 +110,14 @@ const deleteEvent = async (req, res) => {
 
 // Authenticated user can sign up for an event
 const signUpForEvent = async (req, res) => {
-  
-  const userId = req.user.id;
+  const clerkId = req.auth?.clerkId;
   const eventId = req.params.id;
 
   try {
+    const user = await User.findOne({ clerkId });
     const event = await Event.findById(eventId);
-    const user = await User.findById(userId);
 
     if (!event || !user) {
-      console.log('Event or user not found');
       return res.status(404).json({ msg: 'Event or user not found' });
     }
 
@@ -127,12 +125,11 @@ const signUpForEvent = async (req, res) => {
       return res.status(403).json({ msg: 'Admins cannot sign up for events' });
     }
 
-    const alreadySignedUp = event.participants.includes(userId);
-    if (alreadySignedUp) {
+    if (event.participants.includes(user._id)) {
       return res.status(400).json({ msg: 'User already signed up for this event' });
     }
 
-    event.participants.push(userId);
+    event.participants.push(user._id);
     user.eventsSignedUp.push(eventId);
 
     await event.save();
@@ -141,36 +138,33 @@ const signUpForEvent = async (req, res) => {
     return res.status(200).json({ msg: 'Successfully signed up for the event' });
   } catch (err) {
     console.error(err);
-    return res.status(500).json({ msg: 'Server error', error: err.msg });
+    return res.status(500).json({ msg: 'Server error', error: err.message });
   }
 };
 
 
 // Authenticated user can cancel their sign up for an event
 const unSignUpFromEvent = async (req, res) => {
-  const userId = req.user.id;
+  const clerkId = req.auth?.clerkId;
   const eventId = req.params.id;
 
   try {
-    const user = await User.findById(userId);
-    if (!user) {
-      return res.status(404).json({ msg: 'User not found' });
+    const user = await User.findOne({ clerkId });
+    const event = await Event.findById(eventId);
+
+    if (!user || !event) {
+      return res.status(404).json({ msg: 'User or event not found' });
     }
 
     if (user.role === 'admin') {
       return res.status(403).json({ msg: 'Admins cannot unsign from events' });
     }
 
-    const event = await Event.findById(eventId);
-    if (!event) {
-      return res.status(404).json({ msg: 'Event not found' });
-    }
-
-    if (!event.participants.includes(userId)) {
+    if (!event.participants.includes(user._id)) {
       return res.status(400).json({ msg: 'You are not signed up for this event' });
     }
 
-    event.participants = event.participants.filter(p => p.toString() !== userId);
+    event.participants = event.participants.filter(p => p.toString() !== user._id.toString());
     user.eventsSignedUp = user.eventsSignedUp.filter(e => e.toString() !== eventId);
 
     await event.save();
@@ -178,10 +172,10 @@ const unSignUpFromEvent = async (req, res) => {
 
     return res.status(200).json({ msg: 'Successfully removed from event' });
   } catch (err) {
-    return res.status(500).json({ msg: 'Error unsigning from event', error: err.msg });
+    console.error(err);
+    return res.status(500).json({ msg: 'Error unsigning from event', error: err.message });
   }
 };
-
 
 
 module.exports = { getAllEvents, createEvent, getEventById, updateEvent, deleteEvent, signUpForEvent, unSignUpFromEvent };

@@ -2,42 +2,72 @@ const request = require('supertest');
 const app = require('../app');
 const mongoose = require('mongoose');
 const seedDatabase = require('../db/seedDatabase');
-const jwt = require('jsonwebtoken');
 const Event = require('../models/Event');
 const User = require('../models/User');
+
+jest.mock('../middlewares/clerkAuthMiddleware', () => ({
+  authenticateClerkToken: (req, res, next) => {
+    req.auth = global.__mockClerkAuth__ || {
+      clerkId: 'test_admin_id',
+      sessionId: 'mock-session',
+    };
+    next();
+  },
+  isAdmin: async (req, res, next) => {
+    const user = await require('../models/User').findOne({ clerkId: req.auth.clerkId });
+    if (!user || user.role !== 'admin') {
+      return res.status(403).json({ msg: 'Access denied: Admins only' });
+    }
+    req.user = user;
+    next();
+  },
+  isEventCreatorAdmin: async (req, res, next) => {
+    const event = await require('../models/Event').findById(req.params.id);
+    const user = await require('../models/User').findOne({ clerkId: req.auth.clerkId });
+  
+    if (!event || !user) {
+      return res.status(404).json({ msg: 'Event or user not found' });
+    }
+
+    const isSameAdmin = user.role === 'admin' && event.createdBy.toString() === user._id.toString();
+
+    if (!isSameAdmin) {
+      return res.status(403).json({ msg: 'Only the admin who created this event can modify it' });
+    }
+
+    req.user = user;
+    req.event = event;
+    next();
+  }
+}));
 
 describe('Event Signup API - Regular User vs Admin User', () => {
   let eventId;
 
   let adminUser;
-  let adminToken;
-
   let regularUser;
-  let userToken;
 
   beforeAll(async () => {
+    await mongoose.connect(process.env.MONGODB_URI);
     await mongoose.connection.dropDatabase();
     await seedDatabase();
 
-    // Get users from DB
-    adminUser = await User.findOne({ username: 'mary.stone' });
-    regularUser = await User.findOne({ username: 'bob.smith' });
-
-    // Create tokens
-    adminToken = jwt.sign(
-      { id: adminUser._id.toString(), username: adminUser.username, role: adminUser.role },
-      process.env.JWT_SECRET,
-      { expiresIn: '2h' }
-    );
+    adminUser = await User.create({
+      clerkId: 'admin_123',
+      username: 'adminTest',
+      email: 'admin@test.com',
+      role: 'admin',
+      isVerified: true,
+    });
     
-    userToken = jwt.sign(
-      { id: regularUser._id.toString(), username: regularUser.username, role: regularUser.role },
-      process.env.JWT_SECRET,
-      { expiresIn: '2h' }
-    );
+    regularUser = await User.create({
+      clerkId: 'user_123',
+      username: 'userTest',
+      email: 'user@test.com',
+      role: 'user',
+      isVerified: true,
+    });
     
-
-    // Create event as admin
     const createdEvent = await Event.create({
       title: 'Test Signup Event',
       description: 'A special test event',
@@ -50,63 +80,62 @@ describe('Event Signup API - Regular User vs Admin User', () => {
       image: 'https://example.com/test.jpg',
       eventURL: 'https://example.com/test-event',
       status: 'active',
-      organizerContact: {
+      createdBy: adminUser._id,
+      organizerContact: {            
         email: 'organizer@test.com',
         phone: '+123456789'
-      },
-      createdBy: adminUser._id
+      }
     });
 
     eventId = createdEvent._id.toString();
-    // console.log('Created test event with ID:', eventId);
   });
 
   afterAll(async () => {
     await mongoose.connection.dropDatabase();
-    await mongoose.connection.close();
+    await mongoose.disconnect();
   });
 
   describe('POST /api/events/:id/signup and /unsignup', () => {
     it('should allow a user to sign up for the event', async () => {
-      const res = await request(app)
-        .post(`/api/events/${eventId}/signup`)
-        .set('Authorization', `Bearer ${userToken}`);
+      global.__mockClerkAuth__ = { clerkId: regularUser.clerkId, sessionId: 'x' };
+
+      const res = await request(app).post(`/api/events/${eventId}/signup`);
 
       expect(res.status).toBe(200);
       expect(res.body.msg).toMatch(/successfully signed up/i);
     });
 
     it('should not allow signing up twice for the same event', async () => {
-      const res = await request(app)
-        .post(`/api/events/${eventId}/signup`)
-        .set('Authorization', `Bearer ${userToken}`);
+      global.__mockClerkAuth__ = { clerkId: regularUser.clerkId, sessionId: 'x' };
+
+      const res = await request(app).post(`/api/events/${eventId}/signup`);
 
       expect(res.status).toBe(400);
       expect(res.body.msg).toMatch(/already signed up/i);
     });
 
     it('should not allow an admin to sign up for an event', async () => {
-      const res = await request(app)
-        .post(`/api/events/${eventId}/signup`)
-        .set('Authorization', `Bearer ${adminToken}`);
-    
+      global.__mockClerkAuth__ = { clerkId: adminUser.clerkId, sessionId: 'x' };
+
+      const res = await request(app).post(`/api/events/${eventId}/signup`);
+
       expect(res.status).toBe(403);
       expect(res.body.msg).toMatch(/admins cannot sign up/i);
     });
 
     it('should allow a user to unsign from the event', async () => {
-      const res = await request(app)
-        .post(`/api/events/${eventId}/unsignup`)
-        .set('Authorization', `Bearer ${userToken}`);
+      global.__mockClerkAuth__ = { clerkId: regularUser.clerkId, sessionId: 'x' };
+
+      const res = await request(app).post(`/api/events/${eventId}/unsignup`);
 
       expect(res.status).toBe(200);
       expect(res.body.msg).toMatch(/removed from event/i);
     });
 
     it('should not allow unsigning if not signed up', async () => {
-      const res = await request(app)
-        .post(`/api/events/${eventId}/unsignup`)
-        .set('Authorization', `Bearer ${userToken}`);
+      global.__mockClerkAuth__ = { clerkId: regularUser.clerkId, sessionId: 'x' };
+
+      const res = await request(app).post(`/api/events/${eventId}/unsignup`);
 
       expect(res.status).toBe(400);
       expect(res.body.msg).toMatch(/not signed up/i);
