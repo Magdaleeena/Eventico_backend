@@ -253,10 +253,8 @@ describe('Event Controller API', () => {
     
         const res = await request(app)
           .put(`/api/events/${eventId}`)
-          .send({ title: 'Hacked Title' });
-    
-        console.log('👀 PUT Attempt by Other Admin:', res.status, res.body);
-    
+          .send({ title: 'Hacked Title' });  
+        
         expect(res.status).toBe(403);
         expect(res.body.msg).toMatch(/only the admin who created/i);
       });
