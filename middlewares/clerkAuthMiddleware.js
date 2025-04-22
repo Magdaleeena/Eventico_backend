@@ -4,15 +4,22 @@ const { requireAuth } = require('@clerk/express');
 
 // This ensures req.auth.clerkId is available like before
 const normalizeClerkAuth = (req, res, next) => {
+  console.log("🧩 normalizeClerkAuth middleware hit");
   if (req.auth?.userId) {
     req.auth.clerkId = req.auth.userId;
   }
   next();
 };
 
-// Main authentication middleware
-const authenticateClerkToken = [requireAuth(), normalizeClerkAuth];
+// Custom wrapper to inject a log before requireAuth does its thing
+const requireAuthWithLog = () => {
+  return (req, res, next) => {
+    console.log("🔐 requireAuth middleware hit");
+    return requireAuth()(req, res, next);
+  };
+};
 
+const authenticateClerkToken = [requireAuthWithLog(), normalizeClerkAuth];
 
 // Checks if the authenticated user is an admin
 const isAdmin = async (req, res, next) => {
