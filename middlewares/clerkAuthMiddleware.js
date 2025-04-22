@@ -1,8 +1,23 @@
 const User = require('../models/User');
 const Event = require('../models/Event');
-const { requireAuth } = require('@clerk/express'); 
+const { auth } = require('@clerk/express');
 
-const authenticateClerkToken = requireAuth();
+const authenticateClerkToken = (req, res, next) => {
+  try {
+    const { userId, sessionId } = auth(req);
+
+    if (!userId) {
+      return res.status(401).json({ msg: 'Unauthorized: Clerk token missing or invalid' });
+    }
+
+    req.auth = { clerkId: userId, sessionId }; // aliasing it back
+    next();
+  } catch (err) {
+    console.error("Clerk auth error:", err);
+    res.status(500).json({ msg: "Clerk auth error", error: err.message });
+  }
+};
+
 
 // Checks if the authenticated user is an admin
 const isAdmin = async (req, res, next) => {
