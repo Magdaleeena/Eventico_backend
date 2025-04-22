@@ -1,22 +1,17 @@
 const User = require('../models/User');
 const Event = require('../models/Event');
-const { auth } = require('@clerk/express');
+const { requireAuth } = require('@clerk/express');
 
-const authenticateClerkToken = (req, res, next) => {
-  try {
-    const { userId, sessionId } = auth(req);
-
-    if (!userId) {
-      return res.status(401).json({ msg: 'Unauthorized: Clerk token missing or invalid' });
-    }
-
-    req.auth = { clerkId: userId, sessionId }; // aliasing it back
-    next();
-  } catch (err) {
-    console.error("Clerk auth error:", err);
-    res.status(500).json({ msg: "Clerk auth error", error: err.message });
+// This ensures req.auth.clerkId is available like before
+const normalizeClerkAuth = (req, res, next) => {
+  if (req.auth?.userId) {
+    req.auth.clerkId = req.auth.userId;
   }
+  next();
 };
+
+// Main authentication middleware
+const authenticateClerkToken = [requireAuth(), normalizeClerkAuth];
 
 
 // Checks if the authenticated user is an admin
