@@ -5,11 +5,18 @@ const { requireAuth } = require('@clerk/express');
 // This ensures req.auth.clerkId is available like before
 const normalizeClerkAuth = (req, res, next) => {
   console.log("🧩 normalizeClerkAuth middleware hit");
+  console.log("🔍 Current req.auth object:", req.auth);
+
   if (req.auth?.userId) {
     req.auth.clerkId = req.auth.userId;
+    console.log("✅ clerkId set to:", req.auth.clerkId);
+  } else {
+    console.warn("⚠️ No userId in req.auth");
   }
+
   next();
 };
+
 
 // Custom wrapper to inject a log before requireAuth does its thing
 const requireAuthWithLog = () => {
