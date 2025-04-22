@@ -7,6 +7,7 @@ const eventRoutes = require('./routes/eventRoutes');
 const endpointsRoutes = require('./routes/endpointsRoutes');
 const { mongooseValidationHandler, mongooseCastErrorHandler, customErrorHandler, serverErrorHandler } = require('./error-handlers');
 const path = require('path');
+const { requireAuth } = require('@clerk/express');
 
 const app = express();
 
@@ -31,6 +32,12 @@ app.use('/public', express.static(path.join(__dirname, 'public')));
 app.use('/api/users', userRoutes);
 
 app.use('/api/events', eventRoutes);
+
+app.get('/debug-auth', requireAuth(), (req, res) => {
+  console.log("🧪 req.auth on /debug-auth route:", req.auth);
+  res.json({ message: `Authenticated user ID: ${req.auth.userId}` });
+});
+
 
 app.all("*", (request, response) => {
   response.status(404).send({ msg: 'Path not found' });
