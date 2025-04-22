@@ -1,15 +1,4 @@
 const User = require('../models/User');
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
-
-// Generate token
-const generateToken = (user) => {
-  return jwt.sign(
-    { userId: user._id, username: user.username, role: user.role },
-    process.env.JWT_SECRET, 
-    { expiresIn: '2h' } 
-  );
-};
 
 // Get all users
 exports.getAllUsers = async (req, res) => {
@@ -23,97 +12,12 @@ exports.getAllUsers = async (req, res) => {
     }
 };
 
-// Create a new user
-exports.createUser = async (req, res, next) => {
-  try {
-    const { firstName, lastName, username, email, password, phone, role, profileImage, bio, location, social, dateOfBirth } = req.body;
-
-    // Check if user already exists
-    const normalizedEmail = email.toLowerCase();
-    const userExists = await User.findOne({ email: normalizedEmail });
-    if (userExists) {
-      return res.status(400).json({ msg: 'User already exists' });
-    }     
-
-    const hashedPassword = await User.hashPassword(password); 
-      
-    const newUser = new User({ firstName, lastName, username, email: normalizedEmail, password: hashedPassword, phone, role, profileImage, bio, location, social, dateOfBirth });
-    await newUser.save();
-   
-    const token = generateToken(newUser);
-
-    // User response (excluding sensitive fields)
-    const userResponse = {
-      id: newUser.id,
-      firstName: newUser.firstName,
-      lastName: newUser.lastName,
-      username: newUser.username,
-      email: newUser.email,
-      phone: newUser.phone,
-      role: newUser.role,
-      profileImage: newUser.profileImage,
-      bio: newUser.bio,
-      location: newUser.location,
-      social: newUser.social,
-      dateOfBirth: newUser.dateOfBirth,
-      isVerified: newUser.isVerified,
-      isActive: newUser.isActive,
-      createdAt: newUser.createdAt,
-      updatedAt: newUser.updatedAt,    
-      token, 
-    };
-
-    res.status(201).json({
-      msg: 'User created successfully',
-      user: userResponse,
-    });
-
-  } catch (err) {
-    next(err); 
-  }
-};
-
-// Login user
-exports.loginUser = async (req, res) => {
-  try {
-    const { email, password } = req.body;
-
-    // Find the user by email
-    const user = await User.findOne({ email }).select('+password'); // This tells Mongoose to include the password field just for this query, which is exactly what you want during login
-    if (!user) {
-      return res.status(400).json({ msg: 'Invalid credentials' });
-    }
-
-    // Compare the entered password with the hashed password
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
-      return res.status(400).json({ msg: 'Invalid credentials' });
-    }
-
-    // Generate JWT token
-    const token = generateToken(user);
-
-    res.status(200).json({
-      msg: 'Login successful',
-      user: {
-        id: user.id,
-        username: user.username,
-        email: user.email,
-      },
-      token,
-    });
-  } catch (err) {
-    res.status(500).json({ msg: 'Error logging in', error: err.msg });
-  }
-};
-
-
 // Get your own profile
 exports.getOwnProfile = async (req, res, next) => {
   try {
     const clerkId = req.auth?.clerkId;
-    console.log("📌 Clerk ID received in getOwnProfile:", clerkId);
-    console.log("📌 Full req.auth object:", req.auth);
+    console.log("Clerk ID received in getOwnProfile:", clerkId);
+    console.log("Full req.auth object:", req.auth);
 
     if (!clerkId) {
       return res.status(401).json({ msg: "Missing Clerk ID in request" });
@@ -145,7 +49,6 @@ exports.getOwnProfile = async (req, res, next) => {
   }
 };
 
-
 // Update your own profile
 exports.updateOwnProfile = async (req, res, next) => {
   try {
@@ -176,7 +79,6 @@ exports.updateOwnProfile = async (req, res, next) => {
   }
 };
 
-
 // Delete your own profile
 exports.deleteOwnProfile = async (req, res, next) => {
   try {
@@ -190,7 +92,6 @@ exports.deleteOwnProfile = async (req, res, next) => {
   }
 };
 
-
 // Sync Clerk user into your database
 exports.syncUserFromClerk = async (req, res) => {
   try {
@@ -202,7 +103,7 @@ exports.syncUserFromClerk = async (req, res) => {
 
     const normalizedEmail = email.toLowerCase();
 
-    // 👉 Look for an existing user by Clerk ID or email
+    // Find an existing user by Clerk ID or email
     let user = await User.findOne({ $or: [{ clerkId }, { email: normalizedEmail }] });
 
     if (!user) {
@@ -239,7 +140,6 @@ exports.syncUserFromClerk = async (req, res) => {
         console.log("Clerk user already exists:", user.email);
       }
     }
-
     res.status(200).json({ msg: "User synced successfully", user });
   } catch (err) {
     console.error("Error syncing user:", {

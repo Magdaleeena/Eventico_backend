@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const eventController = require('../controllers/eventController');
-const { authenticateToken, isAdmin, isEventCreatorAdmin } = require('../middlewares/authMiddleware');
+const { authenticateClerkToken, isAdmin, isEventCreatorAdmin } = require('../middlewares/clerkAuthMiddleware');
 
 // Get all events PUBLIC
 router.get('/', eventController.getAllEvents);
@@ -10,18 +10,18 @@ router.get('/', eventController.getAllEvents);
 router.get('/:id', eventController.getEventById);
 
 // Create a new event ADMIN ONLY
-router.post('/', authenticateToken, isAdmin, eventController.createEvent);
+router.post('/', authenticateClerkToken, isAdmin, eventController.createEvent);
 
 // Update an event by ID
-router.put('/:id', authenticateToken, isEventCreatorAdmin, eventController.updateEvent);
+router.put('/:id', authenticateClerkToken, isEventCreatorAdmin, eventController.updateEvent);
 
 // Delete an event by ID
-router.delete('/:id', authenticateToken, isEventCreatorAdmin, eventController.deleteEvent);
+router.delete('/:id', authenticateClerkToken, isEventCreatorAdmin, eventController.deleteEvent);
 
 // User can signup for an event
-router.post('/:id/signup', authenticateToken, eventController.signUpForEvent);
+router.post('/:id/signup', authenticateClerkToken, eventController.signUpForEvent);
 
 // User can cancel their signup for an event
-router.post('/:id/unsignup', authenticateToken, eventController.unSignUpFromEvent);
+router.post('/:id/unsignup', authenticateClerkToken, eventController.unSignUpFromEvent);
 
 module.exports = router;
