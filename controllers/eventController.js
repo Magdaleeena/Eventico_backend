@@ -4,23 +4,19 @@ const User = require('../models/User');
 // Get all events with pagination, sorting, and optional category filter
 const getAllEvents = async (req, res) => {
   const { page = 1, limit = 10, category, sortBy = 'date', sortOrder = 'asc' } = req.query;
-  
   const order = sortOrder === 'desc' ? -1 : 1;  
-  
+
   try {
-    // Build filter object for category (optional)
     const filter = category ? { category } : {};
 
     const events = await Event.find(filter)
-      .sort({ [sortBy]: order })  // Sort by 'date' or other fields
-      .skip((page - 1) * limit)   // Skip the correct number of items for pagination
-      .limit(Number(limit))       // Limit the number of events to 'limit'
-      .populate('createdBy', 'firstName lastName');         
+      .sort({ [sortBy]: order })
+      .skip((page - 1) * limit)
+      .limit(Number(limit))
+      .populate('createdBy', 'firstName lastName');
 
-    // Get the total count of events for pagination
     const totalEvents = await Event.countDocuments(filter);
 
-    // Send response with events, total count, and pagination details
     res.status(200).json({
       events,
       totalEvents,
@@ -37,7 +33,7 @@ const getEventById = async (req, res) => {
   const { id } = req.params;
   try {
     const event = await Event.findById(id)
-    .populate('createdBy', 'firstName lastName username');
+      .populate('createdBy', 'firstName lastName username');
     if (!event) {
       return res.status(404).json({ msg: 'Event not found' });
     }
@@ -47,13 +43,14 @@ const getEventById = async (req, res) => {
   }
 };
 
-
 // Create a new event
 const createEvent = async (req, res) => {
   try {
-    const { title, description, date, location, maxParticipants, keywords, category, tags, image, eventURL, status, organizerContact } = req.body;
+    const {
+      title, description, date, location, maxParticipants,
+      keywords, category, tags, image, eventURL, status, organizerContact
+    } = req.body;
 
-    // Create a new event document
     const newEvent = new Event({
       title,
       description,
@@ -61,7 +58,7 @@ const createEvent = async (req, res) => {
       location,
       createdBy: req.user.id,
       maxParticipants,
-      participants: [], // Initially no participants
+      participants: [],
       keywords,
       category,
       tags,
@@ -71,15 +68,12 @@ const createEvent = async (req, res) => {
       organizerContact,
     });
 
-    // Save event to the database
     const event = await newEvent.save();
-
     res.status(201).json(event);
-  } catch (err) {    
+  } catch (err) {
     res.status(400).json({ msg: 'Bad request, invalid data.' }); 
   }
 };
-
 
 // Update an event
 const updateEvent = async (req, res) => {
@@ -87,7 +81,6 @@ const updateEvent = async (req, res) => {
   const updates = req.body;
 
   try {
-    // This returns the event after it's been updated { new: true}
     const updatedEvent = await Event.findByIdAndUpdate(id, updates, { new: true });
     return res.status(200).json(updatedEvent);
   } catch (err) {
@@ -95,11 +88,9 @@ const updateEvent = async (req, res) => {
   }
 };
 
-
 // Delete an event
 const deleteEvent = async (req, res) => {
   const { id } = req.params;
-
   try {
     await Event.findByIdAndDelete(id);
     return res.status(200).json({ msg: 'Event deleted' });
@@ -110,11 +101,11 @@ const deleteEvent = async (req, res) => {
 
 // Authenticated user can sign up for an event
 const signUpForEvent = async (req, res) => {
-  const clerkId = req.auth?.clerkId;
+  const userId = req.auth?.userId;
   const eventId = req.params.id;
 
   try {
-    const user = await User.findOne({ clerkId });
+    const user = await User.findOne({ userId });
     const event = await Event.findById(eventId);
 
     if (!event || !user) {
@@ -142,14 +133,13 @@ const signUpForEvent = async (req, res) => {
   }
 };
 
-
 // Authenticated user can cancel their sign up for an event
 const unSignUpFromEvent = async (req, res) => {
-  const clerkId = req.auth?.clerkId;
+  const userId = req.auth?.userId;
   const eventId = req.params.id;
 
   try {
-    const user = await User.findOne({ clerkId });
+    const user = await User.findOne({ userId });
     const event = await Event.findById(eventId);
 
     if (!user || !event) {
@@ -177,5 +167,5 @@ const unSignUpFromEvent = async (req, res) => {
   }
 };
 
-
 module.exports = { getAllEvents, createEvent, getEventById, updateEvent, deleteEvent, signUpForEvent, unSignUpFromEvent };
+

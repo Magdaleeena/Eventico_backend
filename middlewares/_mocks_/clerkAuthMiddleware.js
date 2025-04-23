@@ -5,14 +5,14 @@ const Event = require('../models/Event');
 
 module.exports.authenticateClerkToken = (req, res, next) => {
   req.auth = global.__mockClerkAuth__ || {
-    clerkId: 'test_admin_id',
+    userId: 'test_admin_id', 
     sessionId: 'mock-session',
   };
   next();
 };
 
 module.exports.isAdmin = async (req, res, next) => {
-  const user = await User.findOne({ clerkId: req.auth.clerkId });
+  const user = await User.findOne({ userId: req.auth.userId });
 
   if (!user || user.role !== 'admin') {
     return res.status(403).json({ msg: 'Access denied: Admins only' });
@@ -23,7 +23,7 @@ module.exports.isAdmin = async (req, res, next) => {
 };
 
 module.exports.isEventCreatorAdmin = async (req, res, next) => {
-  const user = await User.findOne({ clerkId: req.auth.clerkId });
+  const user = await User.findOne({ userId: req.auth.userId });
   const event = await Event.findById(req.params.id);
 
   if (!user || !event) {

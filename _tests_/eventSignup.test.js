@@ -8,13 +8,13 @@ const User = require('../models/User');
 jest.mock('../middlewares/clerkAuthMiddleware', () => ({
   authenticateClerkToken: (req, res, next) => {
     req.auth = global.__mockClerkAuth__ || {
-      clerkId: 'test_admin_id',
+      userId: 'test_admin_id',
       sessionId: 'mock-session',
     };
     next();
   },
   isAdmin: async (req, res, next) => {
-    const user = await require('../models/User').findOne({ clerkId: req.auth.clerkId });
+    const user = await require('../models/User').findOne({ userId: req.auth.userId });
     if (!user || user.role !== 'admin') {
       return res.status(403).json({ msg: 'Access denied: Admins only' });
     }
@@ -23,7 +23,7 @@ jest.mock('../middlewares/clerkAuthMiddleware', () => ({
   },
   isEventCreatorAdmin: async (req, res, next) => {
     const event = await require('../models/Event').findById(req.params.id);
-    const user = await require('../models/User').findOne({ clerkId: req.auth.clerkId });
+    const user = await require('../models/User').findOne({ userId: req.auth.userId });
   
     if (!event || !user) {
       return res.status(404).json({ msg: 'Event or user not found' });
@@ -43,7 +43,6 @@ jest.mock('../middlewares/clerkAuthMiddleware', () => ({
 
 describe('Event Signup API - Regular User vs Admin User', () => {
   let eventId;
-
   let adminUser;
   let regularUser;
 
@@ -53,7 +52,7 @@ describe('Event Signup API - Regular User vs Admin User', () => {
     await seedDatabase();
 
     adminUser = await User.create({
-      clerkId: 'admin_123',
+      userId: 'admin_123',
       username: 'adminTest',
       email: 'admin@test.com',
       role: 'admin',
@@ -61,7 +60,7 @@ describe('Event Signup API - Regular User vs Admin User', () => {
     });
     
     regularUser = await User.create({
-      clerkId: 'user_123',
+      userId: 'user_123',
       username: 'userTest',
       email: 'user@test.com',
       role: 'user',
@@ -81,7 +80,7 @@ describe('Event Signup API - Regular User vs Admin User', () => {
       eventURL: 'https://example.com/test-event',
       status: 'active',
       createdBy: adminUser._id,
-      organizerContact: {            
+      organizerContact: {
         email: 'organizer@test.com',
         phone: '+123456789'
       }
@@ -97,7 +96,7 @@ describe('Event Signup API - Regular User vs Admin User', () => {
 
   describe('POST /api/events/:id/signup and /unsignup', () => {
     it('should allow a user to sign up for the event', async () => {
-      global.__mockClerkAuth__ = { clerkId: regularUser.clerkId, sessionId: 'x' };
+      global.__mockClerkAuth__ = { userId: regularUser.userId };
 
       const res = await request(app).post(`/api/events/${eventId}/signup`);
 
@@ -106,7 +105,7 @@ describe('Event Signup API - Regular User vs Admin User', () => {
     });
 
     it('should not allow signing up twice for the same event', async () => {
-      global.__mockClerkAuth__ = { clerkId: regularUser.clerkId, sessionId: 'x' };
+      global.__mockClerkAuth__ = { userId: regularUser.userId };
 
       const res = await request(app).post(`/api/events/${eventId}/signup`);
 
@@ -115,7 +114,7 @@ describe('Event Signup API - Regular User vs Admin User', () => {
     });
 
     it('should not allow an admin to sign up for an event', async () => {
-      global.__mockClerkAuth__ = { clerkId: adminUser.clerkId, sessionId: 'x' };
+      global.__mockClerkAuth__ = { userId: adminUser.userId };
 
       const res = await request(app).post(`/api/events/${eventId}/signup`);
 
@@ -124,7 +123,7 @@ describe('Event Signup API - Regular User vs Admin User', () => {
     });
 
     it('should allow a user to unsign from the event', async () => {
-      global.__mockClerkAuth__ = { clerkId: regularUser.clerkId, sessionId: 'x' };
+      global.__mockClerkAuth__ = { userId: regularUser.userId };
 
       const res = await request(app).post(`/api/events/${eventId}/unsignup`);
 
@@ -133,7 +132,7 @@ describe('Event Signup API - Regular User vs Admin User', () => {
     });
 
     it('should not allow unsigning if not signed up', async () => {
-      global.__mockClerkAuth__ = { clerkId: regularUser.clerkId, sessionId: 'x' };
+      global.__mockClerkAuth__ = { userId: regularUser.userId };
 
       const res = await request(app).post(`/api/events/${eventId}/unsignup`);
 

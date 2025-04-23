@@ -7,24 +7,22 @@ const seedDatabase = require('../db/seedDatabase');
 jest.mock('../middlewares/clerkAuthMiddleware', () => ({
   authenticateClerkToken: (req, res, next) => {
     req.auth = global.__mockClerkAuth__ || {
-      clerkId: 'test_clerk_id_123',
-      sessionId: 'test_session',
+      userId: 'user_test_id',
+      sessionId: 'mock-session',
     };
     next();
   },
   isAdmin: async (req, res, next) => {
-    const clerkId = req.auth.clerkId;
-    const user = await require('../models/User').findOne({ clerkId });
-
+    const user = await require('../models/User').findOne({ userId: req.auth.userId });
     if (!user || user.role !== 'admin') {
       return res.status(403).json({ msg: 'Access denied: Admins only' });
     }
-
     req.user = user;
     next();
   },
-  isEventCreatorAdmin: (req, res, next) => next(), // bypass this for now
+  isEventCreatorAdmin: (req, res, next) => next(),
 }));
+
 
 describe('Users protected routes - auth via Clerk', () => {
   
@@ -33,15 +31,22 @@ describe('Users protected routes - auth via Clerk', () => {
     await mongoose.connection.dropDatabase();
     await seedDatabase();
 
-    await User.create({
-      clerkId: 'test_clerk_id_123',
-      email: 'test@example.com',
-      username: 'testuser',
-      firstName: 'Test',
-      lastName: 'User',
-      role: 'user',
-      isVerified: true,
-    });
+    await User.create([
+      {
+        userId: 'admin_user_id',
+        email: 'admin@example.com',
+        username: 'adminuser',
+        role: 'admin',
+        isVerified: true,
+      },
+      {
+        userId: 'user_test_id',
+        email: 'user@example.com',
+        username: 'testuser',
+        role: 'user',
+        isVerified: true,
+      },
+    ]);
   });
 
   afterAll(async () => {
@@ -50,33 +55,11 @@ describe('Users protected routes - auth via Clerk', () => {
   });
 
   describe('GET /api/users (admin only)', () => {
-    beforeAll(async () => {
-      await User.create([
-        {
-          clerkId: 'admin_clerk_id',
-          email: 'admin@example.com',
-          username: 'adminuser',
-          firstName: 'Admin',
-          lastName: 'User',
-          role: 'admin',
-          isVerified: true,
-        },
-        {
-          clerkId: 'user_clerk_id',
-          email: 'user@example.com',
-          username: 'normaluser',
-          firstName: 'Normal',
-          lastName: 'User',
-          role: 'user',
-          isVerified: true,
-        },
-      ]);
-    });
-
+    
     it('should return all users when accessed by admin', async () => {
       global.__mockClerkAuth__ = {
-        clerkId: 'admin_clerk_id',
-        sessionId: 'test_session',
+        userId: 'admin_user_id',
+        sessionId: 'mock-session',
       };
 
       const res = await request(app)
@@ -93,8 +76,8 @@ describe('Users protected routes - auth via Clerk', () => {
 
     it('should return 403 if user is not admin', async () => {
       global.__mockClerkAuth__ = {
-        clerkId: 'user_clerk_id',
-        sessionId: 'test_session',
+        userId: 'user_test_id',
+        sessionId: 'mock_session',
       };
 
       const res = await request(app)
@@ -108,19 +91,20 @@ describe('Users protected routes - auth via Clerk', () => {
     });
   });  
 
-  describe('GET /api/users/me (Clerk)', () => {
+  describe('GET /api/users/me', () => {
     it('should return the current Clerk user profile', async () => {
+      global.__mockClerkAuth__ = { userId: 'user_test_id' };
       const res = await request(app)
         .get('/api/users/me')
         .set('Authorization', 'Bearer fake-token');
 
       expect(res.status).toBe(200);
       expect(res.body).toHaveProperty('username', 'testuser');
-      expect(res.body).toHaveProperty('email', 'test@example.com');
+      expect(res.body).toHaveProperty('email', 'user@example.com');
     });
   });
 
-  describe('PUT /api/users/me (Clerk)', () => {
+  describe('PUT /api/users/me', () => {
     it('should update the current Clerk user profile', async () => {
       const res = await request(app)
         .put('/api/users/me')
@@ -133,7 +117,7 @@ describe('Users protected routes - auth via Clerk', () => {
   
     it('should return 400 if username is already taken by another user', async () => {
       await User.create({
-        clerkId: 'other_clerk_id',
+        userId: 'other_clerk_id',
         username: 'takenusername',
         email: 'someone@example.com',
       });
@@ -148,7 +132,7 @@ describe('Users protected routes - auth via Clerk', () => {
     });
   
     it('should return 404 if user not found', async () => {
-        global.__mockClerkAuth__ = { clerkId: 'nonexistent_clerk_id', sessionId: 'session_xyz' };
+        global.__mockClerkAuth__ = { userId: 'nonexistent_clerk_id', sessionId: 'session_xyz' };
       
         const res = await request(app)
           .put('/api/users/me')
@@ -162,11 +146,11 @@ describe('Users protected routes - auth via Clerk', () => {
       });
   }); 
 
-  describe('DELETE /api/users/me (Clerk)', () => {
+  describe('DELETE /api/users/me', () => {
     it('should delete the current Clerk user profile', async () => {
       // The user exists before trying to delete
       await User.create({
-        clerkId: 'delete_me_id',
+        userId: 'delete_me_id',
         email: 'deleteme@example.com',
         username: 'deleteme',
         firstName: 'Delete',
@@ -175,7 +159,7 @@ describe('Users protected routes - auth via Clerk', () => {
         isVerified: true,
       });
   
-      global.__mockClerkAuth__ = { clerkId: 'delete_me_id', sessionId: 'test_session' };
+      global.__mockClerkAuth__ = { userId: 'delete_me_id', sessionId: 'test_session' };
   
       const res = await request(app)
         .delete('/api/users/me')
@@ -184,14 +168,14 @@ describe('Users protected routes - auth via Clerk', () => {
       expect(res.status).toBe(200);
       expect(res.body.msg).toMatch(/deleted/i);
   
-      const deleted = await User.findOne({ clerkId: 'delete_me_id' });
+      const deleted = await User.findOne({ userId: 'delete_me_id' });
       expect(deleted).toBeNull();
   
       delete global.__mockClerkAuth__;
     });
   
     it('should return 404 if user is not found', async () => {
-      global.__mockClerkAuth__ = { clerkId: 'nonexistent_user_id', sessionId: 'fake-session' };
+      global.__mockClerkAuth__ = { userId: 'nonexistent_user_id', sessionId: 'fake-session' };
   
       const res = await request(app)
         .delete('/api/users/me')

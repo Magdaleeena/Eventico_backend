@@ -1,88 +1,45 @@
+const { requireAuth } = require('@clerk/express');
 const User = require('../models/User');
 const Event = require('../models/Event');
-const { requireAuth } = require('@clerk/express');
 
-// This ensures req.auth.clerkId is available like before
-const normalizeClerkAuth = (req, res, next) => {
-  console.log("🧩 normalizeClerkAuth middleware hit");
-  console.log("🔍 Current req.auth object:", req.auth);
+// Main auth middleware
+const authenticateClerkToken = [requireAuth()];
 
-  if (req.auth?.userId) {
-    req.auth.clerkId = req.auth.userId;
-    console.log("✅ clerkId set to:", req.auth.clerkId);
-  } else {
-    console.warn("⚠️ No userId in req.auth");
-  }
-
-  next();
-};
-
-
-// Custom wrapper to inject a log before requireAuth does its thing
-const requireAuthWithLog = () => {
-  return (req, res, next) => {
-    console.log("🔐 requireAuth middleware hit");
-    return requireAuth()(req, res, next);
-  };
-};
-
-const authenticateClerkToken = [requireAuthWithLog(), normalizeClerkAuth];
-
-// Checks if the authenticated user is an admin
+// Check if user is admin
 const isAdmin = async (req, res, next) => {
   try {
-    const user = await User.findOne({ clerkId: req.auth.clerkId });
-
+    const user = await User.findOne({ userId: req.auth.userId });
     if (!user || user.role !== 'admin') {
-      return res.status(403).json({ msg: 'Access denied: Admins only' });
+      return res.status(403).json({ msg: 'Admins only' });
     }
-
-    // Attach user info if needed later
     req.user = user;
-
     next();
   } catch (err) {
     res.status(500).json({ msg: 'Server error in isAdmin check' });
   }
 };
 
-// Checks if the user is the creator of the event or an admin
+// Check if event creator or admin
 const isEventCreatorAdmin = async (req, res, next) => {
   try {
-    const user = await User.findOne({ clerkId: req.auth.clerkId });
+    const user = await User.findOne({ userId: req.auth.userId });
     const event = await Event.findById(req.params.id);
-
-    if (!user) {
-      return res.status(401).json({ msg: 'User not found' });
-    }
-
-    if (!event) {
-      return res.status(404).json({ msg: 'Event not found' });
-    }
+    if (!user) return res.status(401).json({ msg: 'User not found' });
+    if (!event) return res.status(404).json({ msg: 'Event not found' });
 
     const isAdmin = user.role === 'admin';
     const isCreator = event.createdBy.toString() === user._id.toString();
 
     if (!isAdmin && !isCreator) {
-      return res.status(403).json({ msg: 'Only the admin or the creator of this event can modify it' });
+      return res.status(403).json({ msg: 'Only admin or creator can modify' });
     }
 
-    // Optionally attach user/event to the request
     req.user = user;
     req.event = event;
-
     next();
   } catch (err) {
-    console.error('Authorization error:', err);
-    res.status(500).json({ msg: 'Server error' });
+    res.status(500).json({ msg: 'Server error in isEventCreatorAdmin' });
   }
 };
 
-module.exports = {
-  authenticateClerkToken,
-  isAdmin,
-  isEventCreatorAdmin
-};
-
-
-
+module.exports = { authenticateClerkToken, isAdmin, isEventCreatorAdmin };

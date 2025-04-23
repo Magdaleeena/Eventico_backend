@@ -5,7 +5,6 @@
     "username": "Julie",
     "email": "julie.kirk@happy.face.com",
     "phone": "+1234567890",
-    "password": "hashedPassword1",
     "role": "user",
     "profileImage": "/public/images/default_profile_img.png",
     "bio": "Nature enthusiast and event organizer",
@@ -21,7 +20,8 @@
     "lastLogin": "2025-03-25T10:00:00.000Z",
     "createdAt": "2025-03-24T08:00:00.000Z",
     "updatedAt": "2025-03-24T08:00:00.000Z",
-    "eventsSignedUp": []
+    "eventsSignedUp": [],
+    "userId": "user_test_1"
   },
   {
     "firstName": "Bob",
@@ -29,7 +29,6 @@
     "username": "bob.smith",
     "email": "bob.smith@example.com",
     "phone": "+1234567891",
-    "password": "hashedPassword2",
     "role": "user",
     "profileImage": "/public/images/default_profile_img.png",
     "bio": "Nature enthusiast and event organizer",
@@ -45,7 +44,8 @@
     "lastLogin": "2025-03-25T10:00:00.000Z",
     "createdAt": "2025-03-24T08:00:00.000Z",
     "updatedAt": "2025-03-24T08:00:00.000Z",
-    "eventsSignedUp": []
+    "eventsSignedUp": [],
+    "userId": "user_test_2"
   },
   {
     "firstName": "Charlie",
@@ -53,7 +53,6 @@
     "username": "charlie.davis",
     "email": "charlie.davis@example.com",
     "phone": "+1234567892",
-    "password": "hashedPassword3",
     "role": "user",
     "profileImage": "/public/images/default_profile_img.png",
     "bio": "Nature enthusiast and event organizer",
@@ -69,7 +68,8 @@
     "lastLogin": "2025-03-25T10:00:00.000Z",
     "createdAt": "2025-03-24T08:00:00.000Z",
     "updatedAt": "2025-03-24T08:00:00.000Z",
-    "eventsSignedUp": []
+    "eventsSignedUp": [],
+    "userId": "user_test_3"
   },
   {
     "firstName": "Diana",
@@ -77,7 +77,6 @@
     "username": "diana.williams",
     "email": "diana.williams@example.com",
     "phone": "+1234567893",
-    "password": "hashedPassword4",
     "role": "user",
     "profileImage": "/public/images/default_profile_img.png",
     "bio": "Nature enthusiast and event organizer",
@@ -93,7 +92,8 @@
     "lastLogin": "2025-03-25T10:00:00.000Z",
     "createdAt": "2025-03-24T08:00:00.000Z",
     "updatedAt": "2025-03-24T08:00:00.000Z",
-    "eventsSignedUp": []
+    "eventsSignedUp": [],
+    "userId": "user_test_4"
   },
   {
     "firstName": "Eva",
@@ -101,7 +101,6 @@
     "username": "eva.green",
     "email": "eva.green@example.com",
     "phone": "+1234567894",
-    "password": "hashedPassword5",
     "role": "user",
     "profileImage": "/public/images/default_profile_img.png",
     "bio": "Nature enthusiast and event organizer",
@@ -117,7 +116,8 @@
     "lastLogin": "2025-03-25T10:00:00.000Z",
     "createdAt": "2025-03-24T08:00:00.000Z",
     "updatedAt": "2025-03-24T08:00:00.000Z",
-    "eventsSignedUp": []
+    "eventsSignedUp": [],
+    "userId": "user_test_5"
   },
   {
     "firstName": "Frank",
@@ -125,7 +125,6 @@
     "username": "frank.thompson",
     "email": "frank.thompson@example.com",
     "phone": "+1234567895",
-    "password": "hashedPassword6",
     "role": "user",
     "profileImage": "/public/images/default_profile_img.png",
     "bio": "Nature enthusiast and event organizer",
@@ -141,7 +140,8 @@
     "lastLogin": "2025-03-25T10:00:00.000Z",
     "createdAt": "2025-03-24T08:00:00.000Z",
     "updatedAt": "2025-03-24T08:00:00.000Z",
-    "eventsSignedUp": []
+    "eventsSignedUp": [],
+    "userId": "user_test_6"
   },
   {
     "firstName": "Grace",
@@ -149,7 +149,6 @@
     "username": "grace.lee",
     "email": "grace.lee@example.com",
     "phone": "+1234567896",
-    "password": "hashedPassword7",
     "role": "user",
     "profileImage": "/public/images/default_profile_img.png",
     "bio": "Nature enthusiast and event organizer",
@@ -165,7 +164,8 @@
     "lastLogin": "2025-03-25T10:00:00.000Z",
     "createdAt": "2025-03-24T08:00:00.000Z",
     "updatedAt": "2025-03-24T08:00:00.000Z",
-    "eventsSignedUp": []
+    "eventsSignedUp": [],
+    "userId": "user_test_7"
   },
   {
     "firstName": "Hannah",
@@ -173,7 +173,6 @@
     "username": "hannah.moore",
     "email": "hannah.moore@example.com",
     "phone": "+1234567897",
-    "password": "hashedPassword8",
     "role": "user",
     "profileImage": "/public/images/default_profile_img.png",
     "bio": "Nature enthusiast and event organizer",
@@ -189,7 +188,8 @@
     "lastLogin": "2025-03-25T10:00:00.000Z",
     "createdAt": "2025-03-24T08:00:00.000Z",
     "updatedAt": "2025-03-24T08:00:00.000Z",
-    "eventsSignedUp": []
+    "eventsSignedUp": [],
+    "userId": "user_test_8"
   },
   {
     "firstName": "Isaac",
@@ -197,7 +197,6 @@
     "username": "isaac.clark",
     "email": "isaac.clark@example.com",
     "phone": "+1234567898",
-    "password": "hashedPassword9",
     "role": "user",
     "profileImage": "/public/images/default_profile_img.png",
     "bio": "Nature enthusiast and event organizer",
@@ -213,7 +212,8 @@
     "lastLogin": "2025-03-25T10:00:00.000Z",
     "createdAt": "2025-03-24T08:00:00.000Z",
     "updatedAt": "2025-03-24T08:00:00.000Z",
-    "eventsSignedUp": []
+    "eventsSignedUp": [],
+    "userId": "user_test_9"
   },
   {
     "firstName": "Jack",
@@ -221,7 +221,6 @@
     "username": "jack.wilson",
     "email": "jack.wilson@example.com",
     "phone": "+1234567899",
-    "password": "hashedPassword10",
     "role": "user",
     "profileImage": "/public/images/default_profile_img.png",
     "bio": "Nature enthusiast and event organizer",
@@ -237,7 +236,8 @@
     "lastLogin": "2025-03-25T10:00:00.000Z",
     "createdAt": "2025-03-24T08:00:00.000Z",
     "updatedAt": "2025-03-24T08:00:00.000Z",
-    "eventsSignedUp": []
+    "eventsSignedUp": [],
+    "userId": "user_test_10"
   },
   {
     "firstName": "Katherine",
@@ -245,7 +245,6 @@
     "username": "katherine.scott",
     "email": "katherine.scott@example.com",
     "phone": "+1234567800",
-    "password": "hashedPassword11",
     "role": "user",
     "profileImage": "/public/images/default_profile_img.png",
     "bio": "Nature enthusiast and event organizer",
@@ -261,7 +260,8 @@
     "lastLogin": "2025-03-25T10:00:00.000Z",
     "createdAt": "2025-03-24T08:00:00.000Z",
     "updatedAt": "2025-03-24T08:00:00.000Z",
-    "eventsSignedUp": []
+    "eventsSignedUp": [],
+    "userId": "user_test_11"
   },
   {
     "firstName": "John",
@@ -269,7 +269,6 @@
     "username": "john.doe",
     "email": "john.doe@community.com",
     "phone": "+1234567890",
-    "password": "hashedPasswordAdmin1",
     "role": "admin",
     "eventsManaged": [],
     "profileImage": "/public/images/default_profile_img.png",
@@ -285,7 +284,8 @@
     "isActive": true,
     "lastLogin": "2025-03-25T10:00:00.000Z",
     "createdAt": "2025-03-24T08:00:00.000Z",
-    "updatedAt": "2025-03-24T08:00:00.000Z"
+    "updatedAt": "2025-03-24T08:00:00.000Z",
+    "userId": "user_test_12"
   },
   {
     "firstName": "Mary",
@@ -293,7 +293,6 @@
     "username": "mary.stone",
     "email": "mary.stone@community.com",
     "phone": "+1234567891",
-    "password": "hashedPasswordAdmin2",
     "role": "admin",
     "eventsManaged": [
       "67e1cebd9c1844e2a36b1400",
@@ -312,7 +311,8 @@
     "isActive": true,
     "lastLogin": "2025-03-25T10:00:00.000Z",
     "createdAt": "2025-03-24T08:00:00.000Z",
-    "updatedAt": "2025-03-24T08:00:00.000Z"
+    "updatedAt": "2025-03-24T08:00:00.000Z",
+    "userId": "user_test_13"
   },
   {
     "firstName": "Lisa",
@@ -320,7 +320,6 @@
     "username": "lisa.turner",
     "email": "lisa.turner@community.com",
     "phone": "+1234567892",
-    "password": "hashedPasswordAdmin3",
     "role": "admin",
     "eventsManaged": [],
     "profileImage": "/public/images/default_profile_img.png",
@@ -336,7 +335,8 @@
     "isActive": true,
     "lastLogin": "2025-03-25T10:00:00.000Z",
     "createdAt": "2025-03-24T08:00:00.000Z",
-    "updatedAt": "2025-03-24T08:00:00.000Z"
+    "updatedAt": "2025-03-24T08:00:00.000Z",
+    "userId": "user_test_14"
   },
   {
     "firstName": "James",
@@ -344,7 +344,6 @@
     "username": "james.brown",
     "email": "james.brown@community.com",
     "phone": "+1234567893",
-    "password": "hashedPasswordAdmin4",
     "role": "admin",
     "eventsManaged": [],
     "profileImage": "/public/images/default_profile_img.png",
@@ -360,6 +359,7 @@
     "isActive": true,
     "lastLogin": "2025-03-25T10:00:00.000Z",
     "createdAt": "2025-03-24T08:00:00.000Z",
-    "updatedAt": "2025-03-24T08:00:00.000Z"
+    "updatedAt": "2025-03-24T08:00:00.000Z",
+    "userId": "user_test_15"
   }
 ]
