@@ -1,19 +1,18 @@
 const User = require('../models/User');
 const Event = require('../models/Event');
-const { requireAuth } = require('@clerk/express');
+const { requireAuth: clerkRequireAuth  } = require('@clerk/express');
 
 
 // Middleware wrapper
-const requireAuthWrapper = () => (req, res, next) => {
-  console.log("[MIDDLEWARE] requireAuthWrapper hit");
+const requireAuth = () => (req, res, next) => {
+  console.log("[MIDDLEWARE] requireAuth wrapper hit");
 
-  // Call original Clerk middleware
-  requireAuth()(req, res, (err) => {
+  clerkRequireAuth()(req, res, (err) => {
     if (err) {
-      console.error("[MIDDLEWARE] requireAuth failed:", err);
-      return res.status(401).json({ msg: "Unauthorized – Clerk requireAuth failed" });
+      console.error("[MIDDLEWARE] Clerk requireAuth failed:", err);
+      return res.status(401).json({ msg: "Unauthorized – Clerk token invalid" });
     }
-    console.log("[MIDDLEWARE] Clerk auth success:", req.auth);
+    console.log("[MIDDLEWARE] Clerk authentication success:", req.auth);
     next();
   });
 };
