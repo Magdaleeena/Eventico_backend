@@ -14,6 +14,8 @@ exports.getAllUsers = async (req, res) => {
 
 // Get your own profile
 exports.getOwnProfile = async (req, res, next) => {
+  console.log("[DEBUG] req.headers:", req.headers);
+  console.log("[DEBUG] req.auth from middleware:", req.auth);
   console.log("[getOwnProfile] Route hit");
 
   try {
