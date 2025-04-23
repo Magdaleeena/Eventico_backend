@@ -2,6 +2,22 @@ const User = require('../models/User');
 const Event = require('../models/Event');
 const { requireAuth } = require('@clerk/express');
 
+
+// Middleware wrapper
+const requireAuthWrapper = () => (req, res, next) => {
+  console.log("[MIDDLEWARE] requireAuthWrapper hit");
+
+  // Call original Clerk middleware
+  requireAuth()(req, res, (err) => {
+    if (err) {
+      console.error("[MIDDLEWARE] requireAuth failed:", err);
+      return res.status(401).json({ msg: "Unauthorized – Clerk requireAuth failed" });
+    }
+    console.log("[MIDDLEWARE] Clerk auth success:", req.auth);
+    next();
+  });
+};
+
 // Admin checker
 const isAdmin = async (req, res, next) => {
   try {
