@@ -20,12 +20,21 @@ exports.getOwnProfile = async (req, res, next) => {
     const userId = req.auth?.userId;
     console.log("[CONTROLLER] req.auth:", req.auth);
     console.log("[CONTROLLER] req.auth.userId:", userId);
+
     if (!userId) {
       console.warn("userId missing from auth object");
       return res.status(401).json({ msg: "Missing userId in request" });
     }
 
-    const user = await User.findOne({ userId }).select('-password');
+    let user;
+    try {
+      user = await User.findOne({ userId }); 
+      console.log("[CONTROLLER] Mongo query success:", user);
+    } catch (dbErr) {
+      console.error("Mongoose query failed:", dbErr);
+      return res.status(500).json({ msg: "Mongo query crashed", error: dbErr.message });
+    }
+
     if (!user) {
       console.warn("No user found for userId:", userId);
       return res.status(404).json({ msg: 'User not found in DB' });
@@ -47,6 +56,7 @@ exports.getOwnProfile = async (req, res, next) => {
     return res.status(500).json({ msg: "Internal server error", error: err.message });
   }
 };
+
 
 // Update your own profile
 exports.updateOwnProfile = async (req, res, next) => {
