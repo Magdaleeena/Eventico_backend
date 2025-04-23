@@ -12,10 +12,9 @@ const { mongooseValidationHandler, mongooseCastErrorHandler, customErrorHandler,
 const app = express();
 connectDB();
 
-app.use(cors({
-  origin: ['http://localhost:5173', 'https://eventico-frontend.onrender.com'], 
-  credentials: true,
-}));
+app.options('*', cors());
+
+app.use(cors());
 
 app.use(express.json());
 
