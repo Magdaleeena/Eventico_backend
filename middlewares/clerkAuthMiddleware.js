@@ -1,18 +1,21 @@
 const User = require('../models/User');
 const Event = require('../models/Event');
-const { getAuth } = require("@clerk/express");
+const { getAuth } = require('@clerk/express');
 
 const authenticateClerkToken = (req, res, next) => {
+  const authHeader = req.headers.authorization;
+  console.log("[AUTH] Raw Authorization Header:", authHeader);
+
   const auth = getAuth(req);
-  console.log("[middleware] getAuth output:", auth);
-  
+  console.log("[AUTH] Clerk getAuth result:", auth);
+
   if (!auth?.userId) {
-    return res.status(401).json({ msg: "Unauthorized" });
+    return res.status(401).json({ msg: "Unauthorized – Clerk token not valid" });
   }
+
   req.auth = auth;
   next();
 };
-
 
 // Check if user is admin
 const isAdmin = async (req, res, next) => {
