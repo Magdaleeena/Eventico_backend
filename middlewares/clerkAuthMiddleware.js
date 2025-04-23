@@ -8,6 +8,7 @@ const authenticateClerkToken = (req, res, next) => {
 
   const auth = getAuth(req);
   console.log("[AUTH] Clerk getAuth result:", auth);
+  console.log("[MIDDLEWARE] auth.userId:", auth?.userId);
 
   if (!auth?.userId) {
     return res.status(401).json({ msg: "Unauthorized – Clerk token not valid" });

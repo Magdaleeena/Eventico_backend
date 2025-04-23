@@ -18,6 +18,7 @@ exports.getOwnProfile = async (req, res, next) => {
 
   try {
     const userId = req.auth?.userId;
+    console.log("userId:", userId);
     if (!userId) {
       console.warn("userId missing from auth object");
       return res.status(401).json({ msg: "Missing userId in request" });

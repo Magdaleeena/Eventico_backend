@@ -39,4 +39,10 @@ app.use(customErrorHandler);
 
 app.use(serverErrorHandler);
 
+app.use((err, req, res, next) => {
+  console.error("GLOBAL ERROR:", err.stack || err);
+  res.status(500).json({ msg: "Internal Server Error", error: err.message });
+});
+
+
 module.exports = app;
