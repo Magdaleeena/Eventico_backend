@@ -1,9 +1,8 @@
-const { requireAuth } = require('@clerk/express');
 const User = require('../models/User');
 const Event = require('../models/Event');
+const { withAuth } = require('@clerk/express');
 
-// Main auth middleware
-const authenticateClerkToken = [requireAuth()];
+const authenticateClerkToken = withAuth();
 
 // Check if user is admin
 const isAdmin = async (req, res, next) => {
