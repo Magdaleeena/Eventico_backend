@@ -7,6 +7,7 @@ const eventRoutes = require('./routes/eventRoutes');
 const endpointsRoutes = require('./routes/endpointsRoutes');
 const { mongooseValidationHandler, mongooseCastErrorHandler, customErrorHandler, serverErrorHandler } = require('./error-handlers');
 const path = require('path');
+const { clerkExpressWithAuth } = require('@clerk/express');
 
 const app = express();
 
@@ -18,6 +19,8 @@ app.use(cors({
 }));
 
 app.use(express.json());
+
+app.use(clerkExpressWithAuth()); // required to populate req.auth
 
 app.use('/api', endpointsRoutes);
 
