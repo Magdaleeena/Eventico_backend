@@ -1,24 +1,8 @@
 const User = require('../models/User');
 const Event = require('../models/Event');
-const { getAuth } = require('@clerk/express');
+const { requireAuth } = require('@clerk/express');
 
-const authenticateClerkToken = (req, res, next) => {
-  const authHeader = req.headers.authorization;
-  console.log("[AUTH] Raw Authorization Header:", authHeader);
-
-  const auth = getAuth(req);
-  console.log("[AUTH] Clerk getAuth result:", auth);
-  console.log("[MIDDLEWARE] auth.userId:", auth?.userId);
-
-  if (!auth?.userId) {
-    return res.status(401).json({ msg: "Unauthorized – Clerk token not valid" });
-  }
-
-  req.auth = auth;
-  next();
-};
-
-// Check if user is admin
+// Admin checker
 const isAdmin = async (req, res, next) => {
   try {
     const user = await User.findOne({ userId: req.auth.userId });
@@ -28,31 +12,33 @@ const isAdmin = async (req, res, next) => {
     req.user = user;
     next();
   } catch (err) {
-    res.status(500).json({ msg: 'Server error in isAdmin check' });
+    console.error("[isAdmin error]", err);
+    return res.status(500).json({ msg: 'Server error in isAdmin' });
   }
 };
 
-// Check if event creator or admin
+// Event creator checker
 const isEventCreatorAdmin = async (req, res, next) => {
   try {
     const user = await User.findOne({ userId: req.auth.userId });
     const event = await Event.findById(req.params.id);
-    if (!user) return res.status(401).json({ msg: 'User not found' });
-    if (!event) return res.status(404).json({ msg: 'Event not found' });
 
-    const isAdmin = user.role === 'admin';
+    if (!user || !event) {
+      return res.status(404).json({ msg: 'User or Event not found' });
+    }
+
     const isCreator = event.createdBy.toString() === user._id.toString();
-
-    if (!isAdmin && !isCreator) {
-      return res.status(403).json({ msg: 'Only admin or creator can modify' });
+    if (user.role !== 'admin' || !isCreator) {
+      return res.status(403).json({ msg: 'Only the admin who created this event can modify it' });
     }
 
     req.user = user;
     req.event = event;
     next();
   } catch (err) {
-    res.status(500).json({ msg: 'Server error in isEventCreatorAdmin' });
+    console.error("[isEventCreatorAdmin error]", err);
+    return res.status(500).json({ msg: 'Server error in isEventCreatorAdmin' });
   }
 };
 
-module.exports = { authenticateClerkToken, isAdmin, isEventCreatorAdmin };
+module.exports = { requireAuth, isAdmin, isEventCreatorAdmin };

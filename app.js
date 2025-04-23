@@ -1,16 +1,15 @@
-const cors = require('cors');
-require('dotenv-flow').config();  
 const express = require('express');
+const cors = require('cors');
+const path = require('path');
+require('dotenv-flow').config();  
+
 const connectDB = require('./db');  
 const userRoutes = require('./routes/userRoutes'); 
 const eventRoutes = require('./routes/eventRoutes');
 const endpointsRoutes = require('./routes/endpointsRoutes');
 const { mongooseValidationHandler, mongooseCastErrorHandler, customErrorHandler, serverErrorHandler } = require('./error-handlers');
-const path = require('path');
-const { clerkExpressWithAuth } = require('@clerk/express');
 
 const app = express();
-
 connectDB();
 
 app.use(cors({
@@ -19,8 +18,6 @@ app.use(cors({
 }));
 
 app.use(express.json());
-
-app.use(clerkExpressWithAuth()); // required to populate req.auth
 
 app.use('/api', endpointsRoutes);
 
@@ -41,11 +38,5 @@ app.use(mongooseCastErrorHandler);
 app.use(customErrorHandler);
 
 app.use(serverErrorHandler);
-
-app.use((err, req, res, next) => {
-  console.error("GLOBAL ERROR:", err.stack || err);
-  res.status(500).json({ msg: "Internal Server Error", error: err.message });
-});
-
 
 module.exports = app;

@@ -4,9 +4,10 @@ const mongoose = require('mongoose');
 const seedDatabase = require('../db/seedDatabase');
 const Event = require('../models/Event');
 const User = require('../models/User');
+jest.mock('../middlewares/clerkAuthMiddleware');
 
 jest.mock('../middlewares/clerkAuthMiddleware', () => ({
-  authenticateClerkToken: (req, res, next) => {
+  requireAuth: () => (req, res, next) => {
     req.auth = global.__mockClerkAuth__ || {
       userId: 'test_admin_id',
       sessionId: 'mock-session',
@@ -24,7 +25,7 @@ jest.mock('../middlewares/clerkAuthMiddleware', () => ({
   isEventCreatorAdmin: async (req, res, next) => {
     const event = await require('../models/Event').findById(req.params.id);
     const user = await require('../models/User').findOne({ userId: req.auth.userId });
-  
+
     if (!event || !user) {
       return res.status(404).json({ msg: 'Event or user not found' });
     }

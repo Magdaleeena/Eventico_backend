@@ -4,9 +4,16 @@ const mongoose = require('mongoose');
 const Event = require('../models/Event');
 const User = require('../models/User');
 const seedDatabase = require('../db/seedDatabase');
+jest.mock('../middlewares/clerkAuthMiddleware');
 
-// Mock Clerk Middleware
 jest.mock('../middlewares/clerkAuthMiddleware', () => ({
+  requireAuth: () => (req, res, next) => {
+    req.auth = global.__mockClerkAuth__ || {
+      userId: 'test_admin_id',
+      sessionId: 'mock-session',
+    };
+    next();
+  },
   authenticateClerkToken: (req, res, next) => {
     req.auth = global.__mockClerkAuth__ || {
       userId: 'test_admin_id',
