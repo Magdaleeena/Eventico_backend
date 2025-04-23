@@ -18,7 +18,8 @@ exports.getOwnProfile = async (req, res, next) => {
 
   try {
     const userId = req.auth?.userId;
-    console.log("userId:", userId);
+    console.log("[CONTROLLER] req.auth:", req.auth);
+    console.log("[CONTROLLER] req.auth.userId:", userId);
     if (!userId) {
       console.warn("userId missing from auth object");
       return res.status(401).json({ msg: "Missing userId in request" });
@@ -40,7 +41,8 @@ exports.getOwnProfile = async (req, res, next) => {
   } catch (err) {
     console.error("Uncaught error in getOwnProfile:", {
       message: err.message,
-      stack: err.stack
+      stack: err.stack,
+      auth: req.auth,
     });
     return res.status(500).json({ msg: "Internal server error", error: err.message });
   }
