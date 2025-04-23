@@ -4,6 +4,8 @@ const { getAuth } = require("@clerk/express");
 
 const authenticateClerkToken = (req, res, next) => {
   const auth = getAuth(req);
+  console.log("[middleware] getAuth output:", auth);
+  
   if (!auth?.userId) {
     return res.status(401).json({ msg: "Unauthorized" });
   }
