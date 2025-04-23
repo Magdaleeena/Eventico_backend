@@ -1,8 +1,16 @@
 const User = require('../models/User');
 const Event = require('../models/Event');
-const { withAuth } = require('@clerk/express');
+const { getAuth } = require("@clerk/express");
 
-const authenticateClerkToken = withAuth();
+const authenticateClerkToken = (req, res, next) => {
+  const auth = getAuth(req);
+  if (!auth?.userId) {
+    return res.status(401).json({ msg: "Unauthorized" });
+  }
+  req.auth = auth;
+  next();
+};
+
 
 // Check if user is admin
 const isAdmin = async (req, res, next) => {
