@@ -2,7 +2,6 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 require('dotenv-flow').config(); 
-const { clerkMiddleware, getAuth, requireAuth } = require('@clerk/express');
 
 const connectDB = require('./db');  
 const userRoutes = require('./routes/userRoutes'); 
@@ -24,8 +23,6 @@ app.use(cors(corsOptions));
 app.options('*', cors(corsOptions)); 
 
 app.use(express.json());
-
-app.use(clerkMiddleware());
 
 app.use('/api', endpointsRoutes);
 
