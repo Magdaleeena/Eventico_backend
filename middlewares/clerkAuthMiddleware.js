@@ -10,24 +10,24 @@ const extractUserIdFromToken = (req, res, next) => {
     return res.status(401).json({ msg: 'No token provided' });
   }
 
-  const token = authHeader.split(' ')[1]; 
-  
+  const token = authHeader.split(' ')[1];
+
   try {
-    
-    const decoded = jwt.decode(token);
+    // Verify the JWT token using Clerk's public key
+    const decoded = jwt.verify(token, process.env.CLERK_PUBLIC_KEY);
 
     if (!decoded || !decoded.sub) {
       return res.status(401).json({ msg: 'Invalid token' });
     }
 
     req.auth = {
-      userId: decoded.sub,  
-      fullToken: decoded,    
+      userId: decoded.sub,
+      fullToken: decoded,
     };
 
-    next(); 
+    next(); // Proceed to the next middleware or route handler
   } catch (err) {
-    console.error('Token parsing error:', err);
+    console.error('Token verification error:', err);
     return res.status(401).json({ msg: 'Unauthorized' });
   }
 };

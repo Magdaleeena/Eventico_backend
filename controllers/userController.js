@@ -115,6 +115,9 @@ exports.deleteOwnProfile = async (req, res, next) => {
 exports.syncUserFromClerk = async (req, res) => {
   try {
     const { userId, email, firstName, lastName } = req.body;
+    
+    // Ensure that required data is coming from the frontend
+    console.log("Received sync data:", { userId, email, firstName, lastName });
 
     if (!userId || !email) {
       return res.status(400).json({ msg: "Missing required Clerk info" });
@@ -159,11 +162,7 @@ exports.syncUserFromClerk = async (req, res) => {
 
     res.status(200).json({ msg: "User synced successfully", user });
   } catch (err) {
-    console.error("Error syncing user:", {
-      message: err.message,
-      stack: err.stack,
-      body: req.body,
-    });
+    console.error("Error syncing user:", err);
     res.status(500).json({ msg: "Error syncing user", error: err.message });
   }
 };
