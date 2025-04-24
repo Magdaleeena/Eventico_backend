@@ -2,30 +2,24 @@ const express = require('express');
 const userController = require('../controllers/userController');
 const router = express.Router();
 
-const { hasPermission, isAdmin } = require('../middlewares/clerkAuthMiddleware');
-const { requireAuth } = require('@clerk/express');
+const { isAdmin } = require('../middlewares/clerkAuthMiddleware');
+const clerk = require('@clerk/express'); 
+const { requireAuth } = clerk;
 
 
-// Route to get all users - protected route
-router.get('/', hasPermission, isAdmin, userController.getAllUsers);
+// Route to get all users - protected route for admins only
+router.get('/', requireAuth(), isAdmin, userController.getAllUsers);
 
-router.get('/me', requireAuth(), (req, res) => {
-    console.log('[STEP 1] /me hit with requireAuth ✅');
-    console.log('[STEP 1] req.auth:', req.auth);
-    res.json({ auth: req.auth });
-  });
-  
+// Route to get your profile - protected route (auth only)
+router.get('/me', requireAuth(), userController.getOwnProfile);
 
-// Route to get your profile - protected route
-//router.get('/me', userController.getOwnProfile); 
+// Route to update your profile - protected route (auth only)
+router.put('/me', requireAuth(), userController.updateOwnProfile);
 
-// Route to update your profile - protected route
-router.put('/me', userController.updateOwnProfile); 
+// Route to delete your profile - protected route (auth only)
+router.delete('/me', requireAuth(), userController.deleteOwnProfile);
 
-// Route to delete your profile - protected route
-router.delete('/me', userController.deleteOwnProfile); 
-
-router.post("/sync", userController.syncUserFromClerk);
-
+// Sync Clerk user with database - protected route (auth only)
+router.post('/sync', requireAuth(), userController.syncUserFromClerk);
 
 module.exports = router;

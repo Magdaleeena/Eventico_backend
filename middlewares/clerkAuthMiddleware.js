@@ -1,7 +1,9 @@
 const User = require('../models/User');
 const Event = require('../models/Event');
-const { requireAuth, getAuth } = require('@clerk/express');
+const clerk = require('@clerk/express'); // ✅ Use this instead of destructuring
+const { requireAuth, getAuth } = clerk;
 
+// 1. Middleware for checking Clerk permission
 const hasPermission = [
   requireAuth(),
   (req, res, next) => {
@@ -15,10 +17,10 @@ const hasPermission = [
   }
 ];
 
-// 2. Admin check
+// 2. Admin check from MongoDB
 const isAdmin = async (req, res, next) => {
   try {
-    const auth = getAuth(req); // same as Clerk docs
+    const auth = getAuth(req);
     const user = await User.findOne({ userId: auth.userId });
 
     if (!user || user.role !== 'admin') {
@@ -36,7 +38,7 @@ const isAdmin = async (req, res, next) => {
 // 3. Admin managing their own event
 const isEventCreatorAdmin = async (req, res, next) => {
   try {
-    const auth = getAuth(req); // consistent with Clerk pattern
+    const auth = getAuth(req);
     const user = await User.findOne({ userId: auth.userId });
     const event = await Event.findById(req.params.id);
 
