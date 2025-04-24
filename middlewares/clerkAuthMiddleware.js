@@ -13,16 +13,16 @@ const extractUserIdFromToken = (req, res, next) => {
   const token = authHeader.split(' ')[1];
 
   try {
-    // Verify the JWT token using Clerk's public key
-    const decoded = jwt.verify(token, process.env.CLERK_PUBLIC_KEY);
+    // Verify the token using Clerk's secret key
+    const decoded = jwt.verify(token, process.env.CLERK_SECRET_KEY);  // Use the secret key from the .env
 
     if (!decoded || !decoded.sub) {
       return res.status(401).json({ msg: 'Invalid token' });
     }
 
     req.auth = {
-      userId: decoded.sub,
-      fullToken: decoded,
+      userId: decoded.sub,  
+      fullToken: decoded,    
     };
 
     next(); // Proceed to the next middleware or route handler
@@ -31,6 +31,7 @@ const extractUserIdFromToken = (req, res, next) => {
     return res.status(401).json({ msg: 'Unauthorized' });
   }
 };
+
 
 // Admin role checker 
 const isAdmin = async (req, res, next) => {
