@@ -7,6 +7,9 @@ const getAllEvents = async (req, res) => {
   const order = sortOrder === 'desc' ? -1 : 1;  
 
   try {
+    const auth = req.auth || {};
+    const userId = auth.userId || null;
+
     const filter = category ? { category } : {};
 
     const events = await Event.find(filter)
