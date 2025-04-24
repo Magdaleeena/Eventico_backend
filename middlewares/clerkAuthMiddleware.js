@@ -1,6 +1,6 @@
 const User = require('../models/User');
 const Event = require('../models/Event');
-const { getAuth, requireAuth } = require('@clerk/express');
+const { requireAuth, getAuth } = require('@clerk/express');
 
 const hasPermission = [
   requireAuth(),

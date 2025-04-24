@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const eventController = require('../controllers/eventController');
-const { requireAuth, isAdmin, isEventCreatorAdmin } = require('../middlewares/clerkAuthMiddleware');
+const { hasPermission, isAdmin, isEventCreatorAdmin } = require('../middlewares/clerkAuthMiddleware');
 
 // Get all events PUBLIC
 router.get('/', eventController.getAllEvents);
@@ -10,18 +10,18 @@ router.get('/', eventController.getAllEvents);
 router.get('/:id', eventController.getEventById);
 
 // Create a new event ADMIN ONLY
-router.post('/', requireAuth(), isAdmin, eventController.createEvent);
+router.post('/', hasPermission, isAdmin, eventController.createEvent);
 
 // Update an event by ID
-router.put('/:id', requireAuth(), isEventCreatorAdmin, eventController.updateEvent);
+router.put('/:id', hasPermission, isEventCreatorAdmin, eventController.updateEvent);
 
 // Delete an event by ID
-router.delete('/:id', requireAuth(), isEventCreatorAdmin, eventController.deleteEvent);
+router.delete('/:id', hasPermission, isEventCreatorAdmin, eventController.deleteEvent);
 
 // User can signup for an event
-router.post('/:id/signup', requireAuth(), eventController.signUpForEvent);
+router.post('/:id/signup', hasPermission, eventController.signUpForEvent);
 
 // User can cancel their signup for an event
-router.post('/:id/unsignup', requireAuth(), eventController.unSignUpFromEvent);
+router.post('/:id/unsignup', hasPermission, eventController.unSignUpFromEvent);
 
 module.exports = router;
