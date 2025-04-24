@@ -2,6 +2,19 @@ const User = require('../models/User');
 const Event = require('../models/Event');
 const { getAuth } = require('@clerk/express');
 
+const hasPermission = [
+  requireAuth(),
+  (req, res, next) => {
+    const auth = getAuth(req);
+
+    if (!auth || !auth.has({ permission: 'org:admin:example' })) {
+      return res.status(403).send('Forbidden');
+    }
+
+    return next();
+  }
+];
+
 // 2. Admin check
 const isAdmin = async (req, res, next) => {
   try {
@@ -46,7 +59,8 @@ const isEventCreatorAdmin = async (req, res, next) => {
   }
 };
 
-module.exports = {
+module.exports = { 
+  hasPermission,
   isAdmin,
   isEventCreatorAdmin,
 };

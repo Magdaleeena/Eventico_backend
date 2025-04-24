@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 require('dotenv-flow').config(); 
-const { clerkMiddleware } = require('@clerk/express');
+const { clerkMiddleware, getAuth, requireAuth } = require('@clerk/express');
 
 const connectDB = require('./db');  
 const userRoutes = require('./routes/userRoutes'); 
