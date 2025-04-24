@@ -55,7 +55,11 @@ exports.getOwnProfile = async (req, res, next) => {
       stack: err.stack,
       auth: req.auth,
     });
-    return res.status(500).json({ msg: "Internal server error", error: err.message });
+    return res.status(500).json({
+      msg: "Internal server error",
+      error: err.message || "Unknown error",
+      auth: req.auth || "No auth object",
+    });
   }
 };
 
