@@ -8,13 +8,13 @@ const { hasPermission, isAdmin } = require('../middlewares/clerkAuthMiddleware')
 router.get('/', hasPermission, isAdmin, userController.getAllUsers);
 
 // Route to get your profile - protected route
-router.get('/me', hasPermission, userController.getOwnProfile); 
+router.get('/me', userController.getOwnProfile); 
 
 // Route to update your profile - protected route
-router.put('/me',  hasPermission, userController.updateOwnProfile); 
+router.put('/me', userController.updateOwnProfile); 
 
 // Route to delete your profile - protected route
-router.delete('/me', hasPermission, userController.deleteOwnProfile); 
+router.delete('/me', userController.deleteOwnProfile); 
 
 router.post("/sync", userController.syncUserFromClerk);
 
