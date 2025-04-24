@@ -2,29 +2,19 @@ const express = require('express');
 const router = express.Router();
 const eventController = require('../controllers/eventController');
 
-const { isAdmin, isEventCreatorAdmin } = require('../middlewares/clerkAuthMiddleware');
-const clerk = require('@clerk/express'); 
-const { requireAuth } = clerk;
+const { extractUserIdFromToken, isAdmin, isEventCreatorAdmin } = require('../middlewares/clerkAuthMiddleware');
 
-// Get all events - PUBLIC
+// Public routes
 router.get('/', eventController.getAllEvents);
-
-// Get a single event by ID - PUBLIC
 router.get('/:id', eventController.getEventById);
 
-// Create a new event - ADMIN ONLY
-router.post('/', requireAuth(), isAdmin, eventController.createEvent);
+// Admin routes
+router.post('/', extractUserIdFromToken, isAdmin, eventController.createEvent);
+router.put('/:id', extractUserIdFromToken, isEventCreatorAdmin, eventController.updateEvent);
+router.delete('/:id', extractUserIdFromToken, isEventCreatorAdmin, eventController.deleteEvent);
 
-// Update an event - ADMIN + must be creator
-router.put('/:id', requireAuth(), isEventCreatorAdmin, eventController.updateEvent);
-
-// Delete an event - ADMIN + must be creator
-router.delete('/:id', requireAuth(), isEventCreatorAdmin, eventController.deleteEvent);
-
-// Sign up for an event - USER must be logged in
-router.post('/:id/signup', requireAuth(), eventController.signUpForEvent);
-
-// Cancel signup - USER must be logged in
-router.post('/:id/unsignup', requireAuth(), eventController.unSignUpFromEvent);
+// Signed-in user routes
+router.post('/:id/signup', extractUserIdFromToken, eventController.signUpForEvent);
+router.post('/:id/unsignup', extractUserIdFromToken, eventController.unSignUpFromEvent);
 
 module.exports = router;

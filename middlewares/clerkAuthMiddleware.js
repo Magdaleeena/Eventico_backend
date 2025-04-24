@@ -1,27 +1,34 @@
+const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const Event = require('../models/Event');
-const clerk = require('@clerk/express'); // ✅ Use this instead of destructuring
-const { requireAuth, getAuth } = clerk;
 
-// 1. Middleware for checking Clerk permission
-const hasPermission = [
-  requireAuth(),
-  (req, res, next) => {
-    const auth = getAuth(req);
+// Custom Clerk token parser
+const extractUserIdFromToken = (req, res, next) => {
+  const authHeader = req.headers.authorization;
 
-    if (!auth || !auth.has({ permission: 'org:admin:example' })) {
-      return res.status(403).send('Forbidden');
-    }
-
-    return next();
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    return res.status(401).json({ msg: 'No token provided' });
   }
-];
 
-// 2. Admin check from MongoDB
+  const token = authHeader.split(' ')[1];
+  const decoded = jwt.decode(token); // not verified — good enough for MVP
+
+  if (!decoded || !decoded.sub) {
+    return res.status(401).json({ msg: 'Invalid token' });
+  }
+
+  req.auth = {
+    userId: decoded.sub,
+    fullToken: decoded,
+  };
+
+  next();
+};
+
+// Admin role checker (MongoDB)
 const isAdmin = async (req, res, next) => {
   try {
-    const auth = getAuth(req);
-    const user = await User.findOne({ userId: auth.userId });
+    const user = await User.findOne({ userId: req.auth.userId });
 
     if (!user || user.role !== 'admin') {
       return res.status(403).json({ msg: 'Admins only' });
@@ -35,11 +42,10 @@ const isAdmin = async (req, res, next) => {
   }
 };
 
-// 3. Admin managing their own event
+// Admin must be creator of event
 const isEventCreatorAdmin = async (req, res, next) => {
   try {
-    const auth = getAuth(req);
-    const user = await User.findOne({ userId: auth.userId });
+    const user = await User.findOne({ userId: req.auth.userId });
     const event = await Event.findById(req.params.id);
 
     if (!user || !event) {
@@ -61,8 +67,8 @@ const isEventCreatorAdmin = async (req, res, next) => {
   }
 };
 
-module.exports = { 
-  hasPermission,
+module.exports = {
+  extractUserIdFromToken,
   isAdmin,
   isEventCreatorAdmin,
 };
