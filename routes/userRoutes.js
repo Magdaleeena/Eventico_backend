@@ -5,7 +5,7 @@ const router = express.Router();
 const { extractUserIdFromToken, isAdmin } = require('../middlewares/clerkAuthMiddleware');
 
 // Route to get all users - protected route for admins only
-router.get('/', rextractUserIdFromToken, isAdmin, userController.getAllUsers);
+router.get('/', extractUserIdFromToken, isAdmin, userController.getAllUsers);
 
 // Route to get your profile - protected route (auth only)
 router.get('/me', extractUserIdFromToken, userController.getOwnProfile);
