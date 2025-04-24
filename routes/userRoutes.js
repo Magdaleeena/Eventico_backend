@@ -7,9 +7,10 @@ const { hasPermission, isAdmin } = require('../middlewares/clerkAuthMiddleware')
 // Route to get all users - protected route
 router.get('/', hasPermission, isAdmin, userController.getAllUsers);
 
-router.get('/me', (req, res) => {
-    console.log('[TEST] /me route hit ✅');
-    res.send('Route is alive');
+router.get('/me', requireAuth(), (req, res) => {
+    console.log('[STEP 1] /me hit with requireAuth ✅');
+    console.log('[STEP 1] req.auth:', req.auth);
+    res.json({ auth: req.auth });
   });
   
 
