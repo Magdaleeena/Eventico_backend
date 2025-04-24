@@ -82,3 +82,4 @@ module.exports = {
   isAdmin,
   isEventCreatorAdmin,
 };
+//
