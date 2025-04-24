@@ -2,7 +2,9 @@ const express = require('express');
 const userController = require('../controllers/userController');
 const router = express.Router();
 
-const { requireAuth, isAdmin } = require('../middlewares/clerkAuthMiddleware');
+const { isAdmin } = require('../middlewares/clerkAuthMiddleware');
+
+const { requireAuth, getAuth, clerkClient } = require('@clerk/express');
 
 // Route to get all users - protected route
 router.get('/', requireAuth(), isAdmin, userController.getAllUsers);
