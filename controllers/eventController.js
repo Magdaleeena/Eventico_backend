@@ -27,7 +27,7 @@ const getAllEvents = async (req, res) => {
       currentPage: Number(page),
     });
   } catch (err) {
-    res.status(500).json({ msg: 'Error fetching events', error: err.msg });
+    res.status(500).json({ msg: 'Error fetching events', error: err.message });
   }
 };
 
@@ -42,7 +42,7 @@ const getEventById = async (req, res) => {
     }
     return res.status(200).json(event);
   } catch (err) {
-    return res.status(500).json({ msg: 'Error fetching event', error: err.msg });
+    return res.status(500).json({ msg: 'Error fetching event', error: err.message });
   }
 };
 
@@ -87,7 +87,7 @@ const updateEvent = async (req, res) => {
     const updatedEvent = await Event.findByIdAndUpdate(id, updates, { new: true });
     return res.status(200).json(updatedEvent);
   } catch (err) {
-    return res.status(400).json({ msg: 'Error updating event', error: err.msg });
+    return res.status(400).json({ msg: 'Error updating event', error: err.message });
   }
 };
 
@@ -98,7 +98,7 @@ const deleteEvent = async (req, res) => {
     await Event.findByIdAndDelete(id);
     return res.status(200).json({ msg: 'Event deleted' });
   } catch (err) {
-    return res.status(500).json({ msg: 'Error deleting event', error: err.msg });
+    return res.status(500).json({ msg: 'Error deleting event', error: err.message });
   }
 };
 
