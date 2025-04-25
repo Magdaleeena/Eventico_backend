@@ -46,7 +46,12 @@ exports.createUser = async (req, res, next) => {
     const hashedPassword = await User.hashPassword(password); 
       
     const newUser = new User({ firstName, lastName, username, email: normalizedEmail, password: hashedPassword, phone, role, profileImage, bio, location, social, dateOfBirth });
-    await newUser.save();
+    try {
+      await newUser.save();
+    } catch (saveError) {
+      console.error('Error saving user:', saveError);
+      return res.status(400).json({ msg: saveError.message || 'Error saving user' });
+    }
 
     console.log('Generating token with:', {
       userId: newUser._id,
