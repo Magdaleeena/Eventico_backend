@@ -12,7 +12,12 @@ const app = express();
 
 connectDB();
 
-app.use(cors());
+const corsOptions = {
+  origin: 'http://localhost:5173', // React dev server
+  credentials: true, // if you're using cookies (optional)
+};
+
+app.use(cors(corsOptions));
 
 app.use(express.json());
 
