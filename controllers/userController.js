@@ -35,7 +35,7 @@ exports.createUser = async (req, res, next) => {
       return res.status(400).json({ msg: 'User already exists' });
     }     
 
-    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!$%@#£^&*()_+])[A-Za-z\d!$%@#£^&*()_+]{8,}$/;
+    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[^a-zA-Z\d])[a-zA-Z\d\S]{8,}$/
     if (!passwordRegex.test(password)) {
       return res.status(400).json({
         msg: 'Password must be at least 8 characters long, include both letters, numbers, and at least one special character.'
