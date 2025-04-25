@@ -164,7 +164,7 @@ describe('UserController Tests', () => {
         .set('Authorization', `Bearer ${adminToken}`);
   
       expect(res.status).toBe(400);
-      expect(res.body.msg).toMatch(/Validation error/i);
+      expect(res.body.msg).toMatch(/User validation failed:/i);
     });
   });
 

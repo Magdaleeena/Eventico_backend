@@ -6,7 +6,6 @@ const fs = require('fs');
 const path = require('path');
 const connectDB = require('./index');
 
-
 async function seedDatabase(dataset = 'testData') {
   try {
     await connectDB(); // connect to DB using env
@@ -36,7 +35,8 @@ async function seedDatabase(dataset = 'testData') {
       throw err; // Let tests catch it
     }
   }
-}
+};
+
 
 // Run from CLI if called directly
 if (require.main === module) {
