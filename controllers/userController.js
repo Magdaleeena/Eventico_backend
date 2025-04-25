@@ -25,6 +25,12 @@ exports.getAllUsers = async (req, res) => {
 
 // Create a new user
 exports.createUser = async (req, res, next) => {
+  console.log('Generating token with:', {
+    userId: newUser._id,
+    username: newUser.username,
+    role: newUser.role,
+    jwtSecret: process.env.JWT_SECRET ? 'exists' : 'missing'
+  });
   try {
     const { firstName, lastName, username, email, password, phone, role, profileImage, bio, location, social, dateOfBirth } = req.body;
 
