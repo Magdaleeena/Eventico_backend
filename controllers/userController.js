@@ -5,11 +5,15 @@ const bcrypt = require('bcryptjs');
 // Generate token
 const generateToken = (user) => {
   return jwt.sign(
-    { userId: user._id, username: user.username, role: user.role },
-    process.env.JWT_SECRET, 
-    { expiresIn: '2h' } 
+    {
+      id: user._id,        
+      username: user.username,
+      role: user.role,
+    },
+    process.env.JWT_SECRET,
+    { expiresIn: '2h' }
   );
-};
+}
 
 // Get all users
 exports.getAllUsers = async (req, res) => {
