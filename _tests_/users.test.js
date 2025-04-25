@@ -91,7 +91,7 @@ describe('UserController Tests', () => {
         lastName: 'Koletzki',
         username: 'koliver',
         email: 'koliver@example.com',
-        password: 'password333',
+        password: 'Password333*',
       };
 
       const res = await request(app)
@@ -110,9 +110,9 @@ describe('UserController Tests', () => {
       const duplicateUser = {
         firstName: 'Duplicate',
         lastName: 'User',
-        username: 'dupeuser1',
-        email: 'dupe@example.com',
-        password: 'password123',
+        username: 'username',
+        email: 'username@example.com',
+        password: 'Password123*',
       };
     
       // First request: should succeed
@@ -133,7 +133,7 @@ describe('UserController Tests', () => {
       expect(secondRes.body.msg).toMatch(/already exists/i);
     });
 
-    it('should return 500 if required fields like password are missing', async () => {
+    it('should return 400 if required fields like password are missing or password is not in the right format', async () => {
       const incompleteUser = {
         firstName: 'NoPass',
         lastName: 'User',
@@ -146,8 +146,25 @@ describe('UserController Tests', () => {
         .send(incompleteUser)
         .set('Authorization', `Bearer ${adminToken}`);
   
-      expect(res.status).toBe(500);
-      expect(res.body.msg).toMatch(/Internal server error/i);
+      expect(res.status).toBe(400);
+      expect(res.body.msg).toMatch(/Password must be at least 8 characters long, include both letters, numbers, and at least one special character/i);
+    });
+
+    it('should return 400 if required fields like firstName are missing', async () => {
+      const incompleteUser = {
+        lastName: 'User',
+        username: 'nopass',
+        password: 'Testpass123*',
+        email: 'nopass@example.com'
+      };
+  
+      const res = await request(app)
+        .post('/api/users/register')
+        .send(incompleteUser)
+        .set('Authorization', `Bearer ${adminToken}`);
+  
+      expect(res.status).toBe(400);
+      expect(res.body.msg).toMatch(/Validation error/i);
     });
   });
 
@@ -157,7 +174,7 @@ describe('UserController Tests', () => {
       lastName: 'Tester',
       username: 'logintester',
       email: 'logintester@example.com',
-      password: 'testpass123'
+      password: 'Testpass123*'
     };
   
     it('should create and then log in a user successfully', async () => {      

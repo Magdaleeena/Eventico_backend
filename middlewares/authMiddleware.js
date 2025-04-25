@@ -3,7 +3,8 @@ const Event = require('../models/Event');
 
 // Middleware to check if the user is authenticated
 const authenticateToken = (req, res, next) => {
-    const token = req.header('Authorization')?.replace('Bearer ', '');
+  // extract token
+  const token = req.header('Authorization')?.replace('Bearer ', '');
 
   if (!token) {
     return res.status(401).json({ msg: 'Access denied, no token provided.' });
@@ -13,8 +14,9 @@ const authenticateToken = (req, res, next) => {
     // Verify the token with secret
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     req.user = decoded; // Attach the user to the request object
-    next(); // Allow the request to continue
-  } catch (err) {    
+    next(); 
+  } catch (err) {   
+    console.error('Token verification error:', err); 
     res.status(401).json({ msg: 'Invalid or expired token.' });
   }
 };
@@ -36,7 +38,7 @@ const isEventCreatorAdmin = async (req, res, next) => {
       const userId = req.user._id || req.user.id;
   
       const isAdmin = req.user.role === 'admin';
-      const isCreator = event.createdBy.toString() === userId;
+      const isCreator = event.createdBy.toString() === userId.toString();
   
       if (!isAdmin || !isCreator) {
         return res.status(403).json({ msg: 'Only the admin who created this event can modify it' });
