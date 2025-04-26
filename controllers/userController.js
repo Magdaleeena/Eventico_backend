@@ -58,7 +58,7 @@ exports.createUser = async (req, res, next) => {
     }
 
     console.log('Generating token with:', {
-      userId: newUser._id,
+      id: newUser._id,
       username: newUser.username,
       role: newUser.role,
       jwtSecret: process.env.JWT_SECRET ? 'exists' : 'missing'
@@ -134,7 +134,7 @@ exports.loginUser = async (req, res) => {
 // Get your own profile
 exports.getOwnProfile = async (req, res, next) => {
   try {
-    const user = await User.findById(req.user.userId).select('-password');
+    const user = await User.findById(req.user.id).select('-password');
     if (!user) {
       return res.status(404).json({ msg: 'User not found' });
     }
@@ -151,7 +151,7 @@ exports.updateOwnProfile = async (req, res, next) => {
     delete updates.role; // prevent role change
     delete updates.password; // prevent password change here
 
-    const user = await User.findByIdAndUpdate(req.user.userId, updates, {
+    const user = await User.findByIdAndUpdate(req.user.id, updates, {
       new: true,
       runValidators: true,
     }).select('-password');
@@ -169,7 +169,7 @@ exports.updateOwnProfile = async (req, res, next) => {
 // Delete your own profile
 exports.deleteOwnProfile = async (req, res, next) => {
   try {
-    const user = await User.findByIdAndDelete(req.user.userId);
+    const user = await User.findByIdAndDelete(req.user.id);
     if (!user) {
       return res.status(404).json({ msg: 'User not found' });
     }

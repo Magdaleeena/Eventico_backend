@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken');
 
 const generateToken = (user) => {
   return jwt.sign(
-    { userId: user._id, username: user.username, role: user.role },
+    { id: user._id, username: user.username, role: user.role },
     process.env.JWT_SECRET,
     { expiresIn: '2h' }
   );
@@ -59,10 +59,9 @@ describe('Authenticated User Profile Endpoints', () => {
     it('should update own profile', async () => {
       const res = await request(app)
         .put('/api/users/me')
-        .send({ firstName: 'Updated' })
-        .send({ username: 'usernameUpdated' })
-        .set('Authorization', `Bearer ${userToken}`);
-  
+        .set('Authorization', `Bearer ${userToken}`)
+        .send({ firstName: 'Updated', username: 'usernameUpdated' });       
+        
         expect(res.status).toBe(200);
         expect(res.body.msg).toBe('Profile updated');
         expect(res.body.user.firstName).toBe('Updated');
