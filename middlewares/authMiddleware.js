@@ -35,15 +35,20 @@ const isEventCreatorAdmin = async (req, res, next) => {
         return res.status(404).json({ msg: 'Event not found' });
       }
   
-      const userId = req.user._id || req.user.id;
+      const userId = req.user.id;
+      const eventCreatorId = event.createdBy?.toString(); 
+      const currentUserId = userId?.toString();
   
       const isAdmin = req.user.role === 'admin';
-      const isCreator = event.createdBy.toString() === userId.toString();
+      const isCreator = eventCreatorId && currentUserId && eventCreatorId === currentUserId;
   
-      if (!isAdmin || !isCreator) {
-        return res.status(403).json({ msg: 'Only the admin who created this event can modify it' });
+      if (!isAdmin) {
+        return res.status(403).json({ msg: 'Access denied. Admins only.' });
       }
   
+      if (!isCreator) {
+        return res.status(403).json({ msg: 'Only the admin who created this event can modify it' });
+      }
       next();
     } catch (err) {
       console.error('Authorization error:', err);

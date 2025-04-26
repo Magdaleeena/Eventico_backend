@@ -3,28 +3,35 @@ const app = require('../app');
 const mongoose = require('mongoose');
 const seedDatabase = require('../db/seedDatabase');
 const jwt = require('jsonwebtoken');
-
-const user = {
-  id: '67f54d1287f898787e07a2b2',
-  username: 'mary.stone',
-  role: 'admin'
-};
-
-const token = jwt.sign(user, process.env.JWT_SECRET, { expiresIn: '2h' });
+const User = require('../models/User');
 
 describe('Event Controller API', () => {
+  let token;
+  let adminUser;
   let createdEventId;
 
   beforeAll(async () => {
     await mongoose.connection.dropDatabase();
     await seedDatabase();
+
+    adminUser = await User.findOne({ username: 'mary.stone' });
+
+    if (!adminUser) {
+      throw new Error('Admin user "mary.stone" not found in database');
+    }
+
+    token = jwt.sign(
+      { id: adminUser._id.toString(), username: adminUser.username, role: adminUser.role },
+      process.env.JWT_SECRET,
+      { expiresIn: '2h' }
+    );
   });
 
   afterAll(async () => {
     await mongoose.connection.dropDatabase();
     await mongoose.connection.close();
   });
-
+  
   describe('GET /api/events', () => {
     it('should return a list of events with status 200 and default pagination', async () => {
       const response = await request(app).get('/api/events');
@@ -118,7 +125,7 @@ describe('Event Controller API', () => {
 
     it('should return 403 if the user is not an admin', async () => {
       const nonAdminUser = {
-        id: '67f54d1287f898787e00000', // mock user ID
+        id: '67f54d1287f898787e00000', 
         username: 'regular.user',
         role: 'user', 
       };
@@ -153,18 +160,45 @@ describe('Event Controller API', () => {
     });
   });
 
-  describe('PUT /api/events/:id', () => {
-    it('should update an event with status 200', async () => {
-      // console.log(`Attempting to update event with ID: ${createdEventId}`);
-      const response = await request(app)
+  describe('PUT /api/events/:id', () => {    
+    let createdEventId;
+
+    it('should update an event with status 200', async () => { 
+      const newEvent = {
+        title: 'Event to Update',
+        description: 'Temporary event for update testing.',
+        date: '2025-09-01T18:00:00Z',
+        location: 'Test Location',
+        maxParticipants: 150,
+        keywords: ['temporary', 'update'],
+        category: 'Music',
+        tags: ['testing'],
+        image: 'http://example.com/image.jpg',
+        eventURL: 'http://example.com/event',
+        status: 'active',
+        organizerContact: {
+          email: 'organizer@test.com',
+          phone: '+1234567890',
+        },
+      };
+  
+      const createResponse = await request(app)
+        .post('/api/events')
+        .set('Authorization', `Bearer ${token}`)
+        .send(newEvent);
+  
+      expect(createResponse.status).toBe(201); 
+      createdEventId = createResponse.body._id; 
+  
+      const updateResponse = await request(app)
         .put(`/api/events/${createdEventId}`)
         .set('Authorization', `Bearer ${token}`)
-        .send({ title: 'Updated Title' });
-
-      expect(response.status).toBe(200);
-      expect(response.body.title).toBe('Updated Title');
+        .send({ title: 'Updated Event Title' });
+  
+      expect(updateResponse.status).toBe(200);
+      expect(updateResponse.body.title).toBe('Updated Event Title');
     });
-
+  
     it('should return 404 if event ID is invalid or not found', async () => {
       const invalidId = new mongoose.Types.ObjectId();
   
@@ -178,73 +212,92 @@ describe('Event Controller API', () => {
     });
   
     it('should return 403 if user is not the creator admin', async () => {
+      const newEvent = {
+        title: 'Event For Unauthorized Update',
+        description: 'Temporary event for testing wrong user.',
+        date: '2025-10-01T18:00:00Z',
+        location: 'Unauthorized Location',
+        maxParticipants: 200,
+        keywords: ['unauthorized', 'test'],
+        category: 'Music',
+        tags: ['forbidden'],
+        status: 'active',
+        organizerContact: {
+          email: 'organizer@forbidden.com',
+          phone: '+9876543210',
+        },
+      };
+      const createResponse = await request(app)
+      .post('/api/events')
+      .set('Authorization', `Bearer ${token}`)
+      .send(newEvent);
+      
+      expect(createResponse.status).toBe(201);
+      const createdEventId = createResponse.body._id;
+
       const otherUser = {
-        id: '67f54d1287f898787e07a999', 
+        id: '67f54d1287f898787e07a999',
         username: 'other.admin',
         role: 'admin'
-      };
+      };      
   
       const otherToken = jwt.sign(otherUser, process.env.JWT_SECRET, { expiresIn: '2h' });
   
       const response = await request(app)
-        .put(`/api/events/${createdEventId}`)
+        .put(`/api/events/${createdEventId}`) 
         .set('Authorization', `Bearer ${otherToken}`)
         .send({ title: 'Malicious Update Attempt' });
   
       expect(response.status).toBe(403);
       expect(response.body.msg).toBe('Only the admin who created this event can modify it');
     });
-  });
+  });  
 
   describe('DELETE /api/events/:id', () => {
-    let eventToDeleteId;
-
-  beforeAll(async () => {
-    // An event that this user will later delete
-    const event = {
+  it('should delete the event if the user is the creator', async () => {
+    const newEvent = {
       title: 'Event to Delete',
-      description: 'This event will be deleted in tests.',
-      date: '2025-08-01T19:00:00Z',
-      location: 'Test Location',
-      maxParticipants: 100,
+      description: 'Event created to test delete functionality.',
+      date: '2025-11-01T19:00:00Z',
+      location: 'Delete Test Location',
+      maxParticipants: 80,
       keywords: ['delete', 'test'],
       category: 'Social',
-      tags: ['temporary'],
+      tags: ['removal'],
       status: 'active',
-      image: '',
-      eventURL: '',
       organizerContact: {
-        email: 'test@delete.com',
+        email: 'delete@test.com',
         phone: '+1234567890',
       },
     };
 
-    const response = await request(app)
+    // Create event
+    const createResponse = await request(app)
       .post('/api/events')
       .set('Authorization', `Bearer ${token}`)
-      .send(event);
+      .send(newEvent);
 
-    eventToDeleteId = response.body._id;
+    expect(createResponse.status).toBe(201);
+    const eventToDeleteId = createResponse.body._id;
+
+    // Now delete it
+    const deleteResponse = await request(app)
+      .delete(`/api/events/${eventToDeleteId}`)
+      .set('Authorization', `Bearer ${token}`);
+
+    expect(deleteResponse.status).toBe(200);
+    expect(deleteResponse.body.msg).toBe('Event deleted');
   });
 
-    it('should delete the event if the user is the creator', async () => {
-      const response = await request(app)
-        .delete(`/api/events/${eventToDeleteId}`)
-        .set('Authorization', `Bearer ${token}`);
+  it('should return 404 when trying to delete a non-existent event', async () => {
+    const fakeId = new mongoose.Types.ObjectId();
 
-      expect(response.status).toBe(200);
-      expect(response.body.msg).toBe('Event deleted');
+    const response = await request(app)
+      .delete(`/api/events/${fakeId}`)
+      .set('Authorization', `Bearer ${token}`);
+
+    expect(response.status).toBe(404);
+    expect(response.body.msg).toMatch(/not found/i);
   });
-
-    it('should return 404 when trying to delete an event that does not exist', async () => {
-      const fakeId = new mongoose.Types.ObjectId();
-
-      const response = await request(app)
-        .delete(`/api/events/${fakeId}`)
-        .set('Authorization', `Bearer ${token}`);
-
-      expect(response.status).toBe(404);
-      expect(response.body.msg).toMatch(/not found/i);
-    });
-  });  
+});
 });
