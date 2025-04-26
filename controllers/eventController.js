@@ -138,7 +138,14 @@ const signUpForEvent = async (req, res) => {
     await event.save();
     await user.save();
 
-    return res.status(200).json({ msg: 'Successfully signed up for the event' });
+    return res.status(200).json({ 
+      msg: 'Successfully signed up for the event', 
+      event: {
+          title: event.title,
+          date: event.date,
+          location: event.location
+    } 
+  });
   } catch (err) {
     console.error(err);
     return res.status(500).json({ msg: 'Server error', error: err.msg });
@@ -176,7 +183,14 @@ const unSignUpFromEvent = async (req, res) => {
     await event.save();
     await user.save();
 
-    return res.status(200).json({ msg: 'Successfully removed from event' });
+    return res.status(200).json({ 
+      msg: 'Successfully removed from event', 
+      event: {
+        title: event.title,
+        date: event.date,
+        location: event.location
+  }
+     });
   } catch (err) {
     return res.status(500).json({ msg: 'Error unsigning from event', error: err.msg });
   }
