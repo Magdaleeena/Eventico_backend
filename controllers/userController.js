@@ -1,6 +1,7 @@
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
+const Event = require('../models/Event');
 
 // Generate token
 const generateToken = (user) => {
@@ -136,13 +137,23 @@ exports.getOwnProfile = async (req, res, next) => {
   try {
     const user = await User.findById(req.user.id)
     .select('-password')
-    .populate('eventsSignedUp', 'title date location')
-    .populate('eventsManaged', 'title date location');
+    .populate('eventsSignedUp', 'title date location');    
     
     if (!user) {
       return res.status(404).json({ msg: 'User not found' });
     }
-    res.status(200).json(user);
+
+    let eventsManaged = [];
+
+    if (user.role === 'admin') {
+      eventsManaged = await Event.find({ createdBy: user._id })
+        .select('title date location');
+    }
+
+    res.status(200).json({
+      ...user.toObject(), 
+      eventsManaged,
+    });
   } catch (err) {
     next(err);
   }
