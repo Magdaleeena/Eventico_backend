@@ -1,991 +1,991 @@
 [
-    {
-      "title": "Conference in tech for charity",
-      "description": "A wonderful conference themed event you won't want to miss.",
-      "date": "2025-07-04T11:00:00",
-      "location": "Liverpool Philharmonic",
-      "createdBy": "680b7adac1ce5c3459108dd6",
-      "maxParticipants": 35,
-      "participants": [],
-      "keywords": [
-        "networking",
-        "tech",
-        "charity",
-        "community"
-      ],
-      "category": "Conference",
-      "tags": [
-        "creative",
-        "live",
-        "online"
-      ],
-      "image": "https://example.com/event-image-1.jpg",
-      "eventURL": "https://eventico.com/events/1",
-      "status": "active",
-      "createdAt": "2025-03-24T08:00:00",
-      "updatedAt": "2025-03-24T08:00:00",
-      "organizerContact": {
-        "email": "liam.smith@example.com",
-        "phone": "+1234567898"
-      }
-    },
-    {
-      "title": "Learn & fun",
-      "description": "A wonderful entertainment themed event you won't want to miss.",
-      "date": "2025-12-18T19:00:00",
-      "location": "Bristol Old Vic",
-      "createdBy": "680b7adac1ce5c3459108dd6",
-      "maxParticipants": 45,
-      "participants": [],
-      "keywords": [
-        "tech",
-        "learning",
-        "charity",
-        "family"
-      ],
-      "category": "Entertainment",
-      "tags": [
-        "music",
-        "family-friendly",
-        "charity"
-      ],
-      "image": "https://example.com/event-image-2.jpg",
-      "eventURL": "https://eventico.com/events/2",
-      "status": "active",
-      "createdAt": "2025-03-24T08:00:00",
-      "updatedAt": "2025-03-24T08:00:00",
-      "organizerContact": {
-        "email": "liam.smith@example.com",
-        "phone": "+1234567898"
-      }
-    },
-    {
-      "title": "Machester family summer festival",
-      "description": "A wonderful conference themed event you won't want to miss.",
-      "date": "2026-08-17T11:00:00",
-      "location": "Manchester Central",
-      "createdBy": "680b7adac1ce5c3459108dd0",
-      "maxParticipants": 83,
-      "participants": [],
-      "keywords": [
-        "fun",
-        "performance",
-        "family",
-        "outdoor"
-      ],
-      "category": "Conference",
-      "tags": [
-        "interactive",
-        "online",
-        "charity"
-      ],
-      "image": "https://example.com/event-image-3.jpg",
-      "eventURL": "https://eventico.com/events/3",
-      "status": "active",
-      "createdAt": "2025-03-24T08:00:00",
-      "updatedAt": "2025-03-24T08:00:00",
-      "organizerContact": {
-        "email": "noah.lopez@example.com",
-        "phone": "+1234567867"
-      }
-    },
-    {
-      "title": "Tech meet up",
-      "description": "A wonderful technology themed event you won't want to miss.",
-      "date": "2025-09-08T15:00:00",
-      "location": "Newcastle Theatre Royal",
-      "createdBy": "680b7adac1ce5c3459108dd4",
-      "maxParticipants": 94,
-      "participants": [],
-      "keywords": [
-        "performance",
-        "family",
-        "food",
-        "community"
-      ],
-      "category": "Technology",
-      "tags": [
-        "interactive",
-        "music",
-        "workshop"
-      ],
-      "image": "https://example.com/event-image-4.jpg",
-      "eventURL": "https://eventico.com/events/4",
-      "status": "active",
-      "createdAt": "2025-03-24T08:00:00",
-      "updatedAt": "2025-03-24T08:00:00",
-      "organizerContact": {
-        "email": "fatima.ali@example.com",
-        "phone": "+1234567877"
-      }
-    },
-    {
-      "title": "Learn and enjoy!",
-      "description": "A wonderful conference themed event you won't want to miss.",
-      "date": "2026-07-04T11:00:00",
-      "location": "Sheffield City Hall",
-      "createdBy": "680b7adac1ce5c3459108dd8",
-      "maxParticipants": 35,
-      "participants": [],
-      "keywords": [
-        "local",
-        "learning",
-        "workshop",
-        "outdoor"
-      ],
-      "category": "Conference",
-      "tags": [
-        "charity",
-        "workshop",
-        "family-friendly"
-      ],
-      "image": "https://example.com/event-image-5.jpg",
-      "eventURL": "https://eventico.com/events/5",
-      "status": "active",
-      "createdAt": "2025-03-24T08:00:00",
-      "updatedAt": "2025-03-24T08:00:00",
-      "organizerContact": {
-        "email": "amina.khan@example.com",
-        "phone": "+1234567812"
-      }
-    },
-    {
-      "title": "Food & Drink",
-      "description": "A wonderful food & drink themed event you won't want to miss.",
-      "date": "2026-11-05T12:00:00",
-      "location": "Leeds Town Hall",
-      "createdBy": "680b7adac1ce5c3459108dd8",
-      "maxParticipants": 79,
-      "participants": [],
-      "keywords": [
-        "family",
-        "performance",
-        "fun",
-        "workshop"
-      ],
-      "category": "Food & Drink",
-      "tags": [
-        "family-friendly",
-        "in-person",
-        "online"
-      ],
-      "image": "https://example.com/event-image-6.jpg",
-      "eventURL": "https://eventico.com/events/6",
-      "status": "active",
-      "createdAt": "2025-03-24T08:00:00",
-      "updatedAt": "2025-03-24T08:00:00",
-      "organizerContact": {
-        "email": "amina.khan@example.com",
-        "phone": "+1234567812"
-      }
-    },
-    {
-      "title": "Move it!",
-      "description": "A wonderful sports themed event you won't want to miss.",
-      "date": "2025-05-16T12:00:00",
-      "location": "Liverpool Philharmonic",
-      "createdBy": "680b7adac1ce5c3459108dd8",
-      "maxParticipants": 48,
-      "participants": [],
-      "keywords": [
-        "charity",
-        "food",
-        "community",
-        "performance"
-      ],
-      "category": "Sports",
-      "tags": [
-        "UK-based",
-        "workshop",
-        "networking"
-      ],
-      "image": "https://example.com/event-image-7.jpg",
-      "eventURL": "https://eventico.com/events/7",
-      "status": "active",
-      "createdAt": "2025-03-24T08:00:00",
-      "updatedAt": "2025-03-24T08:00:00",
-      "organizerContact": {
-        "email": "amina.khan@example.com",
-        "phone": "+1234567812"
-      }
-    },
-    {
-      "title": "Conference in Cardiff",
-      "description": "A wonderful conference themed event you won't want to miss.",
-      "date": "2025-07-16T11:00:00",
-      "location": "Cardiff Castle",
-      "createdBy": "680b7adac1ce5c3459108dd0",
-      "maxParticipants": 144,
-      "participants": [],
-      "keywords": [
-        "networking",
-        "family",
-        "fun",
-        "outdoor"
-      ],
-      "category": "Conference",
-      "tags": [
-        "networking",
-        "live",
-        "family-friendly"
-      ],
-      "image": "https://example.com/event-image-8.jpg",
-      "eventURL": "https://eventico.com/events/8",
-      "status": "active",
-      "createdAt": "2025-03-24T08:00:00",
-      "updatedAt": "2025-03-24T08:00:00",
-      "organizerContact": {
-        "email": "noah.lopez@example.com",
-        "phone": "+1234567867"
-      }
-    },
-    {
-      "title": "Entertainment",
-      "description": "A wonderful entertainment themed event you won't want to miss.",
-      "date": "2026-03-24T14:00:00",
-      "location": "Liverpool Philharmonic",
-      "createdBy": "680b7adac1ce5c3459108dd4",
-      "maxParticipants": 167,
-      "participants": [],
-      "keywords": [
-        "learning",
-        "community",
-        "outdoor",
-        "local"
-      ],
-      "category": "Entertainment",
-      "tags": [
-        "networking",
-        "online",
-        "interactive"
-      ],
-      "image": "https://example.com/event-image-9.jpg",
-      "eventURL": "https://eventico.com/events/9",
-      "status": "active",
-      "createdAt": "2025-03-24T08:00:00",
-      "updatedAt": "2025-03-24T08:00:00",
-      "organizerContact": {
-        "email": "fatima.ali@example.com",
-        "phone": "+1234567877"
-      }
-    },
-    {
-      "title": "Launch tech event",
-      "description": "A wonderful conference themed event you won't want to miss.",
-      "date": "2026-08-08T18:00:00",
-      "location": "Leeds Town Hall",
-      "createdBy": "680b7adac1ce5c3459108dd8",
-      "maxParticipants": 67,
-      "participants": [],
-      "keywords": [
-        "outdoor",
-        "tech",
-        "food",
-        "workshop"
-      ],
-      "category": "Conference",
-      "tags": [
-        "family-friendly",
-        "online",
-        "music"
-      ],
-      "image": "https://example.com/event-image-10.jpg",
-      "eventURL": "https://eventico.com/events/10",
-      "status": "active",
-      "createdAt": "2025-03-24T08:00:00",
-      "updatedAt": "2025-03-24T08:00:00",
-      "organizerContact": {
-        "email": "amina.khan@example.com",
-        "phone": "+1234567812"
-      }
-    },
-    {
-      "title": "Arts",
-      "description": "A wonderful arts themed event you won't want to miss.",
-      "date": "2025-09-28T11:00:00",
-      "location": "Sheffield City Hall",
-      "createdBy": "680b7adac1ce5c3459108dd0",
-      "maxParticipants": 157,
-      "participants": [],
-      "keywords": [
-        "workshop",
-        "food",
-        "networking",
-        "community"
-      ],
-      "category": "Arts",
-      "tags": [
-        "workshop",
-        "charity",
-        "UK-based"
-      ],
-      "image": "https://example.com/event-image-11.jpg",
-      "eventURL": "https://eventico.com/events/11",
-      "status": "active",
-      "createdAt": "2025-03-24T08:00:00",
-      "updatedAt": "2025-03-24T08:00:00",
-      "organizerContact": {
-        "email": "noah.lopez@example.com",
-        "phone": "+1234567867"
-      }
-    },
-    {
-      "title": "Social meet up",
-      "description": "A wonderful social themed event you won't want to miss.",
-      "date": "2025-11-16T16:00:00",
-      "location": "Manchester Central",
-      "createdBy": "680b7adac1ce5c3459108dd6",
-      "maxParticipants": 54,
-      "participants": [],
-      "keywords": [
-        "performance",
-        "learning",
-        "local",
-        "outdoor"
-      ],
-      "category": "Social",
-      "tags": [
-        "creative",
-        "in-person",
-        "music"
-      ],
-      "image": "https://example.com/event-image-12.jpg",
-      "eventURL": "https://eventico.com/events/12",
-      "status": "active",
-      "createdAt": "2025-03-24T08:00:00",
-      "updatedAt": "2025-03-24T08:00:00",
-      "organizerContact": {
-        "email": "liam.smith@example.com",
-        "phone": "+1234567898"
-      }
-    },
-    {
-      "title": "Charity fundraiser",
-      "description": "A wonderful social themed event you won't want to miss.",
-      "date": "2026-10-15T14:00:00",
-      "location": "Newcastle Theatre Royal",
-      "createdBy": "680b7adac1ce5c3459108dd8",
-      "maxParticipants": 143,
-      "participants": [],
-      "keywords": [
-        "community",
-        "fun",
-        "charity",
-        "food"
-      ],
-      "category": "Social",
-      "tags": [
-        "interactive",
-        "music",
-        "in-person"
-      ],
-      "image": "https://example.com/event-image-13.jpg",
-      "eventURL": "https://eventico.com/events/13",
-      "status": "active",
-      "createdAt": "2025-03-24T08:00:00",
-      "updatedAt": "2025-03-24T08:00:00",
-      "organizerContact": {
-        "email": "amina.khan@example.com",
-        "phone": "+1234567812"
-      }
-    },
-    {
-      "title": "Tech & Finance",
-      "description": "A wonderful technology themed event you won't want to miss.",
-      "date": "2025-12-06T17:00:00",
-      "location": "Birmingham NEC",
-      "createdBy": "680b7adac1ce5c3459108dd6",
-      "maxParticipants": 130,
-      "participants": [],
-      "keywords": [
-        "performance",
-        "food",
-        "community",
-        "learning"
-      ],
-      "category": "Technology",
-      "tags": [
-        "interactive",
-        "UK-based",
-        "creative"
-      ],
-      "image": "https://example.com/event-image-14.jpg",
-      "eventURL": "https://eventico.com/events/14",
-      "status": "active",
-      "createdAt": "2025-03-24T08:00:00",
-      "updatedAt": "2025-03-24T08:00:00",
-      "organizerContact": {
-        "email": "liam.smith@example.com",
-        "phone": "+1234567898"
-      }
-    },
-    {
-      "title": "Health & Wellness",
-      "description": "A wonderful health & wellness themed event you won't want to miss.",
-      "date": "2025-12-15T20:00:00",
-      "location": "Bristol Old Vic",
-      "createdBy": "680b7adac1ce5c3459108dd8",
-      "maxParticipants": 133,
-      "participants": [],
-      "keywords": [
-        "workshop",
-        "family",
-        "networking",
-        "performance"
-      ],
-      "category": "Health & Wellness",
-      "tags": [
-        "charity",
-        "workshop",
-        "in-person"
-      ],
-      "image": "https://example.com/event-image-15.jpg",
-      "eventURL": "https://eventico.com/events/15",
-      "status": "active",
-      "createdAt": "2025-03-24T08:00:00",
-      "updatedAt": "2025-03-24T08:00:00",
-      "organizerContact": {
-        "email": "amina.khan@example.com",
-        "phone": "+1234567812"
-      }
-    },
-    {
-      "title": "Food & Drink",
-      "description": "A wonderful food & drink themed event you won't want to miss.",
-      "date": "2025-12-15T21:00:00",
-      "location": "Liverpool Cetral Hall",
-      "createdBy": "680b7adac1ce5c3459108dd6",
-      "maxParticipants": 198,
-      "participants": [],
-      "keywords": [
-        "networking",
-        "learning",
-        "performance",
-        "outdoor"
-      ],
-      "category": "Food & Drink",
-      "tags": [
-        "in-person",
-        "online",
-        "workshop"
-      ],
-      "image": "https://example.com/event-image-16.jpg",
-      "eventURL": "https://eventico.com/events/16",
-      "status": "active",
-      "createdAt": "2025-03-24T08:00:00",
-      "updatedAt": "2025-03-24T08:00:00",
-      "organizerContact": {
-        "email": "liam.smith@example.com",
-        "phone": "+1234567898"
-      }
-    },
-    {
-      "title": "Food & Drink tasting",
-      "description": "A wonderful food & drink themed event you won't want to miss.",
-      "date": "2025-05-27T20:00:00",
-      "location": "London Eye",
-      "createdBy": "680b7adac1ce5c3459108dd4",
-      "maxParticipants": 53,
-      "participants": [],
-      "keywords": [
-        "food",
-        "outdoor",
-        "local",
-        "learning"
-      ],
-      "category": "Food & Drink",
-      "tags": [
-        "in-person",
-        "UK-based",
-        "workshop"
-      ],
-      "image": "https://example.com/event-image-17.jpg",
-      "eventURL": "https://eventico.com/events/17",
-      "status": "active",
-      "createdAt": "2025-03-24T08:00:00",
-      "updatedAt": "2025-03-24T08:00:00",
-      "organizerContact": {
-        "email": "fatima.ali@example.com",
-        "phone": "+1234567877"
-      }
-    },
-    {
-      "title": "Learn and fun",
-      "description": "A wonderful education themed event you won't want to miss.",
-      "date": "2025-09-28T09:00:00",
-      "location": "Brighton Dome",
-      "createdBy": "680b7adac1ce5c3459108dd2",
-      "maxParticipants": 70,
-      "participants": [],
-      "keywords": [
-        "workshop",
-        "tech",
-        "family",
-        "charity"
-      ],
-      "category": "Education",
-      "tags": [
-        "networking",
-        "UK-based",
-        "interactive"
-      ],
-      "image": "https://example.com/event-image-18.jpg",
-      "eventURL": "https://eventico.com/events/18",
-      "status": "active",
-      "createdAt": "2025-03-24T08:00:00",
-      "updatedAt": "2025-03-24T08:00:00",
-      "organizerContact": {
-        "email": "zara.nguyen@example.com",
-        "phone": "+1234567867"
-      }
-    },
-    {
-      "title": "Historial event",
-      "description": "A wonderful history themed event you won't want to miss.",
-      "date": "2025-09-20T10:00:00",
-      "location": "Edinburgh City Hall",
-      "createdBy": "680b7adac1ce5c3459108dd2",
-      "maxParticipants": 43,
-      "participants": [],
-      "keywords": [
-        "art",
-        "history",
-        "local",
-        "castle"
-      ],
-      "category": "Entertainment",
-      "tags": [
-        "UK-based",
-        "history"
-      ],
-      "image": "https://example.com/event-image-19.jpg",
-      "eventURL": "https://eventico.com/events/19",
-      "status": "active",
-      "createdAt": "2025-03-24T08:00:00",
-      "updatedAt": "2025-03-24T08:00:00",
-      "organizerContact": {
-        "email": "zara.nguyen@example.com",
-        "phone": "+1234567867"
-      }
-    },
-    {
-      "title": "Health & Wellness",
-      "description": "A wonderful health & wellness themed event you won't want to miss.",
-      "date": "2025-08-27T10:00:00",
-      "location": "Manchester Central",
-      "createdBy": "680b7adac1ce5c3459108dd6",
-      "maxParticipants": 107,
-      "participants": [],
-      "keywords": [
-        "tech",
-        "family",
-        "networking",
-        "learning"
-      ],
-      "category": "Health & Wellness",
-      "tags": [
-        "online",
-        "interactive",
-        "creative"
-      ],
-      "image": "https://example.com/event-image-20.jpg",
-      "eventURL": "https://eventico.com/events/20",
-      "status": "active",
-      "createdAt": "2025-03-24T08:00:00",
-      "updatedAt": "2025-03-24T08:00:00",
-      "organizerContact": {
-        "email": "liam.smith@example.com",
-        "phone": "+1234567898"
-      }
-    },
-    {
-      "title": "Tech",
-      "description": "A wonderful technology themed event you won't want to miss.",
-      "date": "2026-11-17T14:00:00",
-      "location": "Newcastle Theatre Royal",
-      "createdBy": "680b7adac1ce5c3459108dd4",
-      "maxParticipants": 48,
-      "participants": [],
-      "keywords": [
-        "learning",
-        "networking",
-        "performance",
-        "family"
-      ],
-      "category": "Technology",
-      "tags": [
-        "in-person",
-        "UK-based",
-        "online"
-      ],
-      "image": "https://example.com/event-image-21.jpg",
-      "eventURL": "https://eventico.com/events/21",
-      "status": "active",
-      "createdAt": "2025-03-24T08:00:00",
-      "updatedAt": "2025-03-24T08:00:00",
-      "organizerContact": {
-        "email": "fatima.ali@example.com",
-        "phone": "+1234567877"
-      }
-    },
-    {
-      "title": "Education",
-      "description": "A wonderful education themed event you won't want to miss.",
-      "date": "2025-08-28T19:00:00",
-      "location": "Cardiff Castle",
-      "createdBy": "680b7adac1ce5c3459108dd4",
-      "maxParticipants": 129,
-      "participants": [],
-      "keywords": [
-        "outdoor",
-        "learning",
-        "workshop",
-        "family"
-      ],
-      "category": "Education",
-      "tags": [
-        "family-friendly",
-        "charity",
-        "interactive"
-      ],
-      "image": "https://example.com/event-image-22.jpg",
-      "eventURL": "https://eventico.com/events/22",
-      "status": "active",
-      "createdAt": "2025-03-24T08:00:00",
-      "updatedAt": "2025-03-24T08:00:00",
-      "organizerContact": {
-        "email": "fatima.ali@example.com",
-        "phone": "+1234567877"
-      }
-    },
-    {
-      "title": "Networking Event",
-      "description": "A wonderful networking themed event you won't want to miss.",
-      "date": "2025-08-11T12:00:00",
-      "location": "Birmingham NEC",
-      "createdBy": "680b7adac1ce5c3459108dd0",
-      "maxParticipants": 74,
-      "participants": [],
-      "keywords": [
-        "outdoor",
-        "workshop",
-        "fun",
-        "community"
-      ],
-      "category": "Networking",
-      "tags": [
-        "workshop",
-        "charity",
-        "networking"
-      ],
-      "image": "https://example.com/event-image-23.jpg",
-      "eventURL": "https://eventico.com/events/23",
-      "status": "active",
-      "createdAt": "2025-03-24T08:00:00",
-      "updatedAt": "2025-03-24T08:00:00",
-      "organizerContact": {
-        "email": "noah.lopez@example.com",
-        "phone": "+1234567867"
-      }
-    },
-    {
-      "title": "Sports",
-      "description": "A wonderful sports themed event you won't want to miss.",
-      "date": "2025-09-22T11:00:00",
-      "location": "Sheffield City Hall",
-      "createdBy": "680b7adac1ce5c3459108dd0",
-      "maxParticipants": 67,
-      "participants": [],
-      "keywords": [
-        "networking",
-        "performance",
-        "outdoor",
-        "family"
-      ],
-      "category": "Sports",
-      "tags": [
-        "music",
-        "live",
-        "online"
-      ],
-      "image": "https://example.com/event-image-24.jpg",
-      "eventURL": "https://eventico.com/events/24",
-      "status": "active",
-      "createdAt": "2025-03-24T08:00:00",
-      "updatedAt": "2025-03-24T08:00:00",
-      "organizerContact": {
-        "email": "noah.lopez@example.com",
-        "phone": "+1234567867"
-      }
-    },
-    {
-      "title": "Music festival",
-      "description": "A wonderful food & drink themed event you won't want to miss.",
-      "date": "2026-07-25T20:00:00",
-      "location": "Leeds Roudhay Park",
-      "createdBy": "680b7adac1ce5c3459108dd0",
-      "maxParticipants": 74,
-      "participants": [],
-      "keywords": [
-        "food",
-        "community",
-        "outdoor",
-        "music"
-      ],
-      "category": "Music",
-      "tags": [
-        "in-person",
-        "live",
-        "workshop"
-      ],
-      "image": "https://example.com/event-image-25.jpg",
-      "eventURL": "https://eventico.com/events/25",
-      "status": "active",
-      "createdAt": "2025-03-24T08:00:00",
-      "updatedAt": "2025-03-24T08:00:00",
-      "organizerContact": {
-        "email": "noah.lopez@example.com",
-        "phone": "+1234567867"
-      }
-    },
-    {
-      "title": "Sports",
-      "description": "A wonderful sports themed event you won't want to miss.",
-      "date": "2026-03-20T10:00:00",
-      "location": "Cardiff Castle",
-      "createdBy": "680b7adac1ce5c3459108dd2",
-      "maxParticipants": 128,
-      "participants": [],
-      "keywords": [
-        "learning",
-        "charity",
-        "food",
-        "networking"
-      ],
-      "category": "Sports",
-      "tags": [
-        "in-person",
-        "interactive",
-        "UK-based"
-      ],
-      "image": "https://example.com/event-image-26.jpg",
-      "eventURL": "https://eventico.com/events/26",
-      "status": "active",
-      "createdAt": "2025-03-24T08:00:00",
-      "updatedAt": "2025-03-24T08:00:00",
-      "organizerContact": {
-        "email": "zara.nguyen@example.com",
-        "phone": "+1234567867"
-      }
-    },
-    {
-      "title": "Entertainment",
-      "description": "A wonderful entertainment themed event you won't want to miss.",
-      "date": "2026-11-03T16:00:00",
-      "location": "Sheffield City Hall",
-      "createdBy": "680b7adac1ce5c3459108dd4",
-      "maxParticipants": 40,
-      "participants": [],
-      "keywords": [
-        "food",
-        "tech",
-        "performance",
-        "charity"
-      ],
-      "category": "Entertainment",
-      "tags": [
-        "in-person",
-        "music",
-        "creative"
-      ],
-      "image": "https://example.com/event-image-27.jpg",
-      "eventURL": "https://eventico.com/events/27",
-      "status": "active",
-      "createdAt": "2025-03-24T08:00:00",
-      "updatedAt": "2025-03-24T08:00:00",
-      "organizerContact": {
-        "email": "fatima.ali@example.com",
-        "phone": "+1234567877"
-      }
-    },
-    {
-      "title": "Networking",
-      "description": "A wonderful networking themed event you won't want to miss.",
-      "date": "2025-10-30T10:00:00",
-      "location": "Manchester Central",
-      "createdBy": "680b7adac1ce5c3459108dd0",
-      "maxParticipants": 75,
-      "participants": [],
-      "keywords": [
-        "performance",
-        "community",
-        "charity",
-        "workshop"
-      ],
-      "category": "Networking",
-      "tags": [
-        "interactive",
-        "UK-based",
-        "in-person"
-      ],
-      "image": "https://example.com/event-image-28.jpg",
-      "eventURL": "https://eventico.com/events/28",
-      "status": "active",
-      "createdAt": "2025-03-24T08:00:00",
-      "updatedAt": "2025-03-24T08:00:00",
-      "organizerContact": {
-        "email": "noah.lopez@example.com",
-        "phone": "+1234567867"
-      }
-    },
-    {
-      "title": "Conference",
-      "description": "A wonderful conference themed event you won't want to miss.",
-      "date": "2026-04-27T14:00:00",
-      "location": "Cardiff Castle",
-      "createdBy": "680b7adac1ce5c3459108dd2",
-      "maxParticipants": 143,
-      "participants": [],
-      "keywords": [
-        "workshop",
-        "local",
-        "learning",
-        "outdoor"
-      ],
-      "category": "Conference",
-      "tags": [
-        "online",
-        "workshop",
-        "family-friendly"
-      ],
-      "image": "https://example.com/event-image-29.jpg",
-      "eventURL": "https://eventico.com/events/29",
-      "status": "active",
-      "createdAt": "2025-03-24T08:00:00",
-      "updatedAt": "2025-03-24T08:00:00",
-      "organizerContact": {
-        "email": "zara.nguyen@example.com",
-        "phone": "+1234567867"
-      }
-    },
-    {
-      "title": "Networking",
-      "description": "A wonderful networking themed event you won't want to miss.",
-      "date": "2026-10-01T12:00:00",
-      "location": "Sheffield City Hall",
-      "createdBy": "680b7adac1ce5c3459108dd4",
-      "maxParticipants": 124,
-      "participants": [],
-      "keywords": [
-        "learning",
-        "outdoor",
-        "local",
-        "fun"
-      ],
-      "category": "Networking",
-      "tags": [
-        "interactive",
-        "creative",
-        "charity"
-      ],
-      "image": "https://example.com/event-image-30.jpg",
-      "eventURL": "https://eventico.com/events/30",
-      "status": "active",
-      "createdAt": "2025-03-24T08:00:00",
-      "updatedAt": "2025-03-24T08:00:00",
-      "organizerContact": {
-        "email": "fatima.ali@example.com",
-        "phone": "+1234567877"
-      }
-    },
-    {
-      "title": "Social",
-      "description": "A wonderful social themed event you won't want to miss.",
-      "date": "2026-11-06T17:00:00",
-      "location": "Bristol Old Vic",
-      "createdBy": "680b7adac1ce5c3459108dd0",
-      "maxParticipants": 105,
-      "participants": [],
-      "keywords": [
-        "workshop",
-        "food",
-        "family",
-        "tech"
-      ],
-      "category": "Social",
-      "tags": [
-        "networking",
-        "interactive",
-        "in-person"
-      ],
-      "image": "https://example.com/event-image-31.jpg",
-      "eventURL": "https://eventico.com/events/31",
-      "status": "active",
-      "createdAt": "2025-03-24T08:00:00",
-      "updatedAt": "2025-03-24T08:00:00",
-      "organizerContact": {
-        "email": "noah.lopez@example.com",
-        "phone": "+1234567867"
-      }
-    },
-    {
-      "title": "Conference",
-      "description": "A wonderful conference themed event you won't want to miss.",
-      "date": "2026-05-11T17:00:00",
-      "location": "Leeds Town Hall",
-      "createdBy": "680b7adac1ce5c3459108dd4",
-      "maxParticipants": 138,
-      "participants": [],
-      "keywords": [
-        "local",
-        "learning",
-        "community",
-        "performance"
-      ],
-      "category": "Conference",
-      "tags": [
-        "creative",
-        "charity",
-        "in-person"
-      ],
-      "image": "https://example.com/event-image-32.jpg",
-      "eventURL": "https://eventico.com/events/32",
-      "status": "active",
-      "createdAt": "2025-03-24T08:00:00",
-      "updatedAt": "2025-03-24T08:00:00",
-      "organizerContact": {
-        "email": "fatima.ali@example.com",
-        "phone": "+1234567877"
-      }
-    },
-    {
-      "title": "Health & Wellness",
-      "description": "A wonderful health & wellness themed event you won't want to miss.",
-      "date": "2025-07-21T16:00:00",
-      "location": "Sheffield City Hall",
-      "createdBy": "680b7adac1ce5c3459108dd6",
-      "maxParticipants": 185,
-      "participants": [],
-      "keywords": [
-        "fun",
-        "workshop",
-        "learning",
-        "family"
-      ],
-      "category": "Health & Wellness",
-      "tags": [
-        "live",
-        "workshop",
-        "creative"
-      ],
-      "image": "https://example.com/event-image-33.jpg",
-      "eventURL": "https://eventico.com/events/33",
-      "status": "active",
-      "createdAt": "2025-03-24T08:00:00",
-      "updatedAt": "2025-03-24T08:00:00",
-      "organizerContact": {
-        "email": "liam.smith@example.com",
-        "phone": "+1234567898"
-      }
+  {
+    "title": "Conference in tech - explore AI",
+    "description": "A wonderful conference themed event you won't want to miss.",
+    "date": "2025-07-05T10:00:00.000Z",
+    "location": "Leeds, The Calls 2, LS2 7JU",
+    "createdBy": "680b7adac1ce5c3459108dd6",
+    "maxParticipants": 35,
+    "participants": [],
+    "keywords": [
+      "networking",
+      "tech",
+      "AI",
+      "community"
+    ],
+    "category": "Conference",
+    "tags": [
+      "creative",
+      "live",
+      "online"
+    ],
+    "image": "https://plus.unsplash.com/premium_photo-1683120966127-14162cdd0935?q=80&w=2763&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "eventURL": "https://eventico.com/events/1",
+    "status": "active",
+    "createdAt": "2025-03-24T08:00:00.000Z",
+    "updatedAt": "2025-03-24T08:00:00.000Z",
+    "organizerContact": {
+      "email": "liam.smith@example.com",
+      "phone": "+1234567898"
     }
-  ]
+  },
+  {
+    "title": "Neon Nights Festival",
+    "description": "\tA futuristic EDM festival featuring light shows and VR experiences.",
+    "date": "2025-12-18T19:00:00.000Z",
+    "location": "Lake Distric, Windermere",
+    "createdBy": "680b7adac1ce5c3459108dd6",
+    "maxParticipants": 95,
+    "participants": [],
+    "keywords": [
+      "festival",
+      "lights",
+      "neon",
+      "fun"
+    ],
+    "category": "Entertainment",
+    "tags": [
+      "music",
+      "family-friendly",
+      "festival"
+    ],
+    "image": "https://images.unsplash.com/photo-1662661230615-58c8c65718aa?q=80&w=2944&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "eventURL": "https://eventico.com/events/2",
+    "status": "active",
+    "createdAt": "2025-03-24T08:00:00.000Z",
+    "updatedAt": "2025-03-24T08:00:00.000Z",
+    "organizerContact": {
+      "email": "liam.smith@example.com",
+      "phone": "+1234567898"
+    }
+  },
+  {
+    "title": "Machester family summer festival",
+    "description": "A wonderful family-themed event you won't want to miss.",
+    "date": "2026-08-17T10:00:00.000Z",
+    "location": "Manchester - Hyde park",
+    "createdBy": "680b7adac1ce5c3459108dd0",
+    "maxParticipants": 83,
+    "participants": [],
+    "keywords": [
+      "fun",
+      "performance",
+      "family",
+      "outdoor"
+    ],
+    "category": "Social",
+    "tags": [
+      "family & friends",
+      "festival",
+      "summer"
+    ],
+    "image": "https://images.unsplash.com/photo-1472653816316-3ad6f10a6592?q=80&w=2740&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "eventURL": "https://eventico.com/events/3",
+    "status": "active",
+    "createdAt": "2025-03-24T08:00:00.000Z",
+    "updatedAt": "2025-03-24T08:00:00.000Z",
+    "organizerContact": {
+      "email": "noah.lopez@example.com",
+      "phone": "+1234567867"
+    }
+  },
+  {
+    "title": "Skybound Hackathon",
+    "description": "48-hour coding sprint focused on drone tech and AI",
+    "date": "2025-09-08T10:00:00.000Z",
+    "location": "Newcastle - Theatre Royal",
+    "createdBy": "680b7adac1ce5c3459108dd4",
+    "maxParticipants": 94,
+    "participants": [],
+    "keywords": [
+      "coding",
+      "AI",
+      "learn",
+      "community"
+    ],
+    "category": "Networking",
+    "tags": [
+      "interactive",
+      "AI",
+      "workshop"
+    ],
+    "image": "https://plus.unsplash.com/premium_photo-1661877737564-3dfd7282efcb?q=80&w=3000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "eventURL": "https://eventico.com/events/4",
+    "status": "active",
+    "createdAt": "2025-03-24T08:00:00.000Z",
+    "updatedAt": "2025-03-24T08:00:00.000Z",
+    "organizerContact": {
+      "email": "fatima.ali@example.com",
+      "phone": "+1234567877"
+    }
+  },
+  {
+    "title": "Twilight Skate Jam",
+    "description": "Nighttime roller skating event with live DJs and neon gear contests.",
+    "date": "2026-07-04T10:00:00.000Z",
+    "location": "Sheffield - City Centre park",
+    "createdBy": "680b7adac1ce5c3459108dd8",
+    "maxParticipants": 25,
+    "participants": [],
+    "keywords": [
+      "local",
+      "skating",
+      "contests",
+      "outdoor"
+    ],
+    "category": "Entertainment",
+    "tags": [
+      "charity",
+      "workshop",
+      "family-friendly"
+    ],
+    "image": "https://plus.unsplash.com/premium_photo-1666264877279-0cf0f2b7c81a?q=80&w=2000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "eventURL": "https://eventico.com/events/5",
+    "status": "active",
+    "createdAt": "2025-03-24T08:00:00.000Z",
+    "updatedAt": "2025-03-24T08:00:00.000Z",
+    "organizerContact": {
+      "email": "amina.khan@example.com",
+      "phone": "+1234567812"
+    }
+  },
+  {
+    "title": "Brew & Brush Pop-up",
+    "description": "Art pop-up event combining local craft beers with live painting sessions",
+    "date": "2026-11-05T12:00:00.000Z",
+    "location": "Cardiff - Town Hall",
+    "createdBy": "680b7adac1ce5c3459108dd8",
+    "maxParticipants": 79,
+    "participants": [],
+    "keywords": [
+      "art",
+      "brew",
+      "fun",
+      "painting"
+    ],
+    "category": "Arts",
+    "tags": [
+      "painting",
+      "in-person",
+      "craft"
+    ],
+    "image": "https://plus.unsplash.com/premium_photo-1692872796848-3d8bcb9522c2?q=80&w=2808&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "eventURL": "https://eventico.com/events/6",
+    "status": "active",
+    "createdAt": "2025-03-24T08:00:00.000Z",
+    "updatedAt": "2025-03-24T08:00:00.000Z",
+    "organizerContact": {
+      "email": "amina.khan@example.com",
+      "phone": "+1234567812"
+    }
+  },
+  {
+    "title": "Starlit Storytelling Night",
+    "description": "Open-mic storytelling under the stars with cozy bonfires.",
+    "date": "2025-07-16T20:00:00.000Z",
+    "location": "Grassington",
+    "createdBy": "680b7adac1ce5c3459108dd8",
+    "maxParticipants": 48,
+    "participants": [],
+    "keywords": [
+      "stories",
+      "literature",
+      "community",
+      "nigth"
+    ],
+    "category": "Social",
+    "tags": [
+      "stories",
+      "fun",
+      "night"
+    ],
+    "image": "https://images.unsplash.com/photo-1519791883288-dc8bd696e667?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "eventURL": "https://eventico.com/events/7",
+    "status": "active",
+    "createdAt": "2025-03-24T08:00:00.000Z",
+    "updatedAt": "2025-04-26T21:14:06.604Z",
+    "organizerContact": {
+      "email": "amina.khan@example.com",
+      "phone": "+1234567812"
+    }
+  },
+  {
+    "title": "Sizzle BBQ Showdown",
+    "description": "Massive outdoor BBQ competition and music festival.",
+    "date": "2025-07-16T14:00:00.000Z",
+    "location": "Cardiff Castle",
+    "createdBy": "680b7adac1ce5c3459108dd0",
+    "maxParticipants": 144,
+    "participants": [],
+    "keywords": [
+      "food",
+      "BBQ",
+      "fun",
+      "outdoor"
+    ],
+    "category": "Food & Drink",
+    "tags": [
+      "BBQ",
+      "live",
+      "music"
+    ],
+    "image": "https://plus.unsplash.com/premium_photo-1693221705288-7a2531eaa5e5?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "eventURL": "https://eventico.com/events/8",
+    "status": "active",
+    "createdAt": "2025-03-24T08:00:00.000Z",
+    "updatedAt": "2025-03-24T08:00:00.000Z",
+    "organizerContact": {
+      "email": "noah.lopez@example.com",
+      "phone": "+1234567867"
+    }
+  },
+  {
+    "title": "Vintage Future Car Rally",
+    "description": "A car show featuring both retro rides and concept EVs",
+    "date": "2026-09-24T14:00:00.000Z",
+    "location": "Margate beach",
+    "createdBy": "680b7adac1ce5c3459108dd4",
+    "maxParticipants": 167,
+    "participants": [],
+    "keywords": [
+      "cars",
+      "rides",
+      "vintage",
+      "fun"
+    ],
+    "category": "Entertainment",
+    "tags": [
+      "cars",
+      "exhibition",
+      "interactive"
+    ],
+    "image": "https://plus.unsplash.com/premium_photo-1664303847960-586318f59035?q=80&w=2748&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "eventURL": "https://eventico.com/events/9",
+    "status": "active",
+    "createdAt": "2025-03-24T08:00:00.000Z",
+    "updatedAt": "2025-03-24T08:00:00.000Z",
+    "organizerContact": {
+      "email": "fatima.ali@example.com",
+      "phone": "+1234567877"
+    }
+  },
+  {
+    "title": "Pixel Playground Expo",
+    "description": "Gaming convention with indie studios, retro arcades, and cosplay tournaments.",
+    "date": "2026-08-08T17:00:00.000Z",
+    "location": "London, Tate Modern",
+    "createdBy": "680b7adac1ce5c3459108dd8",
+    "maxParticipants": 67,
+    "participants": [],
+    "keywords": [
+      "expo",
+      "tech",
+      "gaming",
+      "fun"
+    ],
+    "category": "Networking",
+    "tags": [
+      "expo",
+      "tech",
+      "gaming"
+    ],
+    "image": "https://images.unsplash.com/photo-1486572788966-cfd3df1f5b42?q=80&w=2944&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "eventURL": "https://eventico.com/events/10",
+    "status": "active",
+    "createdAt": "2025-03-24T08:00:00.000Z",
+    "updatedAt": "2025-03-24T08:00:00.000Z",
+    "organizerContact": {
+      "email": "amina.khan@example.com",
+      "phone": "+1234567812"
+    }
+  },
+  {
+    "title": "Mystic Market Bazzar",
+    "description": "A mystical-themed marketplace with artisans, healers, and live performances.",
+    "date": "2025-09-28T10:00:00.000Z",
+    "location": "Manchester - City centre",
+    "createdBy": "680b7adac1ce5c3459108dd0",
+    "maxParticipants": 157,
+    "participants": [],
+    "keywords": [
+      "health",
+      "food",
+      "healing",
+      "community"
+    ],
+    "category": "Health & Wellness",
+    "tags": [
+      "healing",
+      "learn",
+      "music"
+    ],
+    "image": "https://images.unsplash.com/photo-1687181133399-668ddc50065c?q=80&w=2942&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "eventURL": "https://eventico.com/events/11",
+    "status": "active",
+    "createdAt": "2025-03-24T08:00:00.000Z",
+    "updatedAt": "2025-03-24T08:00:00.000Z",
+    "organizerContact": {
+      "email": "noah.lopez@example.com",
+      "phone": "+1234567867"
+    }
+  },
+  {
+    "title": "Infinite Horizons VR Summit",
+    "description": "A virtual reality conference showcasing cutting-edge immersive tech",
+    "date": "2025-11-16T16:00:00.000Z",
+    "location": "Edinbugh - City Hall",
+    "createdBy": "680b7adac1ce5c3459108dd6",
+    "maxParticipants": 54,
+    "participants": [],
+    "keywords": [
+      "tech",
+      "showcasing",
+      "in-person",
+      "meet-ups"
+    ],
+    "category": "Technology",
+    "tags": [
+      "tech",
+      "in-person",
+      "explore"
+    ],
+    "image": "https://plus.unsplash.com/premium_photo-1681426687411-21986b0626a8?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "eventURL": "https://eventico.com/events/12",
+    "status": "active",
+    "createdAt": "2025-03-24T08:00:00.000Z",
+    "updatedAt": "2025-03-24T08:00:00.000Z",
+    "organizerContact": {
+      "email": "liam.smith@example.com",
+      "phone": "+1234567898"
+    }
+  },
+  {
+    "title": "Moonlight Makers Fair",
+    "description": "Nighttime artisan market featuring handmade goods, live music, and food trucks",
+    "date": "2026-10-15T18:00:00.000Z",
+    "location": "Glassgow - city park",
+    "createdBy": "680b7adac1ce5c3459108dd8",
+    "maxParticipants": 143,
+    "participants": [],
+    "keywords": [
+      "community",
+      "fun",
+      "music",
+      "food"
+    ],
+    "category": "Social",
+    "tags": [
+      "live",
+      "music",
+      "in-person"
+    ],
+    "image": "https://images.unsplash.com/photo-1736143157411-0a70fe999ecb?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "eventURL": "https://eventico.com/events/13",
+    "status": "active",
+    "createdAt": "2025-03-24T08:00:00.000Z",
+    "updatedAt": "2025-03-24T08:00:00.000Z",
+    "organizerContact": {
+      "email": "amina.khan@example.com",
+      "phone": "+1234567812"
+    }
+  },
+  {
+    "title": "Battle of the Food Trucks",
+    "description": "Over 50 food trucks compete for the title of \"Top Dish\" — you be the judge!",
+    "date": "2025-12-06T17:00:00.000Z",
+    "location": "Birmingham NEC",
+    "createdBy": "680b7adac1ce5c3459108dd6",
+    "maxParticipants": 130,
+    "participants": [],
+    "keywords": [
+      "performance",
+      "food",
+      "fun",
+      "learning"
+    ],
+    "category": "Food & Drink",
+    "tags": [
+      "food",
+      "UK-based",
+      "meal"
+    ],
+    "image": "https://plus.unsplash.com/premium_photo-1683141388753-ab0077e5a35a?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "eventURL": "https://eventico.com/events/14",
+    "status": "active",
+    "createdAt": "2025-03-24T08:00:00.000Z",
+    "updatedAt": "2025-03-24T08:00:00.000Z",
+    "organizerContact": {
+      "email": "liam.smith@example.com",
+      "phone": "+1234567898"
+    }
+  },
+  {
+    "title": "Health & Wellness",
+    "description": "A wonderful health & wellness themed event you won't want to miss.",
+    "date": "2025-12-15T20:00:00.000Z",
+    "location": "Bristol Old Vic",
+    "createdBy": "680b7adac1ce5c3459108dd8",
+    "maxParticipants": 133,
+    "participants": [],
+    "keywords": [
+      "Yoga",
+      "Health",
+      "Relax",
+      "Body"
+    ],
+    "category": "Health & Wellness",
+    "tags": [
+      "health",
+      "workshop",
+      "in-person"
+    ],
+    "image": "https://images.unsplash.com/photo-1554244933-d876deb6b2ff?q=80&w=2960&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "eventURL": "https://eventico.com/events/15",
+    "status": "active",
+    "createdAt": "2025-03-24T08:00:00.000Z",
+    "updatedAt": "2025-03-24T08:00:00.000Z",
+    "organizerContact": {
+      "email": "amina.khan@example.com",
+      "phone": "+1234567812"
+    }
+  },
+  {
+    "title": "Quantum Code Con",
+    "description": "Conference for next-gen quantum computing enthusiasts and startups.",
+    "date": "2025-12-15T21:00:00.000Z",
+    "location": "Liverpool - Cetral Hall",
+    "createdBy": "680b7adac1ce5c3459108dd6",
+    "maxParticipants": 198,
+    "participants": [],
+    "keywords": [
+      "networking",
+      "learning",
+      "performance",
+      "coding"
+    ],
+    "category": "Technology",
+    "tags": [
+      "in-person",
+      "networking",
+      "workshop"
+    ],
+    "image": "https://images.unsplash.com/photo-1556740714-a8395b3bf30f?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "eventURL": "https://eventico.com/events/16",
+    "status": "active",
+    "createdAt": "2025-03-24T08:00:00.000Z",
+    "updatedAt": "2025-03-24T08:00:00.000Z",
+    "organizerContact": {
+      "email": "liam.smith@example.com",
+      "phone": "+1234567898"
+    }
+  },
+  {
+    "title": "Sunset Serenade Picknic",
+    "description": "Chill live jazz and acoustic sets as the sun sets. Bring a blanket and friends.",
+    "date": "2025-05-27T19:00:00.000Z",
+    "location": "London Eye",
+    "createdBy": "680b7adac1ce5c3459108dd4",
+    "maxParticipants": 53,
+    "participants": [],
+    "keywords": [
+      "food",
+      "outdoor",
+      "music",
+      "fun"
+    ],
+    "category": "Music",
+    "tags": [
+      "music",
+      "food",
+      "instruments"
+    ],
+    "image": "https://images.unsplash.com/photo-1513026705753-bc3fffca8bf4?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "eventURL": "https://eventico.com/events/17",
+    "status": "active",
+    "createdAt": "2025-03-24T08:00:00.000Z",
+    "updatedAt": "2025-03-24T08:00:00.000Z",
+    "organizerContact": {
+      "email": "fatima.ali@example.com",
+      "phone": "+1234567877"
+    }
+  },
+  {
+    "title": "Cosmic Circus",
+    "description": "An intergalactic-themed circus show with neon acrobatics and alien-themed acts",
+    "date": "2025-09-28T08:00:00.000Z",
+    "location": "Brighton Dome",
+    "createdBy": "680b7adac1ce5c3459108dd2",
+    "maxParticipants": 70,
+    "participants": [],
+    "keywords": [
+      "circus",
+      "show",
+      "family",
+      "acrobatics"
+    ],
+    "category": "Entertainment",
+    "tags": [
+      "circus",
+      "family",
+      "interactive"
+    ],
+    "image": "https://images.unsplash.com/photo-1435034568314-8303dbda4b8c?q=80&w=2946&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "eventURL": "https://eventico.com/events/18",
+    "status": "active",
+    "createdAt": "2025-03-24T08:00:00.000Z",
+    "updatedAt": "2025-03-24T08:00:00.000Z",
+    "organizerContact": {
+      "email": "zara.nguyen@example.com",
+      "phone": "+1234567867"
+    }
+  },
+  {
+    "title": "Historial event",
+    "description": "A wonderful history themed event you won't want to miss.",
+    "date": "2025-09-20T09:00:00.000Z",
+    "location": "Edinburgh City Hall",
+    "createdBy": "680b7adac1ce5c3459108dd2",
+    "maxParticipants": 43,
+    "participants": [],
+    "keywords": [
+      "art",
+      "history",
+      "local",
+      "castle"
+    ],
+    "category": "Entertainment",
+    "tags": [
+      "UK-based",
+      "history"
+    ],
+    "image": "https://images.unsplash.com/photo-1582036743538-b909810cf16a?q=80&w=2860&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "eventURL": "https://eventico.com/events/19",
+    "status": "active",
+    "createdAt": "2025-03-24T08:00:00.000Z",
+    "updatedAt": "2025-03-24T08:00:00.000Z",
+    "organizerContact": {
+      "email": "zara.nguyen@example.com",
+      "phone": "+1234567867"
+    }
+  },
+  {
+    "title": "Eco-Warrior Adventure Race",
+    "description": "10K obstacle race with eco-challenges — plant trees, build habitats along the course!",
+    "date": "2025-08-27T09:00:00.000Z",
+    "location": "Peak Districk, Tideswell",
+    "createdBy": "680b7adac1ce5c3459108dd6",
+    "maxParticipants": 107,
+    "participants": [],
+    "keywords": [
+      "sports",
+      "exercise",
+      "nature",
+      "learning"
+    ],
+    "category": "Health & Wellness",
+    "tags": [
+      "sport",
+      "nature",
+      "challenge"
+    ],
+    "image": "https://images.unsplash.com/photo-1618094429551-559b219f9a2b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "eventURL": "https://eventico.com/events/20",
+    "status": "active",
+    "createdAt": "2025-03-24T08:00:00.000Z",
+    "updatedAt": "2025-03-24T08:00:00.000Z",
+    "organizerContact": {
+      "email": "liam.smith@example.com",
+      "phone": "+1234567898"
+    }
+  },
+  {
+    "title": "Urban Garden Fest",
+    "description": "Pop-up urban farms, workshops on rooftop gardening, and local farm-to-table eats",
+    "date": "2026-11-17T14:00:00.000Z",
+    "location": "York - town centre",
+    "createdBy": "680b7adac1ce5c3459108dd4",
+    "maxParticipants": 98,
+    "participants": [],
+    "keywords": [
+      "food",
+      "farm products",
+      "gardening",
+      "workshops"
+    ],
+    "category": "Food & Drink",
+    "tags": [
+      "farm-food",
+      "gardening",
+      "organic"
+    ],
+    "image": "https://plus.unsplash.com/premium_photo-1722945739078-f1c1b3965594?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "eventURL": "https://eventico.com/events/21",
+    "status": "active",
+    "createdAt": "2025-03-24T08:00:00.000Z",
+    "updatedAt": "2025-03-24T08:00:00.000Z",
+    "organizerContact": {
+      "email": "fatima.ali@example.com",
+      "phone": "+1234567877"
+    }
+  },
+  {
+    "title": "Eletric Skies Drone Show",
+    "description": "Massive drone light show choreographed to live electronic music.",
+    "date": "2025-08-28T18:00:00.000Z",
+    "location": "Cambridge - Cherry Hinton Hall Park",
+    "createdBy": "680b7adac1ce5c3459108dd4",
+    "maxParticipants": 129,
+    "participants": [],
+    "keywords": [
+      "drone",
+      "music",
+      "eletro",
+      "light"
+    ],
+    "category": "Music",
+    "tags": [
+      "eletro",
+      "music",
+      "drone"
+    ],
+    "image": "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "eventURL": "https://eventico.com/events/22",
+    "status": "active",
+    "createdAt": "2025-03-24T08:00:00.000Z",
+    "updatedAt": "2025-03-24T08:00:00.000Z",
+    "organizerContact": {
+      "email": "fatima.ali@example.com",
+      "phone": "+1234567877"
+    }
+  },
+  {
+    "title": "The biggest tech meet up in the summer 2025",
+    "description": "Find similar like minded peers to talk tech",
+    "date": "2025-08-11T11:00:00.000Z",
+    "location": "Birmingham NEC",
+    "createdBy": "680b7adac1ce5c3459108dd0",
+    "maxParticipants": 200,
+    "participants": [],
+    "keywords": [
+      "tech",
+      "workshop",
+      "social",
+      "community"
+    ],
+    "category": "Networking",
+    "tags": [
+      "social",
+      "tech",
+      "networking"
+    ],
+    "image": "https://images.unsplash.com/photo-1560439514-4e9645039924?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "eventURL": "https://eventico.com/events/23",
+    "status": "active",
+    "createdAt": "2025-03-24T08:00:00.000Z",
+    "updatedAt": "2025-03-24T08:00:00.000Z",
+    "organizerContact": {
+      "email": "noah.lopez@example.com",
+      "phone": "+1234567867"
+    }
+  },
+  {
+    "title": "Gravity games",
+    "description": "A week of extreme sports: mountain biking, skateboarding, snowboarding all in one",
+    "date": "2026-01-22T10:00:00.000Z",
+    "location": "Inverness",
+    "createdBy": "680b7adac1ce5c3459108dd0",
+    "maxParticipants": 67,
+    "participants": [],
+    "keywords": [
+      "games",
+      "sport",
+      "outdoor",
+      "biking"
+    ],
+    "category": "Sports",
+    "tags": [
+      "biking",
+      "skateboarding",
+      "snowboarding"
+    ],
+    "image": "https://images.unsplash.com/photo-1590461283969-47fedf408cfd?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "eventURL": "https://eventico.com/events/24",
+    "status": "active",
+    "createdAt": "2025-03-24T08:00:00.000Z",
+    "updatedAt": "2025-03-24T08:00:00.000Z",
+    "organizerContact": {
+      "email": "noah.lopez@example.com",
+      "phone": "+1234567867"
+    }
+  },
+  {
+    "title": "Retro Rewind Film Festival",
+    "description": "Outdoor screenings of cult classics from the '80s and '90s, costumes encouraged!",
+    "date": "2026-07-25T19:00:00.000Z",
+    "location": "Leeds - Roudhay Park",
+    "createdBy": "680b7adac1ce5c3459108dd0",
+    "maxParticipants": 174,
+    "participants": [],
+    "keywords": [
+      "movies",
+      "80s",
+      "costumes",
+      "music"
+    ],
+    "category": "Entertainment",
+    "tags": [
+      "retro",
+      "live",
+      "movies"
+    ],
+    "image": "https://images.unsplash.com/photo-1574056067290-0841d2d4833d?q=80&w=2748&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "eventURL": "https://eventico.com/events/25",
+    "status": "active",
+    "createdAt": "2025-03-24T08:00:00.000Z",
+    "updatedAt": "2025-03-24T08:00:00.000Z",
+    "organizerContact": {
+      "email": "noah.lopez@example.com",
+      "phone": "+1234567867"
+    }
+  },
+  {
+    "title": "Wild Brew Coffee Convention",
+    "description": "A global gathering for coffee lovers: rare brews, brewing gear, and barista competitions.",
+    "date": "2026-03-20T10:00:00.000Z",
+    "location": "Cardiff Castle",
+    "createdBy": "680b7adac1ce5c3459108dd2",
+    "maxParticipants": 128,
+    "participants": [],
+    "keywords": [
+      "coffee",
+      "brew",
+      "food",
+      "social"
+    ],
+    "category": "Food & Drink",
+    "tags": [
+      "in-person",
+      "coffee",
+      "food"
+    ],
+    "image": "https://www.shutterstock.com/image-photo/cup-coffee-on-terraces-santangelo-600nw-2437525911.jpg",
+    "eventURL": "https://eventico.com/events/26",
+    "status": "active",
+    "createdAt": "2025-03-24T08:00:00.000Z",
+    "updatedAt": "2025-03-24T08:00:00.000Z",
+    "organizerContact": {
+      "email": "zara.nguyen@example.com",
+      "phone": "+1234567867"
+    }
+  },
+  {
+    "title": "Hidden Realms Immersive Theater",
+    "description": "Interactive theater experience where audiences explore a story through different room",
+    "date": "2026-11-03T16:00:00.000Z",
+    "location": "Canterbury - City Hall",
+    "createdBy": "680b7adac1ce5c3459108dd4",
+    "maxParticipants": 80,
+    "participants": [],
+    "keywords": [
+      "theatre",
+      "acustic",
+      "music",
+      "story"
+    ],
+    "category": "Entertainment",
+    "tags": [
+      "in-person",
+      "music",
+      "creative"
+    ],
+    "image": "https://images.unsplash.com/photo-1483032469466-b937c425697b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "eventURL": "https://eventico.com/events/27",
+    "status": "active",
+    "createdAt": "2025-03-24T08:00:00.000Z",
+    "updatedAt": "2025-03-24T08:00:00.000Z",
+    "organizerContact": {
+      "email": "fatima.ali@example.com",
+      "phone": "+1234567877"
+    }
+  },
+  {
+    "title": "SkyGarden Yoga Retreat",
+    "description": "3-day yoga and meditation retreat held in nature preserves and secret gardens",
+    "date": "2025-10-30T10:00:00.000Z",
+    "location": "Manchester Central",
+    "createdBy": "680b7adac1ce5c3459108dd0",
+    "maxParticipants": 75,
+    "participants": [],
+    "keywords": [
+      "yoga",
+      "gardens",
+      "retreat",
+      "meditation"
+    ],
+    "category": "Health & Wellness",
+    "tags": [
+      "relax",
+      "yoga",
+      "meditation"
+    ],
+    "image": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=2202&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "eventURL": "https://eventico.com/events/28",
+    "status": "active",
+    "createdAt": "2025-03-24T08:00:00.000Z",
+    "updatedAt": "2025-03-24T08:00:00.000Z",
+    "organizerContact": {
+      "email": "noah.lopez@example.com",
+      "phone": "+1234567867"
+    }
+  },
+  {
+    "title": "CIPD HR Conference",
+    "description": "Get up-to-date with the latest law changes and government proposals",
+    "date": "2026-04-27T13:00:00.000Z",
+    "location": "London - Westminster ",
+    "createdBy": "680b7adac1ce5c3459108dd2",
+    "maxParticipants": 143,
+    "participants": [],
+    "keywords": [
+      "HR",
+      "Law",
+      "Government",
+      "CIPD"
+    ],
+    "category": "Conference",
+    "tags": [
+      "CIPD",
+      "law",
+      "employee relations"
+    ],
+    "image": "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "eventURL": "https://eventico.com/events/29",
+    "status": "active",
+    "createdAt": "2025-03-24T08:00:00.000Z",
+    "updatedAt": "2025-03-24T08:00:00.000Z",
+    "organizerContact": {
+      "email": "zara.nguyen@example.com",
+      "phone": "+1234567867"
+    }
+  },
+  {
+    "title": "Wanderlust Writers' Escape",
+    "description": "A cozy getaway retreat for aspiring authors to write, workshop, and relax",
+    "date": "2026-10-01T11:00:00.000Z",
+    "location": "Edinburgh - Royal Hotel",
+    "createdBy": "680b7adac1ce5c3459108dd4",
+    "maxParticipants": 124,
+    "participants": [],
+    "keywords": [
+      "literature",
+      "write",
+      "relax",
+      "retreat"
+    ],
+    "category": "Entertainment",
+    "tags": [
+      "interactive",
+      "creative",
+      "literature"
+    ],
+    "image": "https://cdn.pixabay.com/photo/2024/02/24/20/54/books-8594725_1280.jpg",
+    "eventURL": "https://eventico.com/events/30",
+    "status": "active",
+    "createdAt": "2025-03-24T08:00:00.000Z",
+    "updatedAt": "2025-03-24T08:00:00.000Z",
+    "organizerContact": {
+      "email": "fatima.ali@example.com",
+      "phone": "+1234567877"
+    }
+  },
+  {
+    "title": "Music & Food Festival - Late Night",
+    "description": "Late-night street market with a cyberpunk theme: food, fashion, art, and DJs",
+    "date": "2026-11-06T17:00:00.000Z",
+    "location": "Bristol Old Vic",
+    "createdBy": "680b7adac1ce5c3459108dd0",
+    "maxParticipants": 105,
+    "participants": [],
+    "keywords": [
+      "music",
+      "food",
+      "fashion",
+      "art"
+    ],
+    "category": "Social",
+    "tags": [
+      "music",
+      "food",
+      "in-person"
+    ],
+    "image": "https://images.unsplash.com/photo-1570441643212-8bd2d8fa7d40?q=80&w=3038&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "eventURL": "https://eventico.com/events/31",
+    "status": "active",
+    "createdAt": "2025-03-24T08:00:00.000Z",
+    "updatedAt": "2025-03-24T08:00:00.000Z",
+    "organizerContact": {
+      "email": "noah.lopez@example.com",
+      "phone": "+1234567867"
+    }
+  },
+  {
+    "title": "Aurora Beats Winter Festival",
+    "description": "Dance under the Northern Lights with top DJs and bonfire lounges",
+    "date": "2026-12-11T16:00:00.000Z",
+    "location": "Glasgow - Regent Park",
+    "createdBy": "680b7adac1ce5c3459108dd4",
+    "maxParticipants": 138,
+    "participants": [],
+    "keywords": [
+      "dance",
+      "winter",
+      "DJs",
+      "lights"
+    ],
+    "category": "Music",
+    "tags": [
+      "dance",
+      "winter",
+      "DJs"
+    ],
+    "image": "https://images.unsplash.com/photo-1514675151213-b673863b356e?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "eventURL": "https://eventico.com/events/32",
+    "status": "active",
+    "createdAt": "2025-03-24T08:00:00.000Z",
+    "updatedAt": "2025-03-24T08:00:00.000Z",
+    "organizerContact": {
+      "email": "fatima.ali@example.com",
+      "phone": "+1234567877"
+    }
+  },
+  {
+    "title": "Galactic Gastronomy Gala",
+    "description": "Chefs craft \"space-age\" molecular dishes in a cosmic dining experience",
+    "date": "2025-07-21T15:00:00.000Z",
+    "location": "London - Wimbledon Park",
+    "createdBy": "680b7adac1ce5c3459108dd6",
+    "maxParticipants": 185,
+    "participants": [],
+    "keywords": [
+      "food",
+      "gastronomy",
+      "music",
+      "fun"
+    ],
+    "category": "Food & Drink",
+    "tags": [
+      "food",
+      "gatronomy",
+      "molecular-dishes"
+    ],
+    "image": "https://assets.surlatable.com/m/5f40ce7c6e0f1706/72_dpi_webp-IS_foam_molecular_gastronomy.jpg",
+    "eventURL": "https://eventico.com/events/33",
+    "status": "active",
+    "createdAt": "2025-03-24T08:00:00.000Z",
+    "updatedAt": "2025-03-24T08:00:00.000Z",
+    "organizerContact": {
+      "email": "liam.smith@example.com",
+      "phone": "+1234567898"
+    }
+  }
+]
