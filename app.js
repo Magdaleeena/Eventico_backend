@@ -12,9 +12,20 @@ const app = express();
 
 connectDB();
 
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://eventico.netlify.app'
+];
+
 const corsOptions = {
-  origin: 'http://localhost:5173', // React dev server
-  credentials: true, // if you're using cookies (optional)
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
 };
 
 app.use(cors(corsOptions));
