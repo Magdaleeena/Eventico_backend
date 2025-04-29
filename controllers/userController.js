@@ -53,18 +53,10 @@ exports.createUser = async (req, res, next) => {
     const newUser = new User({ firstName, lastName, username, email: normalizedEmail, password: hashedPassword, phone, role, profileImage, bio, location, social, dateOfBirth });
     try {
       await newUser.save();
-    } catch (saveError) {
-      console.error('Error saving user:', saveError);
+    } catch (saveError) {      
       return res.status(400).json({ msg: saveError.message || 'Error saving user' });
     }
-
-    console.log('Generating token with:', {
-      id: newUser._id,
-      username: newUser.username,
-      role: newUser.role,
-      jwtSecret: process.env.JWT_SECRET ? 'exists' : 'missing'
-    });
-   
+      
     const token = generateToken(newUser);
 
     // User response (excluding sensitive fields)
@@ -114,6 +106,10 @@ exports.loginUser = async (req, res) => {
     if (!isMatch) {
       return res.status(400).json({ msg: 'Invalid credentials' });
     }
+
+    // Update last login
+    user.lastLogin = new Date();
+    await user.save();
 
     // Generate JWT token
     const token = generateToken(user);
