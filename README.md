@@ -31,18 +31,18 @@ This backend is fully **RESTful**, supports **JWT authentication**, and integrat
 ---
 
 ## Set up instructions
-### 1. Clone the repository:
+#### 1. Clone the repository:
 
    ```bash
 git clone https://github.com/Magdaleeena/Eventico_backend.git
 cd Eventico_backend
 ```
-### 2. Install dependencies:
+#### 2. Install dependencies:
   ```bash
 npm install
   ```
 
-### 3. Environment Variables:
+#### 3. Environment Variables:
 Create a .env file in the root folder:
 
   ```bash
@@ -52,17 +52,17 @@ PORT=5000
 ```
 (You don't need access to production database — tests and local development use a local MongoDB test instance.)
 
-### 4. Start MongoDB locally (if you haven't already):
+#### 4. Start MongoDB locally (if you haven't already):
 Make sure MongoDB is running locally on mongodb://localhost:27017.
 
-### 5. Running the app in development:
+#### 5. Running the app in development:
 ```bash
 npm run dev
 ```
 The backend will be running at:
 http://localhost:5000
 
-### 6. Run the test suite:
+#### 6. Run the test suite:
 The database is automatically seeded by /db/seedDatabase.js., therefore, you don't need to manually insert data for testsRun. 
 Run each test file separately:
 ```bash
@@ -76,13 +76,13 @@ npm test _tests_/eventSignup.test.js
 
 ## Available API Routes
 
-### Auth routes:
+#### Auth routes:
 
 POST /api/users/register → Register a new user
 
 POST /api/users/login → Login and get JWT token
 
-### User routes:
+#### User routes:
 
 GET /api/users/me → Get own profile (protected)
 
@@ -92,7 +92,7 @@ DELETE /api/users/me → Delete own profile (protected)
 
 GET /api/users → Get all users (admin only)
 
-### Event routes:
+#### Event routes:
 
 GET /api/events → List all events
 
@@ -117,8 +117,7 @@ POST /api/events/:id/unsignup → Cancel signup for an event
 - Sensitive data like passwords is excluded from responses using Mongoose `.select('-password')`.
 - Users' role-based access control is partially implemented (e.g., only admins can manage certain actions).
 
-## Hosted Version
-You can access the hosted backend API here: [here](https://eventico-backend.onrender.com/api/endpoints)
+---
 
 ## Important
 - Only test database (eventicoTestDB) will be used when running tests.
