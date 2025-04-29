@@ -12,8 +12,8 @@ The intention is to mimic the building of a real-world backend service (such as 
 
 This backend is fully **RESTful**, supports **JWT authentication**, and integrates **MongoDB** for database storage.
 
-🔗 **Hosted API:** [Visit Hosted API (Eventico Backend)](https://eventico-backend.onrender.com)  
-(Replace the link with your frontend connection if needed!)
+🔗 **Hosted API:** [Visit Hosted API (Eventico Backend)](https://eventico-backend.onrender.com/api/endpoints)  
+
 
 ---
 
