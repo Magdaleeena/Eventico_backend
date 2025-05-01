@@ -12,20 +12,15 @@ Eventico Backend provides structured, secure, and efficient access to applicatio
 Built with **Node.js**, **Express**, and **MongoDB**, this backend manages:
 
 
-- 🔐 **Secure authentication**  
-  User registration and login using JWT-based authentication
+- 🔐 **Secure authentication** - User registration and login using JWT-based authentication
 
-- 📅 **Event management**  
-  Create, update, and sign up for events via RESTful endpoints
+- 📅 **Event management** - Create, update, and sign up for events via RESTful endpoints
 
-- 🧑‍💼 **Role-based access control**  
-  Admins have elevated privileges compared to standard users
+- 🧑‍💼 **Role-based access control** - Admins have elevated privileges compared to standard users
 
-- 📁 **MongoDB persistence**  
-  Data is stored in a document-based database using Mongoose
+- 📁 **MongoDB persistence** - Data is stored in a document-based database using Mongoose
 
-- 🧪 **Testable architecture**  
-  Full coverage using Jest and Supertest for unit and integration tests
+- 🧪 **Testable architecture** - Full coverage using Jest and Supertest for unit and integration tests
 
 
 🔗 **Hosted API:** [Explore endpoints](https://eventico-backend.onrender.com/api/endpoints)  
