@@ -1,6 +1,7 @@
 # Eventico Backend 🎉
 
 Welcome to the backend of **Eventico**, a modern full-stack event management platform.  
+
 This RESTful API powers everything from **event discovery** and **user sign-ups** to **admin management** and **secure authentication**. It’s designed to simulate the structure of real-world services like Eventbrite or Reddit, making it ideal for both learning and production-ready use.
 
 ---
