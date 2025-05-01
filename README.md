@@ -115,9 +115,9 @@ npm test _tests_/eventSignup.test.js
 
 - `DELETE /api/events/:id` → Delete an event you created (admin only)
 
-- `POST /api/events/:id/signup` → Sign up for an event 
+- `POST /api/events/:id/signup` → Sign up for an event (auth required)
 
-- `POST /api/events/:id/unsignup` → Cancel signup for an event
+- `POST /api/events/:id/unsignup` → Cancel signup for an event (auth required)
 
 ---
 
