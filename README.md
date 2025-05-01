@@ -7,13 +7,25 @@ This RESTful API powers everything from **event discovery** and **user sign-ups*
 
 ## 🚀 Project Summary
 
-Eventico Backend provides structured, secure, and efficient access to application data through a robust API. Built with **Node.js**, **Express**, and **MongoDB**, this backend manages:
+Eventico Backend provides structured, secure, and efficient access to application data through a robust API.  
+Built with **Node.js**, **Express**, and **MongoDB**, this backend manages:
 
-- 🔐 **Secure authentication** – User registration and login using JWT-based authentication
-- 📅 **Event management** – Create, update, and sign up for events via RESTful endpoints
-- 🧑‍💼 **Role-based access control** – Admins have elevated privileges compared to standard users
-- 📁 **MongoDB persistence** – Data is stored in a document-based database using Mongoose
-- 🧪 **Testable architecture** – Full coverage using Jest and Supertest for unit and integration tests
+
+- 🔐 **Secure authentication**  
+  User registration and login using JWT-based authentication
+
+- 📅 **Event management**  
+  Create, update, and sign up for events via RESTful endpoints
+
+- 🧑‍💼 **Role-based access control**  
+  Admins have elevated privileges compared to standard users
+
+- 📁 **MongoDB persistence**  
+  Data is stored in a document-based database using Mongoose
+
+- 🧪 **Testable architecture**  
+  Full coverage using Jest and Supertest for unit and integration tests
+
 
 🔗 **Hosted API:** [Explore endpoints](https://eventico-backend.onrender.com/api/endpoints)  
 
@@ -115,7 +127,7 @@ npm test _tests_/eventSignup.test.js
 
 ## 🔒 Security
 - Passwords are securely hashed using **bcryptjs** before storage.
-- JWTs are signed using a secure key from `.env (JWR_SECRET)`.
+- JWTs are signed using a secure key from `.env` (`JWT_SECRET`).
 - Protected routes use **authentication middleware** to verify and authorise users.
 - Sensitive fields (e.g., password) are excluded from responses with `.select('-password')`.
 - Basic **role-based access control** restricts admin-only actions.
